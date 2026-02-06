@@ -1,0 +1,247 @@
+/* @file: test_vector_x25519.c
+ * #desc:
+ *
+ * #copy:
+ *    Copyright (C) 1970 Public Free Software
+ *
+ *    This program is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    This program is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ *    You should have received a copy of the GNU General Public License
+ *    along with this program. If not,
+ *    see <https://www.gnu.org/licenses/>.
+ */
+
+#include <stdio.h>
+#include <demoz/c/stdint.h>
+#include <demoz/c/string.h>
+#include <demoz/lib/ecc.h>
+
+
+void print_hex(const uint8_t *buf, uint32_t n)
+{
+	printf(" ");
+	for (uint32_t i = 0; i < n; i++)
+		printf("%02x", buf[i]);
+	printf("\n");
+
+	for (uint32_t i = 0; i < n; i++) {
+		printf(" 0x%02x", buf[i]);
+		if ((i + 1) != n)
+			printf(",");
+		if (!((i + 1) % 8))
+			printf("\n");
+	}
+	if (n % 8)
+		printf("\n");
+}
+
+const char *verify_cmp(const uint8_t *a, const uint8_t *b, uint32_t len)
+{
+	return C_SYMBOL(memcmp)(a, b, len) ? "No" : "Yes";
+}
+
+const char *verify_ieq(int32_t r)
+{
+	return r ? "No" : "Yes";
+}
+
+struct test_vector {
+	uint8_t in_a_pri[128];
+	uint32_t in_a_pri_len;
+	uint8_t in_b_pri[128];
+	uint32_t in_b_pri_len;
+	uint8_t out_a_pub[128];
+	uint32_t out_a_pub_len;
+	uint8_t out_b_pub[128];
+	uint32_t out_b_pub_len;
+	uint8_t out_key[128];
+	uint32_t out_key_len;
+};
+
+struct test_vector_u {
+	uint8_t in_s[128];
+	uint32_t in_s_len;
+	uint8_t in_u[128];
+	uint32_t in_u_len;
+	uint8_t out_u[128];
+	uint32_t out_u_len;
+};
+
+void print_vector(struct test_vector *v)
+{
+	printf("vector in_a_pri: %u\n ", v->in_a_pri_len);
+	print_hex(v->in_a_pri, v->in_a_pri_len);
+	printf("vector in_b_pri: %u\n ", v->in_b_pri_len);
+	print_hex(v->in_b_pri, v->in_b_pri_len);
+	printf("vector out_a_pub: %u\n ", v->out_a_pub_len);
+	print_hex(v->out_a_pub, v->out_a_pub_len);
+	printf("vector out_b_pub: %u\n ", v->out_b_pub_len);
+	print_hex(v->out_b_pub, v->out_b_pub_len);
+	printf("vector out_key: %u\n ", v->out_key_len);
+	print_hex(v->out_key, v->out_key_len);
+}
+
+void print_vector_u(struct test_vector_u *v)
+{
+	printf("vector in_s: %u\n ", v->in_s_len);
+	print_hex(v->in_s, v->in_s_len);
+	printf("vector in_u_pri: %u\n ", v->in_u_len);
+	print_hex(v->in_u, v->in_u_len);
+	printf("vector out_u_pri: %u\n ", v->out_u_len);
+	print_hex(v->out_u, v->out_u_len);
+}
+
+struct test_vector test_x25519_vector_1 = {
+	{
+		0x77, 0x07, 0x6d, 0x0a, 0x73, 0x18, 0xa5, 0x7d,
+		0x3c, 0x16, 0xc1, 0x72, 0x51, 0xb2, 0x66, 0x45,
+		0xdf, 0x4c, 0x2f, 0x87, 0xeb, 0xc0, 0x99, 0x2a,
+		0xb1, 0x77, 0xfb, 0xa5, 0x1d, 0xb9, 0x2c, 0x2a
+	}, ECDH_X25519_PRI_LEN,
+	{
+		0x5d, 0xab, 0x08, 0x7e, 0x62, 0x4a, 0x8a, 0x4b,
+		0x79, 0xe1, 0x7f, 0x8b, 0x83, 0x80, 0x0e, 0xe6,
+		0x6f, 0x3b, 0xb1, 0x29, 0x26, 0x18, 0xb6, 0xfd,
+		0x1c, 0x2f, 0x8b, 0x27, 0xff, 0x88, 0xe0, 0xeb
+	}, ECDH_X25519_PRI_LEN,
+	{
+		0x85, 0x20, 0xf0, 0x09, 0x89, 0x30, 0xa7, 0x54,
+		0x74, 0x8b, 0x7d, 0xdc, 0xb4, 0x3e, 0xf7, 0x5a,
+		0x0d, 0xbf, 0x3a, 0x0d, 0x26, 0x38, 0x1a, 0xf4,
+		0xeb, 0xa4, 0xa9, 0x8e, 0xaa, 0x9b, 0x4e, 0x6a
+	}, ECDH_X25519_PUB_LEN,
+	{
+		0xde, 0x9e, 0xdb, 0x7d, 0x7b, 0x7d, 0xc1, 0xb4,
+		0xd3, 0x5b, 0x61, 0xc2, 0xec, 0xe4, 0x35, 0x37,
+		0x3f, 0x83, 0x43, 0xc8, 0x5b, 0x78, 0x67, 0x4d,
+		0xad, 0xfc, 0x7e, 0x14, 0x6f, 0x88, 0x2b, 0x4f
+	}, ECDH_X25519_PUB_LEN,
+	{
+		0x4a, 0x5d, 0x9d, 0x5b, 0xa4, 0xce, 0x2d, 0xe1,
+		0x72, 0x8e, 0x3b, 0xf4, 0x80, 0x35, 0x0f, 0x25,
+		0xe0, 0x7e, 0x21, 0xc9, 0x47, 0xd1, 0x9e, 0x33,
+		0x76, 0xf0, 0x9b, 0x3c, 0x1e, 0x16, 0x17, 0x42
+	}, ECDH_X25519_KEY_LEN
+	};
+
+struct test_vector_u test_x25519_u_vector_1 = {
+	{
+		0xa5, 0x46, 0xe3, 0x6b, 0xf0, 0x52, 0x7c, 0x9d,
+		0x3b, 0x16, 0x15, 0x4b, 0x82, 0x46, 0x5e, 0xdd,
+		0x62, 0x14, 0x4c, 0x0a, 0xc1, 0xfc, 0x5a, 0x18,
+		0x50, 0x6a, 0x22, 0x44, 0xba, 0x44, 0x9a, 0xc4
+	}, ECDH_X25519_PRI_LEN,
+	{
+		0xe6, 0xdb, 0x68, 0x67, 0x58, 0x30, 0x30, 0xdb,
+		0x35, 0x94, 0xc1, 0xa4, 0x24, 0xb1, 0x5f, 0x7c,
+		0x72, 0x66, 0x24, 0xec, 0x26, 0xb3, 0x35, 0x3b,
+		0x10, 0xa9, 0x03, 0xa6, 0xd0, 0xab, 0x1c, 0x4c
+	}, ECDH_X25519_PUB_LEN,
+	{
+		0xc3, 0xda, 0x55, 0x37, 0x9d, 0xe9, 0xc6, 0x90,
+		0x8e, 0x94, 0xea, 0x4d, 0xf2, 0x8d, 0x08, 0x4f,
+		0x32, 0xec, 0xcf, 0x03, 0x49, 0x1c, 0x71, 0xf7,
+		0x54, 0xb4, 0x07, 0x55, 0x77, 0xa2, 0x85, 0x52
+	}, ECDH_X25519_KEY_LEN
+	};
+
+struct test_vector_u test_x25519_u_vector_2 = {
+	{
+		0x4b, 0x66, 0xe9, 0xd4, 0xd1, 0xb4, 0x67, 0x3c,
+		0x5a, 0xd2, 0x26, 0x91, 0x95, 0x7d, 0x6a, 0xf5,
+		0xc1, 0x1b, 0x64, 0x21, 0xe0, 0xea, 0x01, 0xd4,
+		0x2c, 0xa4, 0x16, 0x9e, 0x79, 0x18, 0xba, 0x0d
+	}, ECDH_X25519_PRI_LEN,
+	{
+		0xe5, 0x21, 0x0f, 0x12, 0x78, 0x68, 0x11, 0xd3,
+		0xf4, 0xb7, 0x95, 0x9d, 0x05, 0x38, 0xae, 0x2c,
+		0x31, 0xdb, 0xe7, 0x10, 0x6f, 0xc0, 0x3c, 0x3e,
+		0xfc, 0x4c, 0xd5, 0x49, 0xc7, 0x15, 0xa4, 0x93
+	}, ECDH_X25519_PUB_LEN,
+	{
+		0x95, 0xcb, 0xde, 0x94, 0x76, 0xe8, 0x90, 0x7d,
+		0x7a, 0xad, 0xe4, 0x5c, 0xb4, 0xb8, 0x73, 0xf8,
+		0x8b, 0x59, 0x5a, 0x68, 0x79, 0x9f, 0xa1, 0x52,
+		0xe6, 0xf8, 0xf7, 0x64, 0x7a, 0xac, 0x79, 0x57
+	}, ECDH_X25519_KEY_LEN
+	};
+
+uint8_t g_buf[4096];
+uint8_t g_a_pub[128];
+uint8_t g_b_pub[128];
+
+void _test_x25519(struct test_vector *t, int32_t n)
+{
+	printf("case %d vector:\n", n);
+	print_vector(t);
+
+	F_SYMBOL(ecdh_x25519_public_key)(t->in_a_pri, g_a_pub);
+	F_SYMBOL(ecdh_x25519_public_key)(t->in_b_pri, g_b_pub);
+
+	printf("out_a_pub: %u -- %s\n ", t->out_a_pub_len,
+		verify_cmp(g_a_pub, t->out_a_pub, t->out_a_pub_len));
+	print_hex(g_a_pub, t->out_a_pub_len);
+
+	printf("out_b_pub: %u -- %s\n ", t->out_b_pub_len,
+		verify_cmp(g_b_pub, t->out_b_pub, t->out_b_pub_len));
+	print_hex(g_b_pub, t->out_b_pub_len);
+
+	F_SYMBOL(ecdh_x25519_shared_key)(t->in_a_pri, g_b_pub, g_buf);
+
+	printf("out_a_key: %u -- %s\n ", t->out_key_len,
+		verify_cmp(g_buf, t->out_key, t->out_key_len));
+	print_hex(g_buf, t->out_key_len);
+
+	F_SYMBOL(ecdh_x25519_shared_key)(t->in_b_pri, g_a_pub, g_buf);
+
+	printf("out_b_key: %u -- %s\n ", t->out_key_len,
+		verify_cmp(g_buf, t->out_key, t->out_key_len));
+	print_hex(g_buf, t->out_key_len);
+
+	printf("\n");
+}
+
+void _test_x25519_u(struct test_vector_u *t, int32_t n)
+{
+	printf("case %d vector:\n", n);
+	print_vector_u(t);
+
+	F_SYMBOL(ecdh_x25519_shared_key)(t->in_s, t->in_u, g_buf);
+
+	printf("pub: %u -- %s\n ", t->out_u_len,
+		verify_cmp(g_buf, t->out_u, t->out_u_len));
+	print_hex(g_buf, t->out_u_len);
+
+	printf("\n");
+}
+
+void test_x25519(void)
+{
+	printf("==== X25519 ====\n\n");
+
+	_test_x25519(&test_x25519_vector_1, 1);
+}
+
+void test_x25519_u(void)
+{
+	printf("==== X25519 u-coordinate ====\n\n");
+
+	_test_x25519_u(&test_x25519_u_vector_1, 1);
+	_test_x25519_u(&test_x25519_u_vector_2, 2);
+}
+
+int main(void)
+{
+	test_x25519();
+	test_x25519_u();
+
+	return 0;
+}

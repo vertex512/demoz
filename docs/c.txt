@@ -1,0 +1,238 @@
+stddef.h
+stdint.h
+limits.h
+float.h
+math.h
+
+getopt.h
+  getopt_r()
+  getopt_long_r()
+
+stdio.h
+  snprintf()
+    vsnprintf()
+
+  sscanf()
+    vsscanf()
+
+  printf()
+    vprintf()
+    fprintf()
+    vfprintf()
+
+  scanf()
+    vscanf()
+    fscanf()
+    vfscanf()
+
+  fdopen()
+  fopen()
+  fclose()
+  fread()
+  fwrite()
+  fseek()
+  rewind()
+  ftell()
+  fileno()
+  fflush()
+
+  popen()
+  pclose()
+
+  feof()
+  ferror()
+  flockfile()
+  funlockfile()
+  ftrylockfile()
+  fgetpos()
+  fsetpos()
+
+  getc()
+  getchar()
+  putc()
+  putchar()
+
+stdlib.h
+  _Exit()
+  exit()
+  atexit()
+  abort()
+
+  malloc()
+  free()
+
+  abs()
+  labs()
+  llabs()
+
+  a64l()
+  l64a()
+
+  atoi()
+  strtol()
+  strtoul()
+  strtoll()
+  strtoull()
+
+  atof()
+  strtof()
+  strtod()
+
+  qsort()
+  bsearch()
+
+  random_r()
+
+unistd.h
+  fork()
+  nice()
+
+  getpid()
+  getppid()
+  getpgid()
+  setpgid()
+
+  getuid()
+  setuid()
+  getgid()
+  setgid()
+  getgroups()
+  setgroups()
+
+  geteuid()
+  seteuid()
+  getegid()
+  setegid()
+
+  execve()
+  fexecve()
+
+  open()
+    openat()
+  close()
+  read()
+  write()
+  lseek()
+  fcntl()
+
+  stat()
+    fstatat()
+  lstat()
+  fstat()
+
+  chown()
+    chownat()
+  chmod()
+    chmodat()
+
+  mknod()
+    mknodat()
+  mkfifo()
+    mkfifoat()
+
+  mkdir()
+    mkdirat()
+
+  rmdir()
+
+  unlink()
+    unlinkat()
+
+  futimens()
+  utimensat()
+
+  umask()
+
+  statvfs()
+
+  link()
+    linkat()
+  symlink()
+    symlinkat()
+  readlink()
+    readlinkat()
+
+  chdir()
+    fchdir()
+
+  pipe()
+
+  fsync()
+  sync()
+
+  sleep()
+  pause()
+
+signal.h
+  kill()
+  killpg()
+
+  signal()
+  sigaction()
+  sigprocmask()
+  sigpending()
+  sigsuspend()
+
+  sigaddset()
+  sigdelset()
+  sigismember()
+  sigemptyset()
+  sigfillset()
+
+sched.h
+  sched_yield()
+
+  sched_getparam()
+  sched_setparam()
+
+  sched_getscheduler()
+  sched_setscheduler()
+
+time.h
+  clock_gettime()
+  clock_settime()
+
+  clock()
+  time()
+
+  nanosleep()
+
+  getitimer()
+  setitimer()
+
+socket.h
+  socket()
+  bind()
+  listen()
+  accept()
+  connect()
+  shutdown()
+
+  send()
+  recv()
+
+  sendto()
+  recvfrom()
+
+  setsockopt()
+  getsockopt()
+
+  getsockname()
+  getpeername()
+
+select.h
+  select()
+
+poll.h
+  poll()
+
+errno.h
+  errno()
+  strerror()
+
+atomic.h
+  atomic_cas()
+
+thread.h
+
+

@@ -1,0 +1,61 @@
+(cmd) $ ./a.out
+
+(out)
+-- add 0
+n:0 prev:-1 next:-1
+-- add 1
+n:1 prev:0 next:0
+n:0 prev:1 next:-1
+-- add-tail 2
+n:1 prev:2 next:0
+n:0 prev:1 next:2
+n:2 prev:0 next:-1
+-- del 0
+n:1 prev:2 next:2
+n:2 prev:1 next:-1
+-- del 1
+n:2 prev:-1 next:-1
+-- del 2
+-- add 0
+n:0 prev:-1 next:-1
+-- ins 0 1
+n:1 prev:0 next:0
+n:0 prev:1 next:-1
+-- ins 0 2
+n:1 prev:0 next:2
+n:2 prev:1 next:0
+n:0 prev:2 next:-1
+-- ins-tail 2 3
+n:1 prev:0 next:2
+n:2 prev:1 next:3
+n:3 prev:2 next:0
+n:0 prev:3 next:-1
+-- add 0
+n:0 prev:-1 next:-1
+-- add 1
+n:1 prev:0 next:0
+n:0 prev:1 next:-1
+-- swp 1 0
+n:0 prev:1 next:1
+n:1 prev:0 next:-1
+-- swp 1 0
+n:1 prev:0 next:0
+n:0 prev:1 next:-1
+-- add 2
+n:2 prev:0 next:1
+n:1 prev:2 next:0
+n:0 prev:1 next:-1
+-- swp 0 2
+n:0 prev:2 next:1
+n:1 prev:0 next:2
+n:2 prev:1 next:-1
+-- add 3
+n:3 prev:2 next:0
+n:0 prev:3 next:1
+n:1 prev:0 next:2
+n:2 prev:1 next:-1
+-- swp 0 2
+n:3 prev:0 next:2
+n:2 prev:3 next:1
+n:1 prev:2 next:0
+n:0 prev:1 next:-1

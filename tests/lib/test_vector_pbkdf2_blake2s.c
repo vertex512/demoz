@@ -1,0 +1,179 @@
+/* @file: test_vector_pbkdf_blake2s.c
+ * #desc:
+ *
+ * #copy:
+ *    Copyright (C) 1970 Public Free Software
+ *
+ *    This program is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    This program is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ *    You should have received a copy of the GNU General Public License
+ *    along with this program. If not,
+ *    see <https://www.gnu.org/licenses/>.
+ */
+
+#include <stdio.h>
+#include <demoz/c/stdint.h>
+#include <demoz/c/string.h>
+#include <demoz/lib/blake2.h>
+#include <demoz/lib/pbkdf2.h>
+
+
+void print_hex(const uint8_t *buf, uint32_t n)
+{
+	printf(" ");
+	for (uint32_t i = 0; i < n; i++)
+		printf("%02x", buf[i]);
+	printf("\n");
+
+	for (uint32_t i = 0; i < n; i++) {
+		printf(" 0x%02x", buf[i]);
+		if ((i + 1) != n)
+			printf(",");
+		if (!((i + 1) % 8))
+			printf("\n");
+	}
+	if (n % 8)
+		printf("\n");
+}
+
+const char *verify_cmp(const uint8_t *a, const uint8_t *b, uint32_t len)
+{
+	return C_SYMBOL(memcmp)(a, b, len) ? "No" : "Yes";
+}
+
+struct test_vector {
+	uint8_t in_pass[128];
+	uint32_t in_pass_len;
+	uint8_t in_salt[128];
+	uint32_t in_salt_len;
+	uint32_t in_iter;
+	uint8_t out_odk[128];
+	uint32_t out_odk_len;
+};
+
+void print_vector(struct test_vector *v)
+{
+	printf("vector in_pass: %u\n ", v->in_pass_len);
+	print_hex(v->in_pass, v->in_pass_len);
+	printf("vector in_salt: %u\n ", v->in_salt_len);
+	print_hex(v->in_salt, v->in_salt_len);
+	printf("vector in_iter: %u\n ", v->in_iter);
+	printf("vector out_odk: %u\n ", v->out_odk_len);
+	print_hex(v->out_odk, v->out_odk_len);
+}
+
+struct test_vector test_blake2s_vector_1 = {
+	{
+		0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64
+	}, 8,
+	{
+		0x73, 0x61, 0x6c, 0x74
+	}, 4,
+	1,
+	{
+		0xed, 0x93, 0x9d, 0x6f, 0x35, 0x1d, 0xdd, 0xb6,
+		0x9f, 0x59, 0x1a, 0xa6, 0x93, 0xd7, 0x5e, 0xcc,
+		0xaa, 0xb7, 0xc8, 0xf5, 0x87, 0x38, 0x4d, 0x8e,
+		0xd8, 0x82, 0xd4, 0x2f, 0xe8, 0x07, 0x64, 0x74
+	}, BLAKE2S_256_LEN
+	};
+
+struct test_vector test_blake2s_vector_2 = {
+	{
+		0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64
+	}, 8,
+	{
+		0x73, 0x61, 0x6c, 0x74
+	}, 4,
+	2,
+	{
+		0x7b, 0x88, 0xe6, 0x5e, 0x6e, 0x95, 0xa1, 0x18,
+		0xbc, 0x99, 0x5f, 0x68, 0x1a, 0x39, 0x1c, 0xbd,
+		0x7b, 0x46, 0xe0, 0xcf, 0x97, 0x50, 0xa8, 0x11,
+		0x00, 0xf6, 0x13, 0xad, 0xd6, 0x2d, 0x84, 0xbe
+	}, BLAKE2S_256_LEN
+	};
+
+struct test_vector test_blake2s_vector_3 = {
+	{
+		0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64
+	}, 8,
+	{
+		0x73, 0x61, 0x6c, 0x74
+	}, 4,
+	4096,
+	{
+		0x07, 0x2b, 0x63, 0xe2, 0xcf, 0xe4, 0xd2, 0x0c,
+		0xd2, 0x08, 0x6a, 0x6b, 0xe6, 0xec, 0x8e, 0x1f,
+		0xd1, 0xbf, 0x2b, 0x79, 0x7f, 0xa2, 0x72, 0xa7,
+		0x49, 0xa7, 0x61, 0xfa, 0xad, 0x66, 0xbe, 0xb6
+	}, BLAKE2S_256_LEN
+	};
+
+struct test_vector test_blake2s_vector_4 = {
+	{
+		0x70, 0x61, 0x73, 0x73, 0x77, 0x6F, 0x72, 0x64,
+		0x50, 0x41, 0x53, 0x53, 0x57, 0x4F, 0x52, 0x44,
+		0x70, 0x61, 0x73, 0x73, 0x77, 0x6F, 0x72, 0x64
+	}, 24,
+	{
+		0x73, 0x61, 0x6C, 0x74, 0x53, 0x41, 0x4C, 0x54,
+		0x73, 0x61, 0x6C, 0x74, 0x53, 0x41, 0x4C, 0x54,
+		0x73, 0x61, 0x6C, 0x74, 0x53, 0x41, 0x4C, 0x54,
+		0x73, 0x61, 0x6C, 0x74, 0x53, 0x41, 0x4C, 0x54,
+		0x73, 0x61, 0x6C, 0x74
+	}, 36,
+	4096,
+	{
+		0xd3, 0x1c, 0x50, 0xf0, 0x6f, 0x99, 0xdd, 0xf9,
+		0x1b, 0x80, 0x78, 0xfa, 0x61, 0x01, 0x4e, 0x03,
+		0x8a, 0xc1, 0x1c, 0x08, 0x6d, 0x00, 0x74, 0x5b,
+		0xd1, 0x0c, 0xfd, 0x59, 0x27, 0x1d, 0x1d, 0xdb,
+		0x9c, 0x6d, 0x21, 0x17, 0x27
+	}, BLAKE2S_256_LEN + 5
+	};
+
+uint8_t g_buf[4096];
+
+void _test_pbkdf2_blake2s(struct test_vector *t, int32_t n)
+{
+	printf("case %d vector:\n", n);
+	print_vector(t);
+
+	F_SYMBOL(pbkdf2_blake2s)(
+		t->in_pass, t->in_pass_len,
+		t->in_salt, t->in_salt_len,
+		g_buf, t->out_odk_len,
+		t->in_iter);
+
+	printf("out_odk: %u -- %s\n ", t->out_odk_len,
+		verify_cmp(g_buf, t->out_odk, t->out_odk_len));
+	print_hex(g_buf, t->out_odk_len);
+
+	printf("\n");
+}
+
+void test_pbkdf2_blake2s(void)
+{
+	printf("==== PBKDF2 BLAKE2S ====\n\n");
+
+	_test_pbkdf2_blake2s(&test_blake2s_vector_1, 1);
+	_test_pbkdf2_blake2s(&test_blake2s_vector_2, 2);
+	_test_pbkdf2_blake2s(&test_blake2s_vector_3, 3);
+	_test_pbkdf2_blake2s(&test_blake2s_vector_4, 4);
+}
+
+int main(void)
+{
+	test_pbkdf2_blake2s();
+
+	return 0;
+}

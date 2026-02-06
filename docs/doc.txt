@@ -1,0 +1,161 @@
+susv4-2018
+  susv4-2018.tar.gz
+    https://pubs.opengroup.org/onlinepubs/9699919799/download/susv4-2018.tgz
+
+C99
+  n1256.html
+    https://port70.net/~nsz/c/c99/n1256.html
+  n1256.txt
+    https://port70.net/~nsz/c/c99/n1256.txt
+
+C11
+  n1570.html
+    https://port70.net/~nsz/c/c11/n1570.html
+  n1570.txt
+    https://port70.net/~nsz/c/c11/n1570.txt
+
+GMP (The GNU Multiple Precision Arithmetic Library)
+  gmp-man-6.1.2.pdf
+    https://gmplib.org/gmp-man-6.1.2.pdf
+
+AES (Advanced Encryption Standard)
+  NIST.FIPS.197-upd1.pdf
+    https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197-upd1.pdf
+
+DES (Data Encryption Standard)
+  fips46-3.pdf
+    https://csrc.nist.gov/files/pubs/fips/46-3/final/docs/fips46-3.pdf
+
+MD5 Message-Digest Algorithm
+  rfc-1321.txt
+    https://www.rfc-editor.org/rfc/rfc1321.txt
+  rfc-1321.html
+    https://www.rfc-editor.org/rfc/rfc1321.html
+
+Secure Hash Standard (SHS)(SHA1/256/224/512/384)
+  NIST.FIPS.180-4.pdf
+    https://nvlpubs.nist.gov:80/nistpubs/FIPS/NIST.FIPS.180-4.pdf
+
+Keyed-Hash Message Authentication Code (HMAC)
+  fips-198-1_final.pdf
+    https://csrc.nist.gov/files/pubs/fips/198-1/final/docs/fips-198-1_final.pdf
+  rfc-2104.txt
+    https://www.rfc-editor.org/rfc/rfc2104.txt
+  rfc-2104.html
+    https://www.rfc-editor.org/rfc/rfc2104.html
+
+Identifiers and Test Vectors for HMAC-SHA2
+  rfc-4231.txt
+    https://www.rfc-editor.org/rfc/rfc4231.txt
+  rfc-4231.html
+    https://www.rfc-editor.org/rfc/rfc4231.html
+
+Curve25519 & Curve448 (Elliptic Curves)
+  rfc-7748.txt
+    https://www.rfc-editor.org/rfc/rfc7748.txt
+  rfc-7748.html
+    https://www.rfc-editor.org/rfc/rfc7748.html
+
+ED25519 & ED448 (Edwards-Curve Digital Signature Algorithm EdDSA)
+  rfc-8032.txt
+    https://www.rfc-editor.org/rfc/rfc8032.txt
+  rfc-8032.html
+    https://www.rfc-editor.org/rfc/rfc8032.html
+
+Digital Signature Standard (DSS) & Curve P-192/224/256/384/521
+  NIST.FIPS.186-4.pdf
+    https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf
+
+Cohen-Miyaji-Ono 1998 & CMO98
+  CMO98-Mixed-Coordinates.pdf
+    https://link.springer.com/content/pdf/10.1007/3-540-49649-1_6.pdf
+
+Elliptic Curve Groups modulo a Prime (ECP Groups) for IKE and IKEv2
+  rfc-5903.txt
+    https://www.rfc-editor.org/rfc/rfc5903.txt
+  rfc-5903.html
+    https://www.rfc-editor.org/rfc/rfc5903.html
+
+Deterministic Usage of the Digital Signature Algorithm (DSA) and Elliptic Curve Digital Signature Algorithm (ECDSA)
+  rfc-6979.txt
+    https://www.rfc-editor.org/rfc/rfc6979.txt
+  rfc-6979.html
+    https://www.rfc-editor.org/rfc/rfc6979.html
+
+RSA.PKCS#1 (RSA Cryptography Specifications)
+  rfc-8017.txt
+    https://www.rfc-editor.org/rfc/rfc8017.txt
+  rfc-8017.html
+    https://www.rfc-editor.org/rfc/rfc8017.html
+
+Secure Hash-3 Standard (SHS)(SHA256/224/512/384)
+  nist.fips.202.pdf
+    https://nvlpubs.nist.gov/nistpubs/fips/nist.fips.202.pdf
+  Keccak-reference-3.0.pdf
+    https://keccak.team/files/Keccak-reference-3.0.pdf
+
+DEFLATE Compressed Algorithm
+  rfc-1951.txt
+    https://www.rfc-editor.org/rfc/rfc1951.txt
+  rfc-1951.html
+    https://www.rfc-editor.org/rfc/rfc1951.html
+
+ChaCha20 and Poly1305 for IETF Protocols
+  rfc-8439.txt
+    https://www.rfc-editor.org/rfc/rfc8439.txt
+  rfc-8439.html
+    https://www.rfc-editor.org/rfc/rfc8439.html
+
+BLAKE2 Cryptographic Hash and Message Authentication Code (MAC)
+  rfc-7693.txt
+    https://www.rfc-editor.org/rfc/rfc7693.txt
+  rfc-7693.html
+    https://www.rfc-editor.org/rfc/rfc7693.html
+
+cSHAKE, KMAC, TupleHash and ParallelHash Algorithms
+  NIST.SP.800-185.pdf
+    http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-185.pdf
+
+HMAC-based Extract-and-Expand Key Derivation Function (HKDF)
+  rfc-5869.txt
+    https://www.rfc-editor.org/rfc/rfc5869.txt
+  rfc-5869.html
+    https://www.rfc-editor.org/rfc/rfc5869.html
+
+scrypt Password-Based Key Derivation
+  rfc-7914.txt
+    https://www.rfc-editor.org/rfc/rfc7914.txt
+  rfc-7914.html
+    https://www.rfc-editor.org/rfc/rfc7914.html
+
+Time-Based One-Time Password (TOTP)
+  rfc-6238.txt
+    https://www.rfc-editor.org/rfc/rfc6238.txt
+  rfc-6238.html
+    https://www.rfc-editor.org/rfc/rfc6238.html
+
+XXHASH
+  xxhash_spec.md
+    https://raw.githubusercontent.com/Cyan4973/xxHash/refs/heads/dev/doc/xxhash_spec.md
+
+ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism Standard)
+  NIST.FIPS.203.ipd.pdf
+    https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.ipd.pdf
+
+Internet Protocol (IPv4)
+  rfc-791.txt
+    https://www.rfc-editor.org/rfc/rfc791.txt
+  rfc-791.html
+    https://www.rfc-editor.org/rfc/rfc791.html
+
+Differentiated Services Field (DS Field)
+  rfc-2474.txt
+    https://www.rfc-editor.org/rfc/rfc2474.txt
+  rfc-2474.html
+    https://www.rfc-editor.org/rfc/rfc2474.html
+
+Explicit Congestion Notification (ECN)
+  rfc-3168.txt
+    https://www.rfc-editor.org/rfc/rfc3168.txt
+  rfc-3168.html
+    https://www.rfc-editor.org/rfc/rfc3168.html

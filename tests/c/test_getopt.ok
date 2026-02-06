@@ -1,0 +1,21 @@
+(cmd) $ ./a.out -abarg1 arg8 -acb arg2 -o -oarg3 --olong --olong=arg4 --along arg9 --along --blong=arg5 --blong arg6 arg7 - -+ -- o
+
+(out)
+option 'a'
+option 'b' with argument 'arg1'
+non option argument 'arg8'
+option 'a'
+option 'c'
+option 'b' with argument 'arg2'
+option 'o' optional argument
+option 'o' with argument 'arg3'
+option long 'o' optional argument
+option long 'o' with argument 'arg4'
+option long 'a'
+non option argument 'arg9'
+option long 'a'
+option long 'b' with argument 'arg5'
+option long 'b' with argument 'arg6'
+non option argument 'arg7'
+option '-'
+option '+'

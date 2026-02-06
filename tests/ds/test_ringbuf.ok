@@ -1,0 +1,12 @@
+(cmd) $ ./a.out
+
+(out)
+write: 13:13
+peek: 4096-2:11
+: llo, world!
+peek: 10-4096:0
+: 
+read: 11:11
+: Hello, worl
+read: 4096:2
+: d!
