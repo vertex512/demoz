@@ -249,8 +249,7 @@ void F_SYMBOL(keccak_squeeze)(uint64_t state[5][5], uint8_t *out,
  * #1: sha3 struct context
  * #2: digest type
  * #3: shake digest length (byte, 0: use xof function)
- * #r: ro/i32
- *    0: no error, -1: type error, -2: digest size error
+ * #r: 0: no error, -1: type error, -2: digest size error
  */
 int32_t F_SYMBOL(sha3_init)(struct sha3_ctx *ctx, int32_t type,
 		uint32_t dsize)

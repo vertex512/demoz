@@ -1,6 +1,6 @@
 /* @file: rsa3072.c
  * #desc:
- *    The implementations of rsa (rivest–shamir–adleman) cryptosystem.
+ *    The implementations of rsa (rivest shamir adleman) cryptosystem.
  *
  * #copy:
  *    Copyright (C) 1970 Public Free Software
@@ -162,7 +162,7 @@ int32_t F_SYMBOL(rsa3072_gencrt)(const uint8_t *p, const uint8_t *q,
 
 	/* dp = d % (p - 1) */
 	F_SYMBOL(bn6400_sub_1)(&a, &_p, 1);
-	F_SYMBOL(bn6400_divmod)(NULL, &a, &_d, &a); 
+	F_SYMBOL(bn6400_divmod)(NULL, &a, &_d, &a);
 
 	F_SYMBOL(bn6400_to_bytes)(&a, dp, RSA3072_PRIME_LEN);
 
@@ -185,7 +185,7 @@ int32_t F_SYMBOL(rsa3072_gencrt)(const uint8_t *p, const uint8_t *q,
  * #4: crt Q parameter
  * #5: Q inverse
  * #6: message
- * #r: 0: success, -1: fail 
+ * #r: 0: success, -1: fail
  */
 int32_t F_SYMBOL(rsa3072_crt_decrypt)(const uint8_t *p, const uint8_t *q,
 		const uint8_t *dp, const uint8_t *dq, const uint8_t *qinv,

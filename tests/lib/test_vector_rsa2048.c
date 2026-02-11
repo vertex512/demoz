@@ -293,7 +293,6 @@ struct test_vector test_rsa_vector_1 = {
 uint8_t g_buf[4096];
 uint8_t g_e[4096];
 uint8_t g_d[4096];
-uint8_t g_d[4096];
 uint8_t g_n[4096];
 uint8_t g_dp[4096];
 uint8_t g_dq[4096];

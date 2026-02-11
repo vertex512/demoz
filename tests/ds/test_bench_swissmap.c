@@ -1,4 +1,4 @@
-/* @file: test_bench_swisstable.c
+/* @file: test_bench_swissmap.c
  * #desc:
  *
  * #copy:
@@ -26,11 +26,11 @@
 #include <demoz/c/stdint.h>
 #include <demoz/c/stdlib.h>
 #include <demoz/c/string.h>
-#include <demoz/ds/swisstable.h>
+#include <demoz/ds/swissmap.h>
 
 
-#define TSIZE (10000000)
-#define SIZE ((int32_t)(TSIZE * 0.95))
+#define TSIZE (5000000)
+#define SIZE ((int32_t)(TSIZE * 0.90))
 #define A_SIZE ((int32_t)(SIZE * 0.1))
 
 struct T {
@@ -54,18 +54,21 @@ int32_t cmp(void *a, const void *b, size_t len)
 
 	return !(key_a == key_b);
 }
-	
-void test_swisstable(void)
+
+void test_swissmap(void)
 {
 	clock_t start, end;
 	double time;
 	RANDOM_TYPE0_NEW(ran, 123456);
 
-	struct swisstable_group *ctrl = malloc(SWISSTABLE_CTRLSIZE(TSIZE));
-	C_SYMBOL(memset)(ctrl, SWISSTABLE_EMPTY, SWISSTABLE_CTRLSIZE(TSIZE));
-	struct T *array = malloc(sizeof(struct T) * TSIZE);
+	union swissmap_group *ctrl = malloc(sizeof(union swissmap_group)
+		* SWISSMAP_CLIGN(TSIZE));
+	struct T *array = malloc(sizeof(struct T) * SWISSMAP_ALIGN(TSIZE));
 	struct T *p;
-	SWISSTABLE_NEW(head, ctrl, array, sizeof(struct T), TSIZE, hash, cmp);
+
+	SWISSMAP_NEW(head, ctrl, array, sizeof(struct T),
+		SWISSMAP_ALIGN(TSIZE), hash, cmp);
+	F_SYMBOL(swissmap_empty)(&head);
 
 	int32_t *array_key = malloc(sizeof(int32_t) * SIZE);
 	for (int32_t i = 0; i < SIZE; i++)
@@ -74,7 +77,7 @@ void test_swisstable(void)
 	/* insert */
 	start = clock();
 	for (int32_t i = 0; i < SIZE; i++) {
-		p = F_SYMBOL(swisstable_insert)(&head,
+		p = F_SYMBOL(swissmap_insert)(&head,
 			&array_key[i], sizeof(int32_t));
 		if (!p) {
 			printf("no speac: i:%d\n", i);
@@ -85,7 +88,7 @@ void test_swisstable(void)
 	end = clock();
 	time = (double)(end - start) / CLOCKS_PER_SEC;
 	printf("insert: %d (%.1f) -- %.6fs (%.2f/s) %.2f ns/op\n",
-		SIZE, (double)SWISSTABLE_FACTOR(&head) / 10,
+		SIZE, (double)SWISSMAP_FACTOR(&head) / 10,
 		time,
 		(double)SIZE / time,
 		(double)(time * 1000000000) / SIZE);
@@ -93,7 +96,7 @@ void test_swisstable(void)
 	/* find */
 	start = clock();
 	for (int32_t i = 0; i < SIZE; i++) {
-		p = F_SYMBOL(swisstable_find)(&head,
+		p = F_SYMBOL(swissmap_find)(&head,
 				&array_key[i], sizeof(int32_t));
 		if (!p) {
 			printf("not found: i:%d\n", i);
@@ -105,7 +108,7 @@ void test_swisstable(void)
 	end = clock();
 	time = (double)(end - start) / CLOCKS_PER_SEC;
 	printf("find: %d (%.1f) -- %.6fs (%.2f/s) %.2f ns/op\n",
-		SIZE, (double)SWISSTABLE_FACTOR(&head) / 10,
+		SIZE, (double)SWISSMAP_FACTOR(&head) / 10,
 		time,
 		(double)SIZE / time,
 		(double)(time * 1000000000) / SIZE);
@@ -113,7 +116,7 @@ void test_swisstable(void)
 	/* access */
 	start = clock();
 	for (int32_t i = 0; i < A_SIZE; i++) {
-		p = F_SYMBOL(swisstable_find)(&head,
+		p = F_SYMBOL(swissmap_find)(&head,
 				&array_key[i], sizeof(int32_t));
 		if (!p) {
 			printf("not found: i:%d\n", i);
@@ -125,7 +128,7 @@ void test_swisstable(void)
 	end = clock();
 	time = (double)(end - start) / CLOCKS_PER_SEC;
 	printf("access: %d (%.1f) -- %.6fs (%.2f/s) %.2f ns/op\n",
-		A_SIZE, (double)SWISSTABLE_FACTOR(&head) / 10,
+		A_SIZE, (double)SWISSMAP_FACTOR(&head) / 10,
 		time,
 		(double)A_SIZE / time,
 		(double)(time * 1000000000) / A_SIZE);
@@ -133,7 +136,7 @@ void test_swisstable(void)
 	/* delete access */
 	start = clock();
 	for (int32_t i = 0; i < A_SIZE; i++) {
-		p = F_SYMBOL(swisstable_delete)(&head,
+		p = F_SYMBOL(swissmap_delete)(&head,
 				&array_key[i], sizeof(int32_t));
 		if (!p) {
 			printf("not found: i:%d\n", i);
@@ -145,7 +148,7 @@ void test_swisstable(void)
 	end = clock();
 	time = (double)(end - start) / CLOCKS_PER_SEC;
 	printf("delete access: %d (%.1f) -- %.6fs (%.2f/s) %.2f ns/op\n",
-		A_SIZE, (double)SWISSTABLE_FACTOR(&head) / 10,
+		A_SIZE, (double)SWISSMAP_FACTOR(&head) / 10,
 		time,
 		(double)A_SIZE / time,
 		(double)(time * 1000000000) / A_SIZE);
@@ -153,7 +156,7 @@ void test_swisstable(void)
 	/* delete */
 	start = clock();
 	for (int32_t i = A_SIZE; i < SIZE; i++) {
-		p = F_SYMBOL(swisstable_delete)(&head,
+		p = F_SYMBOL(swissmap_delete)(&head,
 				&array_key[i], sizeof(int32_t));
 		if (!p) {
 			printf("not found: i:%d\n", i);
@@ -165,15 +168,34 @@ void test_swisstable(void)
 	end = clock();
 	time = (double)(end - start) / CLOCKS_PER_SEC;
 	printf("delete: %d (%.1f) -- %.6fs (%.2f/s) %.2f ns/op\n",
-		SIZE - A_SIZE, (double)SWISSTABLE_FACTOR(&head) / 10,
+		SIZE - A_SIZE, (double)SWISSMAP_FACTOR(&head) / 10,
 		time,
 		(double)(SIZE - A_SIZE) / time,
 		(double)(time * 1000000000) / (SIZE - A_SIZE));
+
+	/* insert access */
+	start = clock();
+	for (int32_t i = 0; i < A_SIZE; i++) {
+		p = F_SYMBOL(swissmap_insert)(&head,
+				&array_key[i], sizeof(int32_t));
+		if (!p) {
+			printf("no speac: i:%d\n", i);
+		} else {
+			p->key = array_key[i];
+		}
+	}
+	end = clock();
+	time = (double)(end - start) / CLOCKS_PER_SEC;
+	printf("insert access: %d (%.1f) -- %.6fs (%.2f/s) %.2f ns/op\n",
+		A_SIZE, (double)SWISSMAP_FACTOR(&head) / 10,
+		time,
+		(double)A_SIZE / time,
+		(double)(time * 1000000000) / A_SIZE);
 }
 
 int main(void)
 {
-	test_swisstable();
+	test_swissmap();
 
 	return 0;
 }

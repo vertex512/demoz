@@ -1,6 +1,6 @@
 /* @file: des.c
  * #desc:
- *    The implementations of data encryption standard.
+ *    the implementations of data encryption standard (lucifer).
  *
  * #copy:
  *    Copyright (C) 1970 Public Free Software

@@ -67,8 +67,7 @@ uint32_t F_SYMBOL(bits_get_fill)(struct bits_get_ctx *ctx, const uint8_t *s,
  * #2: bits value pointer
  * #3: bits length
  * #4: peek bit
- * #r: ro/i32
- *    0: not end, -1: buffer end, >0: remaining unobtained bits
+ * #r: 0: not end, -1: buffer end, >0: remaining unobtained bits
  */
 int32_t F_SYMBOL(bits_get)(struct bits_get_ctx *ctx, uint32_t *v, uint32_t bits,
 		int32_t peek)

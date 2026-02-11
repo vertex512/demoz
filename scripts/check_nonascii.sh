@@ -11,6 +11,6 @@ for i in $@; do
 		b=$((b + 1))
 		n=$(printf %d $(head -c $b $i |cat -n |tail -n 1 |grep -o '^\s*[0-9]\+'))
 		c=$(head -c $b $i |tail -n 1 |wc -c)
-		echo $i: $b $n $c
+		echo "file: $i, length: $b, line: $n, col: $c"
 	fi
 done

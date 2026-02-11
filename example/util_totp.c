@@ -21,6 +21,7 @@
 
 #include <stdio.h>
 #include <time.h>
+#include <demoz/c/stddef.h>
 #include <demoz/c/stdint.h>
 #include <demoz/c/string.h>
 #include <demoz/c/stdlib.h>

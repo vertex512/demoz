@@ -1,6 +1,6 @@
 /* @file: aes_fast.c
  * #desc:
- *    The implementations of advanced encryption standard.
+ *    the implementations of advanced encryption standard (rijndael).
  *
  * #copy:
  *    Copyright (C) 1970 Public Free Software

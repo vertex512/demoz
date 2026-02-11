@@ -1,6 +1,6 @@
-/* @file: swisstable.h
+/* @file: swissmap.h
  * #desc:
- *    The definitions of swiss hash table.
+ *    The definitions of swiss high-performance hash table.
  *
  * #copy:
  *    Copyright (C) 1970 Public Free Software
@@ -20,8 +20,8 @@
  *    see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef _DEMOZ_DS_SWISSTABLE_H
-#define _DEMOZ_DS_SWISSTABLE_H
+#ifndef _DEMOZ_DS_SWISSMAP_H
+#define _DEMOZ_DS_SWISSMAP_H
 
 #include <demoz/config.h>
 #include <demoz/c/stddef.h>
@@ -29,13 +29,14 @@
 
 
 /* @def: _ */
-struct swisstable_group {
-	/* TODO: simd optimization */
-	uint8_t ctrl;
+union swissmap_group {
+	/* XXX: simd optimization */
+	uint32_t ctrl;
+	uint8_t _ctrl[4];
 };
 
-struct swisstable_head {
-	struct swisstable_group *group;
+struct swissmap_head {
+	union swissmap_group *group;
 	void *array;
 	size_t wsize; /* size of each bucket */
 	size_t size;
@@ -46,9 +47,9 @@ struct swisstable_head {
 	int32_t (*call_cmp)(void *, const void *, size_t);
 };
 
-#define SWISSTABLE_NEW(name, _ctrl, _array, _wsize, \
+#define SWISSMAP_NEW(name, _ctrl, _array, _wsize, \
 		_total_size, _hash, _cmp) \
-	struct swisstable_head name = { \
+	struct swissmap_head name = { \
 		.group = _ctrl, \
 		.array = _array, \
 		.wsize = _wsize, \
@@ -58,7 +59,7 @@ struct swisstable_head {
 		.call_cmp = _cmp \
 		}
 
-#define SWISSTABLE_INIT(x, _ctrl, _array, _wsize, \
+#define SWISSMAP_INIT(x, _ctrl, _array, _wsize, \
 		_total_size, _hash, _cmp) \
 	(x)->group = _ctrl; \
 	(x)->array = _array; \
@@ -69,19 +70,19 @@ struct swisstable_head {
 	(x)->call_cmp = _cmp
 
 /* 0b1'0000000 */
-#define SWISSTABLE_EMPTY 0x80
+#define SWISSMAP_EMPTY 0x80
 /* 0b1'1111110 */
-#define SWISSTABLE_DELETE 0xfe
+#define SWISSMAP_DELETE 0xfe
 
-#define SWISSTABLE_FACTOR(x) (((x)->size * 1000) / (x)->total_size)
+#define SWISSMAP_CLIGN(x) (((x) + 3) / 4)
+#define SWISSMAP_ALIGN(x) (4 * SWISSMAP_CLIGN(x))
 
-#define SWISSTABLE_CTRLALIGN(x) (((x) + 0) / 1)
-#define SWISSTABLE_CTRLSIZE(x) \
-	(sizeof(struct swisstable_group) * SWISSTABLE_CTRLALIGN(x))
+#define SWISSMAP_ACTRL(x, n) ((x)->group[(n) >> 2]._ctrl[(n) & 3])
+#define SWISSMAP_ARRAY(x, n) ((void *)((char *)(x)->array + head->wsize * (n)))
 
-#define SWISSTABLE_SIZE(x) ((x)->size)
-#define SWISSTABLE_TOTAL(x) ((x)->total_size)
-#define SWISSTABLE_UNUSED(x, n) (((x)->group[n].ctrl >> 7) & 1)
+#define SWISSMAP_FACTOR(x) (((x)->size * 1000) / (x)->total_size)
+#define SWISSMAP_SIZE(x) ((x)->size)
+#define SWISSMAP_TOTAL(x) ((x)->total_size)
 /* end */
 
 
@@ -89,20 +90,24 @@ struct swisstable_head {
 extern "C" {
 #endif
 
-/* ds/swisstable.c */
+/* ds/swissmap.c */
 
 extern
-void *F_SYMBOL(swisstable_insert)(struct swisstable_head *head,
+void F_SYMBOL(swissmap_empty)(struct swissmap_head *head)
+;
+
+extern
+void *F_SYMBOL(swissmap_insert)(struct swissmap_head *head,
 		const void *key, size_t len)
 ;
 
 extern
-void *F_SYMBOL(swisstable_find)(struct swisstable_head *head,
+void *F_SYMBOL(swissmap_find)(struct swissmap_head *head,
 		const void *key, size_t len)
 ;
 
 extern
-void *F_SYMBOL(swisstable_delete)(struct swisstable_head *head,
+void *F_SYMBOL(swissmap_delete)(struct swissmap_head *head,
 		const void *key, size_t len)
 ;
 

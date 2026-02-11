@@ -291,7 +291,7 @@ static void _fp448_mul(uint32_t r[14],
 	uint32_t carry = 0, carry2 = 0;
 	uint64_t tmp = 0;
 
-	/* TODO: karatsuba optimize */
+	/* XXX: karatsuba optimization */
 
 	/* rr = a * b */
 	for (int32_t i = 0; i < 28; i++)

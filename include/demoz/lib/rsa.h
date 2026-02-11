@@ -1,6 +1,6 @@
 /* @file: rsa.h
  * #desc:
- *    The definitions of rsa (rivest–shamir–adleman) cryptosystem.
+ *    The definitions of rsa (rivest shamir adleman) cryptosystem.
  *
  * #copy:
  *    Copyright (C) 1970 Public Free Software

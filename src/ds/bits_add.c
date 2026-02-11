@@ -27,8 +27,8 @@
 
 /* @func: bits_add
  * #desc:
- *    add bits to the buffer. flush the buffer when it is full. if there
- *    are any remaining bits, keep it as is, then add it again.
+ *    add bits to the buffer.  flush the buffer when it is full.
+ *    if there are any remaining bits, keep it as is, then add it again.
  *
  * #1: bits-add struct context
  * #2: bits value
