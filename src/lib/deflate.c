@@ -1058,6 +1058,17 @@ static uint32_t _longest_match(struct deflate_ctx *ctx, uint32_t pos)
 	if (ctx->nice > ctx->lsize) /* max nice length limit */
 		nice_match = ctx->lsize;
 
+	/*
+	 * 64-KiB
+	 * +-------------------+
+	 * |  :history  |lsize |
+	 * +-------------------+
+	 *              ^
+	 *              start
+	 *     -<--<--<- --
+	 *     match     best_len
+	 */
+
 	do {
 		match = ctx->window + pos;
 		scan = ctx->window + ctx->start;

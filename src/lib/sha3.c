@@ -234,8 +234,6 @@ void F_SYMBOL(keccak_squeeze)(uint64_t state[5][5], uint8_t *out,
 			out += 8;
 			len -= 8;
 		}
-		if (!len)
-			return;
 
 		/* len > rate */
 		F_SYMBOL(keccak_f1600)(state);
