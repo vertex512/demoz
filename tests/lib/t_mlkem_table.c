@@ -68,7 +68,7 @@ static void mlkem_table_init(void)
 		if (mlkem_table[i] > (MLKEM_Q / 2))
 			mlkem_table[i] -= MLKEM_Q;
 		if (mlkem_table[i] < (-MLKEM_Q / 2))
-			mlkem_table[i] += MLKEM_Q; 
+			mlkem_table[i] += MLKEM_Q;
 	}
 }
 
