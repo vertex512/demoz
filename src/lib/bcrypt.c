@@ -71,20 +71,3 @@ void F_SYMBOL(bcrypt_hashpass)(const uint8_t *pass, uint32_t pass_len,
 		ohp[4 * i + 3] = cdata[i] & 0xff;
 	}
 }
-
-/* @func: bcrypt_auth
- * #desc:
- *    bcrypt hashpass comparison is equal.
- *
- * #1: bcrypt hashpass
- * #2: bcrypt hashpass
- * #r: 0: a != b, 1: a == b
- */
-int32_t F_SYMBOL(bcrypt_auth)(const uint8_t *a, const uint8_t *b)
-{
-	uint32_t r = 0;
-	for (int32_t i = 0; i < BCRYPT_HASHPASS_LEN; i++)
-		r |= a[i] ^ b[i];
-
-	return ((r - 1) >> 31) & 1;
-}

@@ -141,6 +141,16 @@ XXHASH
 ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism Standard)
   NIST.FIPS.203.ipd.pdf
     https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.ipd.pdf
+  NIST.FIPS.203.pdf
+    https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf
+
+ML-DSA (Module-Lattice-Based Digital Signature Standard)
+  NIST.FIPS.204.pdf
+    https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf
+
+SLH-DSA (Stateless Hash-Based Digital Signature Standard)
+  NIST.FIPS.205.pdf
+    https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf
 
 Internet Protocol (IPv4)
   rfc-791.txt

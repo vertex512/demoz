@@ -28,6 +28,8 @@
 #define MLKEM_MONT -1044 /* 2^16 mod q == 2285 */
 #define MLKEM_QINV -3327 /* q^-1 mod 2^16 == 62209 */
 
+#define MONT_MUL(a, b) _montgomery_reduce((int32_t)(a) * (b))
+
 static int16_t mlkem_table[128];
 static int16_t tmp[128];
 
@@ -51,16 +53,11 @@ int16_t _montgomery_reduce(int32_t a)
 	return t;
 }
 
-static int16_t _fqmul(int16_t a, int16_t b)
-{
-	return _montgomery_reduce((int32_t)a * b);
-}
-
 static void mlkem_table_init(void)
 {
 	tmp[0] = MLKEM_MONT;
 	for (int32_t i = 1; i < 128; i++) /* multiplied by montgomery factor */
-		tmp[i] = _fqmul(tmp[i - 1], (MLKEM_MONT * MLKEM_ROOT) % MLKEM_Q);
+		tmp[i] = MONT_MUL(tmp[i - 1], (MLKEM_MONT * MLKEM_ROOT) % MLKEM_Q);
 
 	for (int32_t i = 0; i < 128; i++) {
 		mlkem_table[i] = tmp[_bit_reverse(i, 7)];

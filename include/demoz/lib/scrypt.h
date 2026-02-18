@@ -1,6 +1,6 @@
-/* @file: bcrypt.h
+/* @file: scrypt.h
  * #desc:
- *    The definitions of bcrypt password-hash.
+ *    the definitions of scrypt password-based key derivation function.
  *
  * #copy:
  *    Copyright (C) 1970 Public Free Software
@@ -20,16 +20,22 @@
  *    see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef _DEMOZ_LIB_BCRYPT_H
-#define _DEMOZ_LIB_BCRYPT_H
+#ifndef _DEMOZ_LIB_SCRYPT_H
+#define _DEMOZ_LIB_SCRYPT_H
 
 #include <demoz/config.h>
-#include <demoz/c/stddef.h>
 #include <demoz/c/stdint.h>
 
 
 /* @def: _ */
-#define BCRYPT_HASHPASS_LEN 24
+#define SCRYPT_BLOCKSIZE 128
+#define SCRYPT_ELEMENTSIZE 64
+
+#define SCRYPT_TMP_B(r, p) ((r) * SCRYPT_BLOCKSIZE * (p))
+#define SCRYPT_TMP_V(r, n) ((r) * SCRYPT_BLOCKSIZE * (n))
+#define SCRYPT_TMP_Y(r) ((r) * SCRYPT_BLOCKSIZE)
+#define SCRYPT_TMPSIZE(n, r, p) \
+	(SCRYPT_TMP_B(r, p) + SCRYPT_TMP_V(r, n) + SCRYPT_TMP_Y(r))
 /* end */
 
 
@@ -37,12 +43,13 @@
 extern "C" {
 #endif
 
-/* lib/bcrypt.c */
+/* lib/scrypt.c */
 
 extern
-void F_SYMBOL(bcrypt_hashpass)(const uint8_t *pass, uint32_t pass_len,
-		const uint8_t *salt, uint32_t salt_len, uint8_t *ohp,
-		uint32_t k)
+void F_SYMBOL(scrypt)(const uint8_t *pass, uint32_t pass_len,
+		const uint8_t *salt, uint32_t salt_len, uint8_t *tmp,
+		uint32_t n, uint32_t r, uint32_t p, uint8_t *dk,
+		uint32_t len)
 ;
 
 #ifdef __cplusplus

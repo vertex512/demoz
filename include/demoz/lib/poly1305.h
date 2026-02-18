@@ -70,10 +70,6 @@ void F_SYMBOL(poly1305_tag)(struct poly1305_ctx *ctx, uint8_t *tag)
 ;
 
 extern
-int32_t F_SYMBOL(poly1305_tag_auth)(const uint8_t *a, const uint8_t *b)
-;
-
-extern
 void F_SYMBOL(poly1305_process)(struct poly1305_ctx *ctx, const uint8_t *s,
 		size_t len)
 ;

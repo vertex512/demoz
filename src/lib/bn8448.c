@@ -1577,7 +1577,7 @@ void F_SYMBOL(bn8448_redc_mod)(const bn8448_redc_t *s,
 	F_SYMBOL(bn8448_move)(r, &t);
 }
 
-/* @func: bn8448_redc_moto
+/* @func: bn8448_redc_mont
  * #desc:
  *    big number redc montgomery domain.
  *
@@ -1585,7 +1585,7 @@ void F_SYMBOL(bn8448_redc_mod)(const bn8448_redc_t *s,
  * #2: result
  * #3: number
  */
-void F_SYMBOL(bn8448_redc_moto)(const bn8448_redc_t *s,
+void F_SYMBOL(bn8448_redc_mont)(const bn8448_redc_t *s,
 		bn8448_t *r, const bn8448_t *a)
 {
 	bn8448_t t;
@@ -1615,8 +1615,8 @@ int32_t F_SYMBOL(bn8448_redc_pow)(bn8448_t *r,
 		return -1;
 
 	F_SYMBOL(bn8448_set1)(&rr, 1);
-	F_SYMBOL(bn8448_redc_moto)(&s, &rr, &rr);
-	F_SYMBOL(bn8448_redc_moto)(&s, &a1, a);
+	F_SYMBOL(bn8448_redc_mont)(&s, &rr, &rr);
+	F_SYMBOL(bn8448_redc_mont)(&s, &a1, a);
 
 	int32_t n = F_SYMBOL(bn8448_bits)(e);
 	for (int32_t i = 0; i < n; i++) {

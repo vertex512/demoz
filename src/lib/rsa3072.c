@@ -77,7 +77,7 @@ int32_t F_SYMBOL(rsa3072_genkey)(const uint8_t *p, const uint8_t *q,
  *
  * #1: encryption key
  * #2: modulus
- * #3: message
+ * #3: message and cipher
  * #r: 0: success, -1: fail
  */
 int32_t F_SYMBOL(rsa3072_encrypt)(const uint8_t *e, const uint8_t *n,
@@ -108,7 +108,7 @@ int32_t F_SYMBOL(rsa3072_encrypt)(const uint8_t *e, const uint8_t *n,
  *
  * #1: decryption key
  * #2: modulus
- * #3: message
+ * #3: message and cipher
  * #r: 0: success, -1: fail
  */
 int32_t F_SYMBOL(rsa3072_decrypt)(const uint8_t *d, const uint8_t *n,
@@ -184,7 +184,7 @@ int32_t F_SYMBOL(rsa3072_gencrt)(const uint8_t *p, const uint8_t *q,
  * #3: crt P parameter
  * #4: crt Q parameter
  * #5: Q inverse
- * #6: message
+ * #6: message and cipher
  * #r: 0: success, -1: fail
  */
 int32_t F_SYMBOL(rsa3072_crt_decrypt)(const uint8_t *p, const uint8_t *q,

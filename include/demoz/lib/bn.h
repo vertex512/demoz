@@ -265,7 +265,7 @@ void F_SYMBOL(bn4352_redc_mod)(const bn4352_redc_t *s,
 ;
 
 extern
-void F_SYMBOL(bn4352_redc_moto)(const bn4352_redc_t *s,
+void F_SYMBOL(bn4352_redc_mont)(const bn4352_redc_t *s,
 		bn4352_t *r, const bn4352_t *a)
 ;
 
@@ -468,7 +468,7 @@ void F_SYMBOL(bn6400_redc_mod)(const bn6400_redc_t *s,
 ;
 
 extern
-void F_SYMBOL(bn6400_redc_moto)(const bn6400_redc_t *s,
+void F_SYMBOL(bn6400_redc_mont)(const bn6400_redc_t *s,
 		bn6400_t *r, const bn6400_t *a)
 ;
 
@@ -671,7 +671,7 @@ void F_SYMBOL(bn8448_redc_mod)(const bn8448_redc_t *s,
 ;
 
 extern
-void F_SYMBOL(bn8448_redc_moto)(const bn8448_redc_t *s,
+void F_SYMBOL(bn8448_redc_mont)(const bn8448_redc_t *s,
 		bn8448_t *r, const bn8448_t *a)
 ;
 

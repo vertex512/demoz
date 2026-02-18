@@ -217,23 +217,6 @@ void F_SYMBOL(poly1305_tag)(struct poly1305_ctx *ctx, uint8_t *tag)
 	C_SYMBOL(memcpy)(tag, h, POLY1305_TAG_LEN);
 }
 
-/* @func: poly1305_tag_auth
- * #desc:
- *    poly1305 tag comparison is equal.
- *
- * #1: tag
- * #2: tag
- * #r: 0: a != b, 1: a == b
- */
-int32_t F_SYMBOL(poly1305_tag_auth)(const uint8_t *a, const uint8_t *b)
-{
-	uint32_t r = 0;
-	for (int32_t i = 0; i < POLY1305_TAG_LEN; i++)
-		r |= a[i] ^ b[i];
-
-	return ((r - 1) >> 31) & 1;
-}
-
 /* @func: poly1305_process
  * #desc:
  *    poly1305 processing buffer function.
