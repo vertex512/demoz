@@ -56,7 +56,7 @@ static const uint8_t keccak_rho[5][5] = {
  * #desc:
  *    keccak-f permutation function.
  *
- * #1: state buffer
+ * #1: state [in/out] state buffer
  */
 void F_SYMBOL(keccak_f1600)(uint64_t state[5][5])
 {
@@ -171,11 +171,11 @@ void F_SYMBOL(keccak_f1600)(uint64_t state[5][5])
  * #desc:
  *    keccak absorb function.
  *
- * #1: state buffer
- * #2: input buffer (length: >=rate)
- * #3: input length
- * #4: bitrate length (byte)
- * #r: remaining length
+ * #1: state [in/out] state buffer
+ * #2: in    [in]     input buffer (length: >=rate)
+ * #3: len   [in]     input length
+ * #4: len   [in]     bitrate length (byte)
+ * #r: rate  [in]     remaining length
  */
 size_t F_SYMBOL(keccak_absorb)(uint64_t state[5][5], const uint8_t *in,
 		size_t len, uint32_t rate)
@@ -204,10 +204,10 @@ size_t F_SYMBOL(keccak_absorb)(uint64_t state[5][5], const uint8_t *in,
  * #desc:
  *    keccak squeeze function.
  *
- * #1: state buffer
- * #2: digest output
- * #3: digest length
- * #4: bitrate length (byte)
+ * #1: state [in/out] state buffer
+ * #2: out   [out]    digest output
+ * #3: len   [in]     digest length
+ * #4: rate  [in]     bitrate length (byte)
  */
 void F_SYMBOL(keccak_squeeze)(uint64_t state[5][5], uint8_t *out,
 		uint32_t len, uint32_t rate)
@@ -244,10 +244,10 @@ void F_SYMBOL(keccak_squeeze)(uint64_t state[5][5], uint8_t *out,
  * #desc:
  *    sha3 struct context initialization.
  *
- * #1: sha3 struct context
- * #2: digest type
- * #3: shake digest length (byte, 0: use xof function)
- * #r: 0: no error, -1: type error, -2: digest size error
+ * #1: ctx   [out] sha3 struct context
+ * #2: type  [in]  digest type
+ * #3: dsize [in]  shake digest length (byte, 0: use xof function)
+ * #r:       [ret] 0: no error, -1: type error, -2: digest size error
  */
 int32_t F_SYMBOL(sha3_init)(struct sha3_ctx *ctx, int32_t type,
 		uint32_t dsize)
@@ -298,9 +298,9 @@ int32_t F_SYMBOL(sha3_init)(struct sha3_ctx *ctx, int32_t type,
  * #desc:
  *    sha3 processing buffer function.
  *
- * #1: sha3 struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] sha3 struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(sha3_process)(struct sha3_ctx *ctx, const uint8_t *s,
 		size_t len)
@@ -337,7 +337,7 @@ void F_SYMBOL(sha3_process)(struct sha3_ctx *ctx, const uint8_t *s,
  * #desc:
  *    sha3 process the remaining bytes in the buffer and end.
  *
- * #1: sha3 struct context
+ * #1: ctx [in/out] sha3 struct context
  */
 void F_SYMBOL(sha3_finish)(struct sha3_ctx *ctx)
 {
@@ -356,9 +356,9 @@ void F_SYMBOL(sha3_finish)(struct sha3_ctx *ctx)
  * #desc:
  *    sha3 single-time processing function.
  *
- * #1: sha3 struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] sha3 struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(sha3)(struct sha3_ctx *ctx, const uint8_t *s, size_t len)
 {
@@ -370,9 +370,9 @@ void F_SYMBOL(sha3)(struct sha3_ctx *ctx, const uint8_t *s, size_t len)
  * #desc:
  *    keccak shake extendable output function.
  *
- * #1: sha3 struct context
- * #2: digest output
- * #3: digest length
+ * #1: ctx [in/out] sha3 struct context
+ * #2: out [out]    digest output
+ * #3: len [in]     digest length
  */
 void F_SYMBOL(sha3_shake_xof)(struct sha3_ctx *ctx, uint8_t *out, uint32_t len)
 {

@@ -31,9 +31,9 @@
  * #desc:
  *    memory swap.
  *
- * #1: member pointer
- * #2: member pointer
- * #3: memory swap size
+ * #1: a [in/out] member pointer
+ * #2: b [in/out] member pointer
+ * #3: n [in]     memory swap size
  */
 static void _qsort_swap(void *a, void *b, uint64_t n)
 {
@@ -57,11 +57,11 @@ static void _qsort_swap(void *a, void *b, uint64_t n)
  * #desc:
  *    heapsort siftdown.
  *
- * #1: base array
- * #2: number of array members
- * #3: members size
- * #4: callback cmp
- * #5: heapsort binary size
+ * #1: b   [in/out] base array
+ * #2: n   [in]     number of array members
+ * #3: w   [in]     members size
+ * #4: cmp [in]     callback cmp
+ * #5: k   [in]     heapsort binary size
  */
 static void _qsort(void *b, uint64_t n, uint64_t w,
 		int32_t (*cmp)(const void *, const void *), uint64_t k)
@@ -83,10 +83,10 @@ static void _qsort(void *b, uint64_t n, uint64_t w,
  * #desc:
  *    sort a table of data (heapsort).
  *
- * #1: base array
- * #2: number of array members
- * #3: members size
- * #4: callback cmp
+ * #1: b   [in/out] base array
+ * #2: n   [in]     number of array members
+ * #3: w   [in]     members size
+ * #4: cmp [in]     callback cmp
  */
 void C_SYMBOL(qsort)(void *b, uint64_t n, uint64_t w,
 		int32_t (*cmp)(const void *, const void *))
@@ -110,12 +110,12 @@ void C_SYMBOL(qsort)(void *b, uint64_t n, uint64_t w,
  * #desc:
  *    binary search a sorted table.
  *
- * #1: key value
- * #2: base sorted array
- * #3: number of array members
- * #4: members size
- * #5: callback cmp
- * #r: return key members / NULL pointer
+ * #1: k   [in]  key value
+ * #2: b   [in]  base sorted array
+ * #3: n   [in]  number of array members
+ * #4: w   [in]  members size
+ * #5: cmp [in]  callback cmp
+ * #r:     [ret] return key members / NULL pointer
  */
 void *C_SYMBOL(bsearch)(const void *k, const void *b, uint64_t n, uint64_t w,
 		int32_t (*cmp)(const void *, const void *))

@@ -35,7 +35,7 @@ char **C_SYMBOL(___envp) = NULL;
  * #desc:
  *    c runtime entry.
  *
- * #1: stack pointer
+ * #1: sp [in/out] stack pointer
  */
 void C_SYMBOL(___start_main)(size_t *sp)
 {

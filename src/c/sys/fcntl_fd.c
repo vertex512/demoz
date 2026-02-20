@@ -34,10 +34,10 @@
  * #desc:
  *    file descriptor operations.
  *
- * #1: file descriptor
- * #2: command
- * #N: command argument
- * #r: return value of command
+ * #1: fd  [in]     file descriptor
+ * #2: cmd [in]     command
+ * #N:     [in/out] command argument
+ * #r:     [ret]    return value of command
  */
 int32_t C_SYMBOL(fcntl)(int32_t fd, int32_t cmd, ...)
 {

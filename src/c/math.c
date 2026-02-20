@@ -29,8 +29,8 @@
  * #desc:
  *    return an floating-point absolute value.
  *
- * #1: input value
- * #r: absolute value
+ * #1: x [in]  input value
+ * #r:   [ret] absolute value
  */
 double C_SYMBOL(fabs)(double x)
 {
@@ -48,8 +48,8 @@ double C_SYMBOL(fabs)(double x)
  * #desc:
  *    classify real floating-point type.
  *
- * #1: input value
- * #r: floating-point type
+ * #1: x [in]  input value
+ * #r:   [ret] floating-point type
  */
 int32_t C_SYMBOL(fpclassifyf)(float x)
 {
@@ -72,8 +72,8 @@ int32_t C_SYMBOL(fpclassifyf)(float x)
  * #desc:
  *    classify real floating-point type.
  *
- * #1: input value
- * #r: floating-point type
+ * #1: x [in]  input value
+ * #r:   [ret] floating-point type
  */
 int32_t C_SYMBOL(fpclassify)(double x)
 {
@@ -96,8 +96,8 @@ int32_t C_SYMBOL(fpclassify)(double x)
  * #desc:
  *    compute the maximum integer value of x.
  *
- * #1: input value
- * #r: maximum integer value
+ * #1: x [in]  input value
+ * #r:   [ret] maximum integer value
  */
 double C_SYMBOL(floor)(double x)
 {
@@ -127,9 +127,9 @@ double C_SYMBOL(floor)(double x)
  * #desc:
  *    remainder function.
  *
- * #1: input value
- * #2: denominator
- * #r: remainder
+ * #1: x [in]  input value
+ * #2: y [in]  denominator
+ * #r:   [ret] remainder
  */
 double C_SYMBOL(fmod)(double x, double y)
 {
@@ -142,9 +142,9 @@ double C_SYMBOL(fmod)(double x, double y)
  * #desc:
  *    extract the mantissa and exponent from floating-point.
  *
- * #1: input value
- * #2: exponent
- * #r: mantissa
+ * #1: x [in]  input value
+ * #2: e [out] exponent
+ * #r:   [ret] mantissa
  */
 double C_SYMBOL(frexp)(double x, int32_t *e)
 {
@@ -177,9 +177,9 @@ double C_SYMBOL(frexp)(double x, int32_t *e)
  * #desc:
  *    extract floating-point integer and decimals
  *
- * #1: input value
- * #2: integer
- * #r: decimals
+ * #1: x [in]  input value
+ * #2: n [out] integer
+ * #r:   [ret] decimals
  */
 double C_SYMBOL(modf)(double x, double *n)
 {
@@ -215,9 +215,9 @@ double C_SYMBOL(modf)(double x, double *n)
  * #desc:
  *    multiply by an integer power of 2.
  *
- * #1: input floating-point
- * #2: exponent
- * #r: return x*2^n
+ * #1: x [in]  input floating-point
+ * #2: n [in]  exponent
+ * #r:   [ret] return the x*2^n
  */
 double C_SYMBOL(ldexp)(double x, int32_t n)
 {
@@ -256,8 +256,8 @@ double C_SYMBOL(ldexp)(double x, int32_t n)
  * #desc:
  *    cosine function.
  *
- * #1: input value
- * #r: cosine of value
+ * #1: x [in]  input value
+ * #r:   [ret] cosine of value
  */
 double C_SYMBOL(cos)(double x)
 {
@@ -284,8 +284,8 @@ double C_SYMBOL(cos)(double x)
  * #desc:
  *    sine function.
  *
- * #1: input value
- * #r: sine of value
+ * #1: x [in]  input value
+ * #r:   [ret] sine of value
  */
 double C_SYMBOL(sin)(double x)
 {
@@ -312,8 +312,8 @@ double C_SYMBOL(sin)(double x)
  * #desc:
  *    tangent function.
  *
- * #1: input value
- * #r: tangent of value
+ * #1: x [in]  input value
+ * #r:   [ret] tangent of value
  */
 double C_SYMBOL(tan)(double x)
 {
@@ -324,8 +324,8 @@ double C_SYMBOL(tan)(double x)
  * #desc:
  *    arc cosine function.
  *
- * #1: input value
- * #r: arc cosine of value
+ * #1: x [in]  input value
+ * #r:   [ret] arc cosine of value
  */
 double C_SYMBOL(acos)(double x)
 {
@@ -343,8 +343,8 @@ double C_SYMBOL(acos)(double x)
  * #desc:
  *    arc tangent function.
  *
- * #1: input value
- * #r: arc tangent of value
+ * #1: x [in]  input value
+ * #r:   [ret] arc tangent of value
  */
 double C_SYMBOL(atan)(double x)
 {
@@ -394,8 +394,8 @@ double C_SYMBOL(atan)(double x)
  * #desc:
  *    square root function.
  *
- * #1: input value
- * #r: square root of value
+ * #1: x [in]  input value
+ * #r:   [ret] square root of value
  */
 double C_SYMBOL(sqrt)(double x)
 {
@@ -434,8 +434,8 @@ double C_SYMBOL(sqrt)(double x)
  * #desc:
  *    arc cosine function.
  *
- * #1: input value
- * #r: arc cosine of value
+ * #1: x [in]  input value
+ * #r:   [ret] arc cosine of value
  */
 double C_SYMBOL(asin)(double x)
 {
@@ -455,8 +455,8 @@ double C_SYMBOL(asin)(double x)
  * #desc:
  *    exponential function.
  *
- * #1: input value
- * #r: cardinality exponent of value
+ * #1: x [in]  input value
+ * #r:   [ret] cardinality exponent of value
  */
 double C_SYMBOL(exp)(double x)
 {
@@ -479,8 +479,8 @@ double C_SYMBOL(exp)(double x)
  * #desc:
  *    natural logarithm function.
  *
- * #1: input value
- * #r: natural logarithm of value
+ * #1: x [in]  input value
+ * #r:   [ret] natural logarithm of value
  */
 double C_SYMBOL(log)(double x)
 {
@@ -517,8 +517,8 @@ double C_SYMBOL(log)(double x)
  * #desc:
  *    natural logarithm function of base 2.
  *
- * #1: input value
- * #r: natural logarithm of value
+ * #1: x [in]  input value
+ * #r:   [ret] natural logarithm of value
  */
 double C_SYMBOL(log2)(double x)
 {
@@ -529,8 +529,8 @@ double C_SYMBOL(log2)(double x)
  * #desc:
  *    natural logarithm function of base 10.
  *
- * #1: input value
- * #r: natural logarithm of value
+ * #1: x [in]  input value
+ * #r:   [ret] natural logarithm of value
  */
 double C_SYMBOL(log10)(double x)
 {
@@ -541,8 +541,8 @@ double C_SYMBOL(log10)(double x)
  * #desc:
  *    logarithm of 1 plus argument.
  *
- * #1: input value
- * #r: natural logarithm of value
+ * #1: x [in]  input value
+ * #r:   [ret] natural logarithm of value
  */
 double C_SYMBOL(log1p)(double x)
 {
@@ -556,9 +556,9 @@ double C_SYMBOL(log1p)(double x)
  * #desc:
  *    power function.
  *
- * #1: input value
- * #2: exponent value
- * #r: return x^e power value
+ * #1: x [in]  input value
+ * #2: e [in]  exponent value
+ * #r:   [ret] return x^e power value
  */
 static double _pow(double x, double e)
 {
@@ -579,9 +579,9 @@ static double _pow(double x, double e)
  * #desc:
  *    power function.
  *
- * #1: input value
- * #2: exponent value
- * #r: return x^e power value
+ * #1: x [in]  input value
+ * #2: e [in]  exponent value
+ * #r:   [ret] return x^e power value
  */
 double C_SYMBOL(pow)(double x, double e)
 {

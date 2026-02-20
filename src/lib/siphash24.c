@@ -55,10 +55,10 @@
  * #desc:
  *    siphash message authentication function.
  *
- * #1: input buffet
- * #2: input length
- * #3: input key
- * #r: return digest
+ * #1: s   [in]  input buffet
+ * #2: len [in]  input length
+ * #3: key [in]  input key
+ * #r:     [ret] return digest
  */
 uint64_t F_SYMBOL(siphash24)(const uint8_t *s, size_t len, const uint8_t *key)
 {
@@ -114,11 +114,11 @@ uint64_t F_SYMBOL(siphash24)(const uint8_t *s, size_t len, const uint8_t *key)
  * #desc:
  *    siphash of variants message authentication function.
  *
- * #1: input buffet
- * #2: input length
- * #3: input key
- * #4: digest (high) / NULL
- * #r: return digest (low)
+ * #1: s   [in]  input buffet
+ * #2: len [in]  input length
+ * #3: key [in]  input key
+ * #4: h2  [out] digest (high) / NULL
+ * #r:     [ret] return digest (low)
  */
 uint64_t F_SYMBOL(siphashx24)(const uint8_t *s, size_t len, const uint8_t *key,
 		uint64_t *h2)

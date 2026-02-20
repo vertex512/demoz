@@ -31,16 +31,16 @@
  * #desc:
  *    hkdf-sha3 key derivation function.
  *
- * #1: ikm
- * #2: ikm length
- * #3: salt
- * #4: salt length
- * #5: info
- * #6: info length
- * #7: output key
- * #8: key length
- * #9: digest type
- * #r:
+ * #1: ikm      [in]  ikm
+ * #2: ikm      [in]  ikm length
+ * #3: salt     [in]  salt
+ * #4: salt_len [in]  salt length
+ * #5: info     [in]  info
+ * #6: info_len [in]  info length
+ * #7: okm      [out] output key
+ * #8: len      [in]  key length
+ * #9: type     [in]  digest type
+ * #r:          [ret]
  *    0: no error, -1: key length error, -2: digest type error
  */
 int32_t F_SYMBOL(hkdf_sha3)(const uint8_t *ikm, uint32_t ikm_len,

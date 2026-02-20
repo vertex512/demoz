@@ -53,8 +53,8 @@
  * #desc:
  *    sha1 compression function.
  *
- * #1: sha1 struct context
- * #2: input block (length: SHA1_BLOCKSIZE)
+ * #1: ctx [in/out] sha1 struct context
+ * #2: s   [in]     input block (length: SHA1_BLOCKSIZE)
  */
 static void _sha1_compress(struct sha1_ctx *ctx, const uint8_t *s)
 {
@@ -106,7 +106,7 @@ static void _sha1_compress(struct sha1_ctx *ctx, const uint8_t *s)
  * #desc:
  *    sha1 struct context initialization.
  *
- * #1: sha1 struct context
+ * #1: ctx [out] sha1 struct context
  */
 void F_SYMBOL(sha1_init)(struct sha1_ctx *ctx)
 {
@@ -122,9 +122,9 @@ void F_SYMBOL(sha1_init)(struct sha1_ctx *ctx)
  * #desc:
  *    sha1 processing buffer function.
  *
- * #1: sha1 struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] sha1 struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(sha1_process)(struct sha1_ctx *ctx, const uint8_t *s,
 		size_t len)
@@ -165,8 +165,8 @@ void F_SYMBOL(sha1_process)(struct sha1_ctx *ctx, const uint8_t *s,
  * #desc:
  *    sha1 process the remaining bytes in the buffer and end.
  *
- * #1: sha1 struct context
- * #2: total length
+ * #1: ctx [in/out] sha1 struct context
+ * #2: len [in]     total length
  */
 void F_SYMBOL(sha1_finish)(struct sha1_ctx *ctx, uint64_t len)
 {
@@ -193,9 +193,9 @@ void F_SYMBOL(sha1_finish)(struct sha1_ctx *ctx, uint64_t len)
  * #desc:
  *    sha1 single-time processing function.
  *
- * #1: sha1 struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] sha1 struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(sha1)(struct sha1_ctx *ctx, const uint8_t *s, size_t len)
 {

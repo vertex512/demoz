@@ -1,6 +1,6 @@
-/* @file: aes_fast.c
+/* @file: aes_sbox.c
  * #desc:
- *    the implementations of advanced encryption standard (rijndael).
+ *    The implementations of advanced encryption standard (rijndael).
  *
  * #copy:
  *    Copyright (C) 1970 Public Free Software
@@ -225,7 +225,7 @@ static const uint8_t aes_invmul_3_table[256] = {
  * #desc:
  *    shift 4-byte in a word to the left.
  *
- * #1: word array (4-byte)
+ * #1: word [in/out] word array (4-byte)
  */
 static void _aes_rotword(uint8_t *word)
 {
@@ -240,7 +240,7 @@ static void _aes_rotword(uint8_t *word)
  * #desc:
  *    s-box mapping replaces the a word 4-byte.
  *
- * #1: word array (4-byte)
+ * #1: word [in/out] word array (4-byte)
  */
 static void _aes_subword(uint8_t *word)
 {
@@ -254,8 +254,8 @@ static void _aes_subword(uint8_t *word)
  * #desc:
  *    a word 1-byte add round constant.
  *
- * #1: word array (4-byte)
- * #2: round constant index
+ * #1: word [in/out] word array (4-byte)
+ * #2: i    [in]     round constant index
  */
 static void _aes_rcon(uint8_t *word, int32_t i)
 {
@@ -266,8 +266,8 @@ static void _aes_rcon(uint8_t *word, int32_t i)
  * #desc:
  *    add roundkey (keyexp) to the state buffer.
  *
- * #1: state buffer
- * #2: roundkey
+ * #1: state    [in/out] state buffer
+ * #2: roundkey [in]     roundkey
  */
 static void _aes_addroundkey(uint8_t *state, uint8_t *roundkey)
 {
@@ -279,7 +279,7 @@ static void _aes_addroundkey(uint8_t *state, uint8_t *roundkey)
  * #desc:
  *    s-box mapping replaces the state buffer.
  *
- * #1: state buffer
+ * #1: state [in/out] state buffer
  */
 static void _aes_subbytes(uint8_t *state)
 {
@@ -291,7 +291,7 @@ static void _aes_subbytes(uint8_t *state)
  * #desc:
  *    rs-box mapping replaces the state buffer.
  *
- * #1: state buffer
+ * #1: state [in/out] state buffer
  */
 static void _aes_invsubbytes(uint8_t *state)
 {
@@ -303,7 +303,7 @@ static void _aes_invsubbytes(uint8_t *state)
  * #desc:
  *    the row in the state buffer shifted left.
  *
- * #1: state buffer
+ * #1: state [in/out] state buffer
  */
 static void _aes_shiftrows(uint8_t *state)
 {
@@ -332,7 +332,7 @@ static void _aes_shiftrows(uint8_t *state)
  * #desc:
  *    the row in the state buffer shifted right.
  *
- * #1: state buffer
+ * #1: state [in/out] state buffer
  */
 static void _aes_invshiftrows(uint8_t *state)
 {
@@ -363,8 +363,8 @@ static void _aes_invshiftrows(uint8_t *state)
  * #desc:
  *    compute finite field gf(2^8) multiply by 2.
  *
- * #1: number
- * #r: result
+ * #1: n [in]  number
+ * #r:   [ret] result
  */
 static uint8_t _aes_xtime(uint8_t n)
 {
@@ -377,7 +377,7 @@ static uint8_t _aes_xtime(uint8_t n)
  * #desc:
  *    mix column matrix transformat.
  *
- * #1: state buffer
+ * #1: state [in/out] state buffer
  */
 static void _aes_mixcolumns(uint8_t *state)
 {
@@ -422,9 +422,9 @@ static void _aes_mixcolumns(uint8_t *state)
  * #desc:
  *    compute finite field gf(2^8) multiply.
  *
- * #1: number
- * #2: number
- * #r: result
+ * #1: x [in]  number
+ * #2: y [in]  number
+ * #r:   [ret] result
  */
 static uint8_t _aes_invmultiply(uint8_t x, uint8_t y)
 {
@@ -449,7 +449,7 @@ static uint8_t _aes_invmultiply(uint8_t x, uint8_t y)
  * #desc:
  *    inverse mix column matrix transformat.
  *
- * #1: state buffer
+ * #1: state [in/out] state buffer
  */
 static void _aes_invmixcolumns(uint8_t *state)
 {
@@ -514,12 +514,12 @@ static void _aes_invmixcolumns(uint8_t *state)
  * #desc:
  *    aes key expansion function.
  *
- * #1: aes struct context
- * #2: input key
+ * #1: ctx [out] aes struct context
+ * #2: key [in]  input key
  */
 static void _aes_keyexp(struct aes_ctx *ctx, const uint8_t *key)
 {
-	C_SYMBOL(memset)(ctx->keyexp, 0, AES_KEYEXPLEN);
+	C_SYMBOL(memset)(ctx->keyexp, 0, AES_KEYEXP_LEN);
 	C_SYMBOL(memcpy)(ctx->keyexp, key, ctx->keylen);
 
 	uint8_t tmp[4];
@@ -550,25 +550,25 @@ static void _aes_keyexp(struct aes_ctx *ctx, const uint8_t *key)
  * #desc:
  *    aes initialization function.
  *
- * #1: aes struct context
- * #2: input key (length: AES_*_KEYLEN)
- * #3: aes type
- * #r: 0: no error, -1: type error
+ * #1: ctx  [out] aes struct context
+ * #2: key  [in]  input key (length: AES_*_KEYLEN)
+ * #3: type [in]  aes type
+ * #r:      [ret] 0: no error, -1: type error
  */
 int32_t F_SYMBOL(aes_init)(struct aes_ctx *ctx, const uint8_t *key,
 		int32_t type)
 {
 	switch (type) {
 		case AES_128_TYPE:
-			ctx->keylen = AES_128_KEYLEN;
+			ctx->keylen = AES_128_KEY_LEN;
 			ctx->rounds = AES_128_ROUNDS;
 			break;
 		case AES_192_TYPE:
-			ctx->keylen = AES_192_KEYLEN;
+			ctx->keylen = AES_192_KEY_LEN;
 			ctx->rounds = AES_192_ROUNDS;
 			break;
 		case AES_256_TYPE:
-			ctx->keylen = AES_256_KEYLEN;
+			ctx->keylen = AES_256_KEY_LEN;
 			ctx->rounds = AES_256_ROUNDS;
 			break;
 		default:
@@ -584,8 +584,8 @@ int32_t F_SYMBOL(aes_init)(struct aes_ctx *ctx, const uint8_t *key,
  * #desc:
  *    aes encryption function.
  *
- * #1: aes struct context
- * #2: state buffer
+ * #1: ctx   [in]     aes struct context
+ * #2: state [in/out] state buffer
  */
 void F_SYMBOL(aes_encrypt)(struct aes_ctx *ctx, uint8_t *state)
 {
@@ -607,8 +607,8 @@ void F_SYMBOL(aes_encrypt)(struct aes_ctx *ctx, uint8_t *state)
  * #desc:
  *    aes decryption function.
  *
- * #1: aes struct context
- * #2: state buffer
+ * #1: ctx   [in]     aes struct context
+ * #2: state [in/out] state buffer
  */
 void F_SYMBOL(aes_decrypt)(struct aes_ctx *ctx, uint8_t *state)
 {

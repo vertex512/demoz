@@ -30,10 +30,10 @@
  * #desc:
  *    atomic cas (compare-and-swap).
  *
- * #1: (int*) variable pointer
- * #2: (int)  old value
- * #3: (int)  new value
- * #r: (int)  old: success, *var: fail
+ * #1: (int*) [in/out] variable pointer
+ * #2: (int)  [in]     old value
+ * #3: (int)  [in]     new value
+ * #r: (int)  [ret]    old: success, *var: fail
  */
 C_SYMBOL(atomic_cas):
 #if (DEMOZ_MARCH_TYPE == DEMOZ_MARCH_X86_32)

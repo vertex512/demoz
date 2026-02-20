@@ -46,9 +46,9 @@ static const uint8_t salsa20_constant[] = "expand 32-byte k";
  * #desc:
  *    xsalsa20 key generation.
  *
- * #1: xsalsa20 struct context
- * #2: key
- * #3: nonce
+ * #1: state [out] salsa20 state
+ * #2: key   [in]  key
+ * #3: ran   [in]  nonce
  */
 static void _hsalsa20_keygen(uint32_t state[16], const uint8_t *key,
 		const uint8_t *ran)
@@ -91,10 +91,10 @@ static void _hsalsa20_keygen(uint32_t state[16], const uint8_t *key,
  * #desc:
  *    xsalsa20 initialization function.
  *
- * #1: xsalsa20 struct context
- * #2: key
- * #3: nonce
- * #4: counter
+ * #1: ctx [out] xsalsa20 struct context
+ * #2: key [in]  key
+ * #3: ran [in]  nonce
+ * #4: ctr [in]  counter
  */
 void F_SYMBOL(xsalsa20_init)(struct xsalsa20_ctx *ctx, const uint8_t *key,
 		const uint8_t *ran, const uint8_t *ctr)
@@ -129,8 +129,8 @@ void F_SYMBOL(xsalsa20_init)(struct xsalsa20_ctx *ctx, const uint8_t *key,
  * #desc:
  *    xsalsa20 block keystream function.
  *
- * #1: xsalsa20 struct context
- * #2: rounds
+ * #1: ctx [in/out] xsalsa20 struct context
+ * #2: n   [in]     rounds
  */
 void F_SYMBOL(xsalsa20_block)(struct xsalsa20_ctx *ctx, int32_t n)
 {
@@ -161,9 +161,9 @@ void F_SYMBOL(xsalsa20_block)(struct xsalsa20_ctx *ctx, int32_t n)
  * #desc:
  *    xsalsa20 stream encryption function.
  *
- * #1: xsalsa20 struct context
- * #2: buffer
- * #3: length
+ * #1: ctx [in/out] xsalsa20 struct context
+ * #2: buf [in/out] buffer
+ * #3: len [in]     length
  */
 void F_SYMBOL(xsalsa20_crypto)(struct xsalsa20_ctx *ctx, uint8_t *buf,
 		size_t len)

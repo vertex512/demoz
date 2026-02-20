@@ -53,11 +53,11 @@ static int32_t _call(const char *s, int32_t len, void *arg) {
  * #desc:
  *    convert formatted output to buffer.
  *
- * #1: output buffer
- * #2: buffer length
- * #3: format string
- * #4: variable parameter
- * #r: >=0: output length, -1: error
+ * #1: buf [out] output buffer
+ * #2: len [in]  buffer length
+ * #3: fmt [in]  format string
+ * #4: ap  [in]  variable parameter
+ * #r:     [ret] >=0: output length, -1: error
  */
 int32_t C_SYMBOL(vsnprintf)(char *buf, size_t len, const char *fmt,
 		va_list ap)
@@ -83,11 +83,11 @@ int32_t C_SYMBOL(vsnprintf)(char *buf, size_t len, const char *fmt,
  * #desc:
  *    convert formatted output to buffer.
  *
- * #1: output buffer
- * #2: buffer length
- * #3: format string
- * #N: variable parameter
- * #r: >=0: output length, -1: error
+ * #1: buf [out] output buffer
+ * #2: len [in]  buffer length
+ * #3: fmt [in]  format string
+ * #N:     [in]  variable parameter
+ * #r:     [ret] >=0: output length, -1: error
  */
 int32_t C_SYMBOL(snprintf)(char *buf, size_t len, const char *fmt, ...)
 {

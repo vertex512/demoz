@@ -30,8 +30,8 @@
  * #desc:
  *    minheap member swap.
  *
- * #1: member pointer
- * #2: member pointer
+ * #1: a [in/out] member pointer
+ * #2: b [in/out] member pointer
  */
 static void _minheapify_swap(void **a, void **b)
 {
@@ -44,9 +44,9 @@ static void _minheapify_swap(void **a, void **b)
  * #desc:
  *    minheap member up shift.
  *
- * #1: minheap head
- * #2: array index
- * #3: callback
+ * #1: head [in/out] minheap head
+ * #2: n    [in]     array index
+ * #3: cmp  [in]     callback
  */
 static void _minheapify_up(struct minheap_head *head,
 		size_t n, int32_t (*cmp)(void *, void *))
@@ -65,9 +65,9 @@ static void _minheapify_up(struct minheap_head *head,
  * #desc:
  *    minheap member down shift.
  *
- * #1: minheap head
- * #2: array index
- * #3: callback
+ * #1: head [in/out] minheap head
+ * #2: n    [in]     array index
+ * #3: cmp  [in]     callback
  */
 static void _minheapify_down(struct minheap_head *head,
 		size_t n, int32_t (*cmp)(void *, void *))
@@ -94,10 +94,10 @@ static void _minheapify_down(struct minheap_head *head,
  * #desc:
  *    insert a minheap array member.
  *
- * #1: minheap head
- * #2: new member pointer
- * #3: callback
- * #r: 0: no error, -1: error array full
+ * #1: head [in/out] minheap head
+ * #2: new  [in/out] new member pointer
+ * #3: cmp  [in]     callback
+ * #r:      [ret]    0: no error, -1: error array full
  */
 int32_t F_SYMBOL(minheap_insert)(struct minheap_head *head,
 		void *new, int32_t (*cmp)(void *, void *))
@@ -116,8 +116,8 @@ int32_t F_SYMBOL(minheap_insert)(struct minheap_head *head,
  * #desc:
  *    build a minheap (array assignment).
  *
- * #1: minheap head
- * #2: callback
+ * #1: head [in/out] minheap head
+ * #2: cmp  [in]     callback
  */
 void F_SYMBOL(minheap_build)(struct minheap_head *head,
 		int32_t (*cmp)(void *, void *))
@@ -134,9 +134,9 @@ void F_SYMBOL(minheap_build)(struct minheap_head *head,
  * #desc:
  *    search for minheap array member index.
  *
- * #1: minheap head
- * #2: member pointer
- * #r: array index (-1: not found)
+ * #1: head [in/out] minheap head
+ * #2: p    [in]     member pointer
+ * #r:      [ret]    array index (-1: not found)
  */
 ssize_t F_SYMBOL(minheap_search)(struct minheap_head *head,
 		void *p)
@@ -153,10 +153,10 @@ ssize_t F_SYMBOL(minheap_search)(struct minheap_head *head,
  * #desc:
  *    search for minheap array member index.
  *
- * #1: minheap head
- * #2: callback arg
- * #3: callback
- * #r: array index (-1: not found)
+ * #1: head [in/out] minheap head
+ * #2: arg  [in]     callback arg
+ * #3: cmp  [in]     callback
+ * #r:      [ret]    array index (-1: not found)
  */
 ssize_t F_SYMBOL(minheap_search2)(struct minheap_head *head,
 		void *arg, int32_t (*cmp)(void *, void *))
@@ -173,10 +173,10 @@ ssize_t F_SYMBOL(minheap_search2)(struct minheap_head *head,
  * #desc:
  *    erase a minheap array member.
  *
- * #1: minheap head
- * #2: array index
- * #3: callback
- * #r: 0: no error, -1: error array full
+ * #1: head [in/out] minheap head
+ * #2: ind  [in]     array index
+ * #3: cmp  [in]     callback
+ * #r:      [ret]    0: no error, -1: error array full
  */
 int32_t F_SYMBOL(minheap_erase)(struct minheap_head *head,
 		size_t ind, int32_t (*cmp)(void *, void *))
@@ -201,9 +201,9 @@ int32_t F_SYMBOL(minheap_erase)(struct minheap_head *head,
  * #desc:
  *    extract a minheap minimum member.
  *
- * #1: minheap head
- * #2: callback
- * #r: minimum member / NULL pointer
+ * #1: head [in/out] minheap head
+ * #2: cmp  [in]     callback
+ * #r:      [ret]    minimum member / NULL pointer
  */
 void* F_SYMBOL(minheap_extract)(struct minheap_head *head,
 		int32_t (*cmp)(void *, void *))

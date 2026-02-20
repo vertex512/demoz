@@ -31,10 +31,10 @@
  * #desc:
  *    string to floating-point (integer) conversion.
  *
- * #1: input string
- * #2: end pointer / NULL
- * #3: base type
- * #r: return double
+ * #1: s [in]  input string
+ * #2: e [out] end pointer / NULL
+ * #3: b [in]  base type
+ * #r:   [ret] return double
  */
 static double _strtod_num(const char *s, char **e, int32_t b)
 {
@@ -65,9 +65,9 @@ static double _strtod_num(const char *s, char **e, int32_t b)
  * #desc:
  *    string to floating-point conversion.
  *
- * #1: input string
- * #2: end pointer / NULL
- * #r: return double
+ * #1: s [in]  input string
+ * #2: e [out] end pointer / NULL
+ * #r:   [ret] return double
  */
 static double _strtod(const char *s, char **e)
 {
@@ -117,8 +117,8 @@ static double _strtod(const char *s, char **e)
  * #desc:
  *    string to float conversion.
  *
- * #1: input string
- * #r: return double
+ * #1: s [in]  input string
+ * #r:   [ret] return double
  */
 double C_SYMBOL(atof)(const char *s)
 {
@@ -129,9 +129,9 @@ double C_SYMBOL(atof)(const char *s)
  * #desc:
  *    string to double conversion.
  *
- * #1: input string
- * #2: end pointer / NULL
- * #r: return double
+ * #1: s [in]  input string
+ * #2: e [out] end pointer / NULL
+ * #r:   [ret] return double
  */
 double C_SYMBOL(strtod)(const char *s, char **e)
 {

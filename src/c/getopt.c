@@ -30,12 +30,12 @@
  * #desc:
  *    command-line short options parse.
  *
- * #1: argc
- * #2: argv
- * #3: options string
- * #4: argument pointer
- * #5: current argv index
- * #r:
+ * #1: argc   [in]     command-line argc
+ * #2: argv   [in]     command-line argv
+ * #3: optstr [in]     options string
+ * #4: arg    [in/out] argument pointer
+ * #5: ind    [in/out] current argv index
+ * #r:        [ret]
  *    -1: parseing end, ':': missing argument, '?': unknown option,
  *    '<opt-character>': option character
  */
@@ -125,14 +125,14 @@ int32_t C_SYMBOL(getopt_r)(int32_t argc, char *const *argv,
  * #desc:
  *    command-line long options parse.
  *
- * #1: argc
- * #2: argv
- * #3: short options string
- * #4: long options string
- * #5: long option index
- * #6: argument pointer
- * #7: current argv index
- * #r:
+ * #1: argc     [in]     command-line argc
+ * #2: argv     [in]     command-line argv
+ * #3: optstr   [in]     short options string
+ * #4: longopts [in]     long options string
+ * #5: longind  [out]    long option index
+ * #6: arg      [in/out] argument pointer
+ * #7: ind      [in/out] current argv index
+ * #r:          [ret]
  *    -1: parseing end, ':': missing argument, '?': unknown option,
  *    '<opt-character>': option character/number, 0: use long option flag
  */

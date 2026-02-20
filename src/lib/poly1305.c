@@ -40,8 +40,8 @@
  * #desc:
  *    poly1305 initialization function.
  *
- * #1: poly1305 struct context
- * #2: input key (length: POLY1305_KEY_LEN)
+ * #1: ctx [out] poly1305 struct context
+ * #2: key [in]  input key (length: POLY1305_KEY_LEN)
  */
 void F_SYMBOL(poly1305_init)(struct poly1305_ctx *ctx, const uint8_t *key)
 {
@@ -64,9 +64,9 @@ void F_SYMBOL(poly1305_init)(struct poly1305_ctx *ctx, const uint8_t *key)
  * #desc:
  *    poly1305 block processing function.
  *
- * #1: poly1305 struct context
- * #2: input block (length: POLY1305_BLOCKSIZE)
- * #3: padding bit
+ * #1: ctx    [in/out] poly1305 struct context
+ * #2: s      [in]     input block (length: POLY1305_BLOCKSIZE)
+ * #3: padbit [in]     padding bit
  */
 void F_SYMBOL(poly1305_block)(struct poly1305_ctx *ctx, const uint8_t *s,
 		uint32_t padbit)
@@ -152,8 +152,8 @@ void F_SYMBOL(poly1305_block)(struct poly1305_ctx *ctx, const uint8_t *s,
  * #desc:
  *    output poly1305 authentication tag.
  *
- * #1: poly1305 struct context
- * #2: result tag (length: POLY1305_TAG_LEN)
+ * #1: ctx [in]  poly1305 struct context
+ * #2: tag [out] result tag (length: POLY1305_TAG_LEN)
  */
 void F_SYMBOL(poly1305_tag)(struct poly1305_ctx *ctx, uint8_t *tag)
 {
@@ -221,9 +221,9 @@ void F_SYMBOL(poly1305_tag)(struct poly1305_ctx *ctx, uint8_t *tag)
  * #desc:
  *    poly1305 processing buffer function.
  *
- * #1: poly1305 struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] poly1305 struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(poly1305_process)(struct poly1305_ctx *ctx, const uint8_t *s,
 		size_t len)
@@ -264,7 +264,7 @@ void F_SYMBOL(poly1305_process)(struct poly1305_ctx *ctx, const uint8_t *s,
  * #desc:
  *    poly1305 process the remaining bytes in the buffer and end.
  *
- * #1: poly1305 struct context
+ * #1: ctx [in/out] poly1305 struct context
  */
 void F_SYMBOL(poly1305_finish)(struct poly1305_ctx *ctx)
 {
@@ -282,9 +282,9 @@ void F_SYMBOL(poly1305_finish)(struct poly1305_ctx *ctx)
  * #desc:
  *    poly1305 single-time processing function.
  *
- * #1: poly1305 struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] poly1305 struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(poly1305)(struct poly1305_ctx *ctx, const uint8_t *s,
 		size_t len)

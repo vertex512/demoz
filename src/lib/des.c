@@ -1,6 +1,6 @@
 /* @file: des.c
  * #desc:
- *    the implementations of data encryption standard (lucifer).
+ *    The implementations of data encryption standard (lucifer).
  *
  * #copy:
  *    Copyright (C) 1970 Public Free Software
@@ -161,8 +161,8 @@ static const uint8_t des_sbox[8][64] = {
  * #desc:
  *    remove parity bit, 64bit to 56bit.
  *
- * #1: output 56bit key
- * #2: input 64bit key
+ * #1: key_k [out] output 56bit key
+ * #2: key   [in]  input 64bit key
  */
 static void _des_permute_pc1(uint8_t *key_k, const uint8_t *key)
 {
@@ -179,8 +179,8 @@ static void _des_permute_pc1(uint8_t *key_k, const uint8_t *key)
  * #desc:
  *    key 56bit to 2 * 28bit, c and d shift.
  *
- * #1: key 28bit c or d
- * #2: key expansion rounds
+ * #1: key_cd [out] key 28bit c or d
+ * #2: round  [in]  key expansion rounds
  */
 static void _des_shiftpcd(uint8_t *key_cd, int32_t round)
 {
@@ -207,9 +207,9 @@ static void _des_shiftpcd(uint8_t *key_cd, int32_t round)
  * #desc:
  *    key 28bit c and d merge 48bit key.
  *
- * #1: key 48bit merge
- * #2: key 28bit c
- * #3: key 28bit d
+ * #1: key_k [out] key 48bit merge
+ * #2: key_c [in]  key 28bit c
+ * #3: key_d [in]  key 28bit d
  */
 static void _des_permute_pc2(uint8_t *key_k, uint8_t *key_c, uint8_t *key_d)
 {
@@ -233,8 +233,8 @@ static void _des_permute_pc2(uint8_t *key_k, uint8_t *key_c, uint8_t *key_d)
  * #desc:
  *    buffer initial permute.
  *
- * #1: output buffer
- * #2: input buffer
+ * #1: out [out] output buffer
+ * #2: in  [in]  input buffer
  */
 static void _des_permute_ip(uint8_t *out, uint8_t *in)
 {
@@ -251,8 +251,8 @@ static void _des_permute_ip(uint8_t *out, uint8_t *in)
  * #desc:
  *    expansion 32bit to 48bit.
  *
- * #1: output buffer
- * #2: input buffer
+ * #1: out [out] output buffer
+ * #2: in  [in]  input buffer
  */
 static void _des_expand_e(uint8_t *out, uint8_t *in)
 {
@@ -269,8 +269,8 @@ static void _des_expand_e(uint8_t *out, uint8_t *in)
  * #desc:
  *    des sbox compress (48bit to 32bit).
  *
- * #1: output buffer
- * #2: input buffer
+ * #1: out [out] output buffer
+ * #2: in  [in]  input buffer
  */
 static void _des_permute_sbox(uint8_t *out, uint8_t *in)
 {
@@ -321,8 +321,8 @@ static void _des_permute_sbox(uint8_t *out, uint8_t *in)
  * #desc:
  *    32bit p permutation shuffles.
  *
- * #1: output buffer
- * #2: input buffer
+ * #1: out [out] output buffer
+ * #2: in  [in]  input buffer
  */
 static void _des_permute_p(uint8_t *out, uint8_t *in)
 {
@@ -339,8 +339,8 @@ static void _des_permute_p(uint8_t *out, uint8_t *in)
  * #desc:
  *    buffer final permutation.
  *
- * #1: output buffer
- * #2: input buffer
+ * #1: out [out] output buffer
+ * #2: in  [in]  input buffer
  */
 static void _des_permute_ip1(uint8_t *out, uint8_t *in)
 {
@@ -357,8 +357,8 @@ static void _des_permute_ip1(uint8_t *out, uint8_t *in)
  * #desc:
  *    des initialization function.
  *
- * #1: des context struct
- * #2: input key (length: DES_KEYLEN)
+ * #1: ctx [out] des context struct
+ * #2: key [in]  input key (length: DES_KEYLEN)
  */
 void F_SYMBOL(des_init)(struct des_ctx *ctx, const uint8_t *key)
 {
@@ -400,9 +400,9 @@ void F_SYMBOL(des_init)(struct des_ctx *ctx, const uint8_t *key)
  * #desc:
  *    des encryption and decryption function.
  *
- * #1: des struct context
- * #2: buffer (length: DES_BLOCKSIZE)
- * #3: 0: encrypt, 1: decrypt
+ * #1: ctx        [in]     des struct context
+ * #2: buf        [in/out] buffer (length: DES_BLOCKSIZE)
+ * #3: is_decrypt [in]     0: encrypt, 1: decrypt
  */
 void F_SYMBOL(des_crypto)(struct des_ctx *ctx, uint8_t *buf,
 		int32_t is_decrypt)

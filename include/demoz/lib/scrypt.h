@@ -1,6 +1,6 @@
 /* @file: scrypt.h
  * #desc:
- *    the definitions of scrypt password-based key derivation function.
+ *    The definitions of scrypt password-based key derivation function.
  *
  * #copy:
  *    Copyright (C) 1970 Public Free Software

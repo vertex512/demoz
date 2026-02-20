@@ -31,13 +31,13 @@
  * #desc:
  *    pbkdf2-sha1 key derivation function.
  *
- * #1: password
- * #2: password length
- * #3: salt
- * #4: salt length
- * #5: output key
- * #6: key length
- * #7: iterations number
+ * #1: pass     [in]  password
+ * #2: pass_len [in]  password length
+ * #3: salt     [in]  salt
+ * #4: salt_len [in]  salt length
+ * #5: odk      [out] output key
+ * #6: len      [in]  key length
+ * #7: k        [in]  iterations number
  */
 void F_SYMBOL(pbkdf2_sha1)(const uint8_t *pass, uint32_t pass_len,
 		const uint8_t *salt, uint32_t salt_len, uint8_t *odk,

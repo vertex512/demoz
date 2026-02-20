@@ -29,9 +29,9 @@
  * #desc:
  *    reentrant random number generator.
  *
- * #1: random context struct
- * #2: random number result
- * #r: 0: no error, -1: param error
+ * #1: p [in/out] random context struct
+ * #2: v [out]    random number result
+ * #r:   [ret]    0: no error, -1: param error
  */
 int32_t C_SYMBOL(random_r)(struct random_ctx *p, int32_t *v)
 {

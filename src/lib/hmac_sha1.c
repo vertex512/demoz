@@ -32,9 +32,9 @@
  * #desc:
  *    hmac-sha1 struct context initialization.
  *
- * #1: hmac-sha1 struct context
- * #2: input key
- * #3: key length
+ * #1: ctx     [out] hmac-sha1 struct context
+ * #2: key     [in]  input key
+ * #3: key_len [in]  key length
  */
 void F_SYMBOL(hmac_sha1_init)(struct hmac_sha1_ctx *ctx, const uint8_t *key,
 		uint32_t key_len)
@@ -67,9 +67,9 @@ void F_SYMBOL(hmac_sha1_init)(struct hmac_sha1_ctx *ctx, const uint8_t *key,
  * #desc:
  *    hmac-sha1 processing buffer function.
  *
- * #1: hmac-sha1 struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] hmac-sha1 struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(hmac_sha1_process)(struct hmac_sha1_ctx *ctx, const uint8_t *s,
 		size_t len)
@@ -81,8 +81,8 @@ void F_SYMBOL(hmac_sha1_process)(struct hmac_sha1_ctx *ctx, const uint8_t *s,
  * #desc:
  *    hmac-sha1 process the remaining bytes in the buffer and end.
  *
- * #1: hmac-sha1 struct context
- * #2: total length
+ * #1: ctx [in/out] hmac-sha1 struct context
+ * #2: len [in]     total length
  */
 void F_SYMBOL(hmac_sha1_finish)(struct hmac_sha1_ctx *ctx, uint64_t len)
 {
@@ -101,9 +101,9 @@ void F_SYMBOL(hmac_sha1_finish)(struct hmac_sha1_ctx *ctx, uint64_t len)
  * #desc:
  *    hmac-sha1 single-time processing function.
  *
- * #1: hmac-sha1 struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] hmac-sha1 struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(hmac_sha1)(struct hmac_sha1_ctx *ctx, const uint8_t *s,
 		size_t len)

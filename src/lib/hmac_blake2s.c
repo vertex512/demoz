@@ -32,9 +32,9 @@
  * #desc:
  *    hmac-blake2s struct context initialization.
  *
- * #1: hmac-blake2s struct context
- * #2: input key
- * #3: key length
+ * #1: ctx     [out] hmac-blake2s struct context
+ * #2: key     [in]  input key
+ * #3: key_len [in]  key length
  */
 void F_SYMBOL(hmac_blake2s_init)(struct hmac_blake2s_ctx *ctx,
 		const uint8_t *key, uint32_t key_len)
@@ -67,9 +67,9 @@ void F_SYMBOL(hmac_blake2s_init)(struct hmac_blake2s_ctx *ctx,
  * #desc:
  *    hmac-blake2s processing buffer function.
  *
- * #1: hmac-blake2s struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] hmac-blake2s struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(hmac_blake2s_process)(struct hmac_blake2s_ctx *ctx,
 		const uint8_t *s, size_t len)
@@ -81,7 +81,7 @@ void F_SYMBOL(hmac_blake2s_process)(struct hmac_blake2s_ctx *ctx,
  * #desc:
  *    hmac-blake2s process the remaining bytes in the buffer and end.
  *
- * #1: hmac-blake2s struct context
+ * #1: ctx [in/out] hmac-blake2s struct context
  */
 void F_SYMBOL(hmac_blake2s_finish)(struct hmac_blake2s_ctx *ctx)
 {
@@ -99,9 +99,9 @@ void F_SYMBOL(hmac_blake2s_finish)(struct hmac_blake2s_ctx *ctx)
  * #desc:
  *    hmac-blake2s single-time processing function.
  *
- * #1: hmac-blake2s struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] hmac-blake2s struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(hmac_blake2s)(struct hmac_blake2s_ctx *ctx, const uint8_t *s,
 		size_t len)

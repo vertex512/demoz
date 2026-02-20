@@ -31,15 +31,15 @@
  * #desc:
  *    hkdf-sha512 key derivation function.
  *
- * #1: ikm
- * #2: ikm length
- * #3: salt
- * #4: salt length
- * #5: info
- * #6: info length
- * #7: output key
- * #8: key length
- * #r: 0: no error, -1: key length error
+ * #1: ikm      [in]  ikm
+ * #2: ikm      [in]  ikm length
+ * #3: salt     [in]  salt
+ * #4: salt_len [in]  salt length
+ * #5: info     [in]  info
+ * #6: info_len [in]  info length
+ * #7: okm      [out] output key
+ * #8: len      [in]  key length
+ * #r:          [ret] 0: no error, -1: key length error
  */
 int32_t F_SYMBOL(hkdf_sha512)(const uint8_t *ikm, uint32_t ikm_len,
 		const uint8_t *salt, uint32_t salt_len,
@@ -83,15 +83,15 @@ int32_t F_SYMBOL(hkdf_sha512)(const uint8_t *ikm, uint32_t ikm_len,
  * #desc:
  *    hkdf-sha384 key derivation function.
  *
- * #1: ikm
- * #2: ikm length
- * #3: salt
- * #4: salt length
- * #5: info
- * #6: info length
- * #7: output key
- * #8: key length
- * #r: 0: no error, -1: key length error
+ * #1: ikm      [in]  ikm
+ * #2: ikm      [in]  ikm length
+ * #3: salt     [in]  salt
+ * #4: salt_len [in]  salt length
+ * #5: info     [in]  info
+ * #6: info_len [in]  info length
+ * #7: okm      [out] output key
+ * #8: len      [in]  key length
+ * #r:          [ret] 0: no error, -1: key length error
  */
 int32_t F_SYMBOL(hkdf_sha384)(const uint8_t *ikm, uint32_t ikm_len,
 		const uint8_t *salt, uint32_t salt_len,

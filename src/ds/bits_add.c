@@ -30,10 +30,10 @@
  *    add bits to the buffer.  flush the buffer when it is full.
  *    if there are any remaining bits, keep it as is, then add it again.
  *
- * #1: bits-add struct context
- * #2: bits value
- * #3: bits length
- * #r: 0: not full, 1: buffer full
+ * #1: ctx  [in/out] bits-add struct context
+ * #2: v    [in]     bits value
+ * #3: bits [in]     bits length
+ * #r:      [ret]    0: not full, 1: buffer full
  */
 int32_t F_SYMBOL(bits_add)(struct bits_add_ctx *ctx, uint32_t v, uint32_t bits)
 {

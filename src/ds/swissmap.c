@@ -31,7 +31,7 @@
  * #desc:
  *    swissmap ctrl group set to empty.
  *
- * #1: swissmap head
+ * #1: head [in/out] swissmap head
  */
 void F_SYMBOL(swissmap_empty)(struct swissmap_head *head)
 {
@@ -44,10 +44,10 @@ void F_SYMBOL(swissmap_empty)(struct swissmap_head *head)
  * #desc:
  *    swissmap insert function.
  *
- * #1: swissmap head
- * #2: input key
- * #3: key length
- * #r: bucket / NULL pointer
+ * #1: head [in/out] swissmap head
+ * #2: key  [in]     input key
+ * #3: len  [in]     key length
+ * #r:      [ret]    bucket / NULL pointer
  */
 void *F_SYMBOL(swissmap_insert)(struct swissmap_head *head,
 		const void *key, size_t len)
@@ -94,10 +94,10 @@ void *F_SYMBOL(swissmap_insert)(struct swissmap_head *head,
  * #desc:
  *    swissmap find function.
  *
- * #1: swissmap head
- * #2: input key
- * #3: key length
- * #r: bucket / NULL pointer
+ * #1: head [in/out] swissmap head
+ * #2: key  [in]     input key
+ * #3: len  [in]     key length
+ * #r:      [ret]    bucket / NULL pointer
  */
 void *F_SYMBOL(swissmap_find)(struct swissmap_head *head,
 		const void *key, size_t len)
@@ -135,10 +135,10 @@ void *F_SYMBOL(swissmap_find)(struct swissmap_head *head,
  * #desc:
  *    swissmap delete function.
  *
- * #1: swissmap head
- * #2: input key
- * #3: key length
- * #r: bucket / NULL pointer
+ * #1: head [in/out] swissmap head
+ * #2: key  [in]     input key
+ * #3: len  [in]     key length
+ * #r:      [ret]    bucket / NULL pointer
  */
 void *F_SYMBOL(swissmap_delete)(struct swissmap_head *head,
 		const void *key, size_t len)

@@ -42,9 +42,9 @@
  * #desc:
  *    expr string convert.
  *
- * #1: expr string
- * #2: input string
- * #r: 0: no error, -1: error
+ * #1: expr [in/out] expr string
+ * #2: s    [in/out] input string
+ * #r:      [ret]    0: no error, -1: error
  */
 int32_t _scanf_expr(const char **expr, const char **s)
 {
@@ -123,11 +123,11 @@ e:
  * #desc:
  *    string convert to formatted value.
  *
- * #1: input string
- * #2: end pointer / NULL
- * #3: formatted string
- * #4: variable argument
- * #r: >0: number of matching, <0: format error
+ * #1: s   [in]  input string
+ * #2: e   [out] end pointer / NULL
+ * #3: fmt [in]  formatted string
+ * #4: ap  [in]  variable argument
+ * #r:     [ret] >0: number of matching, <0: format error
  */
 int32_t C_SYMBOL(___scanf)(const char *s, char **e, const char *fmt,
 		va_list ap)

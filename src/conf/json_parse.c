@@ -94,8 +94,8 @@ static int32_t _json_array(struct json_ctx *ctx);
  * #desc:
  *    get the json token.
  *
- * #1: character
- * #r: token value (-1: unknown token)
+ * #1: c [in]  character
+ * #r:   [ret] token value (-1: unknown token)
  */
 static int32_t _json_token(char c)
 {
@@ -144,8 +144,8 @@ static int32_t _json_token(char c)
  * #desc:
  *    get the length of the json string.
  *
- * #1: json struct context
- * #r: string length (-1: error)
+ * #1: ctx [in/out] json struct context
+ * #r:     [ret]    string length (-1: error)
  */
 static int32_t _json_string(struct json_ctx *ctx)
 {
@@ -186,8 +186,8 @@ static int32_t _json_string(struct json_ctx *ctx)
  * #desc:
  *    get the length of the json number.
  *
- * #1: json struct context
- * #r: number length (-1: error)
+ * #1: ctx [in/out] json struct context
+ * #r:     [ret]    number length (-1: error)
  */
 static int32_t _json_number(struct json_ctx *ctx)
 {
@@ -292,8 +292,8 @@ static int32_t _json_number(struct json_ctx *ctx)
  * #desc:
  *    get the length of the json null.
  *
- * #1: json struct context
- * #r: null length (-1: error)
+ * #1: ctx [in/out] json struct context
+ * #r:     [ret]    null length (-1: error)
  */
 static int32_t _json_null(struct json_ctx *ctx)
 {
@@ -310,8 +310,8 @@ static int32_t _json_null(struct json_ctx *ctx)
  * #desc:
  *    get the length of the json true.
  *
- * #1: json struct context
- * #r: true length (-1: error)
+ * #1: ctx [in/out] json struct context
+ * #r:     [ret]    true length (-1: error)
  */
 static int32_t _json_true(struct json_ctx *ctx)
 {
@@ -328,8 +328,8 @@ static int32_t _json_true(struct json_ctx *ctx)
  * #desc:
  *    get the length of the json false.
  *
- * #1: json struct context
- * #r: false length (-1: error)
+ * #1: ctx [in/out] json struct context
+ * #r:     [ret]    false length (-1: error)
  */
 static int32_t _json_false(struct json_ctx *ctx)
 {
@@ -346,8 +346,8 @@ static int32_t _json_false(struct json_ctx *ctx)
  * #desc:
  *    get the length of the json comments.
  *
- * #1: json struct context
- * #r: comment length (-1: error)
+ * #1: ctx [in/out] json struct context
+ * #r:     [ret]    comment length (-1: error)
  */
 static int32_t _json_comment(struct json_ctx *ctx)
 {
@@ -394,8 +394,8 @@ static int32_t _json_comment(struct json_ctx *ctx)
  * #desc:
  *    parse json object.
  *
- * #1: json struct context
- * #r: 0: no error, -1: error, -2: call error
+ * #1: ctx [in/out] json struct context
+ * #r:     [ret]    0: no error, -1: error, -2: call error
  */
 static int32_t _json_object(struct json_ctx *ctx)
 {
@@ -604,8 +604,8 @@ static int32_t _json_object(struct json_ctx *ctx)
  * #desc:
  *    parse json array.
  *
- * #1: json struct context
- * #r: 0: no error, -1: error, -2: call error
+ * #1: ctx [in/out] json struct context
+ * #r:     [ret]    0: no error, -1: error, -2: call error
  */
 static int32_t _json_array(struct json_ctx *ctx)
 {
@@ -764,9 +764,9 @@ static int32_t _json_array(struct json_ctx *ctx)
  * #desc:
  *    json (javascript object notation) parser.
  *
- * #1: json struct context
- * #2: input buffer
- * #r: 0: no error, -1: error, -2: call error
+ * #1: ctx [in/out] json struct context
+ * #2: s   [in]     input buffer
+ * #r:     [ret]    0: no error, -1: error, -2: call error
  */
 int32_t F_SYMBOL(json_parse)(struct json_ctx *ctx, const char *s)
 {

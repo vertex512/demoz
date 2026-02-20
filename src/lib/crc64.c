@@ -560,8 +560,8 @@ static const uint64_t crc64_table_le[256] = {
  * #desc:
  *    get the crc64 table.
  *
- * #1: crc64 type
- * #r: crc64 table
+ * #1: type [in]  crc64 type
+ * #r:      [ret] crc64 table
  */
 const uint64_t *F_SYMBOL(crc64_table)(int32_t type)
 {
@@ -585,11 +585,11 @@ const uint64_t *F_SYMBOL(crc64_table)(int32_t type)
  * #desc:
  *    crc64 msb cyclic redundancy.
  *
- * #1: crc64 table
- * #2: init value
- * #3: input buffer
- * #4: input length
- * #r: crc64 value
+ * #1: t   [in]  crc64 table
+ * #2: c   [in]  init value
+ * #3: s   [in]  input buffer
+ * #4: len [in]  input length
+ * #r:     [ret] crc64 value
  */
 uint64_t F_SYMBOL(crc64_msb)(const uint64_t *t, uint64_t c, const uint8_t *s,
 		uint32_t len)
@@ -607,11 +607,11 @@ uint64_t F_SYMBOL(crc64_msb)(const uint64_t *t, uint64_t c, const uint8_t *s,
  * #desc:
  *    crc64 lsb cyclic redundancy.
  *
- * #1: crc64 table
- * #2: init value
- * #3: input buffer
- * #4: input length
- * #r: crc64 value
+ * #1: t   [in]  crc64 table
+ * #2: c   [in]  init value
+ * #3: s   [in]  input buffer
+ * #4: len [in]  input length
+ * #r:     [ret] crc64 value
  */
 uint64_t F_SYMBOL(crc64_lsb)(const uint64_t *t, uint64_t c, const uint8_t *s,
 		uint32_t len)
@@ -629,10 +629,10 @@ uint64_t F_SYMBOL(crc64_lsb)(const uint64_t *t, uint64_t c, const uint8_t *s,
  * #desc:
  *    crc64 single-time processing function.
  *
- * #1: input buffer
- * #2: input length
- * #3: crc64 type
- * #r: crc64 value
+ * #1: s    [in]  input buffer
+ * #2: len  [in]  input length
+ * #3: type [in]  crc64 type
+ * #r:      [ret] crc64 value
  */
 uint64_t F_SYMBOL(crc64)(const uint8_t *s, uint32_t len, int32_t type)
 {

@@ -31,11 +31,11 @@
  * #desc:
  *    string to integer conversion.
  *
- * #1: input string
- * #2: end pointer / NULL
- * #3: overflow limit
- * #4: base type
- * #r: return unsigned long long
+ * #1: s [in]     input string
+ * #2: e [out]    end pointer / NULL
+ * #3: m [in/out] overflow limit
+ * #4: b [in]     base type
+ * #r:   [ret]    return unsigned long long
  */
 uint64_t C_SYMBOL(___strtoull)(const char *s, char **e, uint64_t *m, int32_t b)
 {
@@ -107,8 +107,8 @@ e:
  * #desc:
  *    string to int conversion.
  *
- * #1: input pointer
- * #r: return int
+ * #1: s [in]  input pointer
+ * #r:   [ret] return int
  */
 int C_SYMBOL(atoi)(const char *s)
 {
@@ -126,8 +126,8 @@ int C_SYMBOL(atoi)(const char *s)
  * #desc:
  *    string to long conversion.
  *
- * #1: input string
- * #r: return long
+ * #1: s [in]  input string
+ * #r:   [ret] return long
  */
 long C_SYMBOL(atol)(const char *s)
 {
@@ -145,8 +145,8 @@ long C_SYMBOL(atol)(const char *s)
  * #desc:
  *    string to long long conversion.
  *
- * #1: input string
- * #r: return long long
+ * #1: s [in]  input string
+ * #r:   [ret] return long long
  */
 long long C_SYMBOL(atoll)(const char *s)
 {
@@ -164,10 +164,10 @@ long long C_SYMBOL(atoll)(const char *s)
  * #desc:
  *    string to long conversion.
  *
- * #1: input string
- * #2: end pointer / NULL
- * #3: base type
- * #r: return long
+ * #1: s [in]  input string
+ * #2: e [out] end pointer / NULL
+ * #3: b [in]  base type
+ * #r:   [ret] return long
  */
 long C_SYMBOL(strtol)(const char *s, char **e, int32_t b)
 {
@@ -185,10 +185,10 @@ long C_SYMBOL(strtol)(const char *s, char **e, int32_t b)
  * #desc:
  *    string to unsigned long conversion.
  *
- * #1: input string
- * #2: end pointer / NULL
- * #3: base type
- * #r: return unsigned long
+ * #1: s [in]  input string
+ * #2: e [out] end pointer / NULL
+ * #3: b [in]  base type
+ * #r:   [ret] return unsigned long
  */
 unsigned long C_SYMBOL(strtoul)(const char *s, char **e, int32_t b)
 {
@@ -206,10 +206,10 @@ unsigned long C_SYMBOL(strtoul)(const char *s, char **e, int32_t b)
  * #desc:
  *    string to long long conversion.
  *
- * #1: input string
- * #2: end pointer / NULL
- * #3: base type
- * #r: return long long
+ * #1: s [in]  input string
+ * #2: e [out] end pointer / NULL
+ * #3: b [in]  base type
+ * #r:   [ret] return long long
  */
 long long C_SYMBOL(strtoll)(const char *s, char **e, int32_t b)
 {
@@ -227,10 +227,10 @@ long long C_SYMBOL(strtoll)(const char *s, char **e, int32_t b)
  * #desc:
  *    string to unsigned long long conversion.
  *
- * #1: input string
- * #2: end pointer / NULL
- * #3: base type
- * #r: return unsigned long long
+ * #1: s [in]  input string
+ * #2: e [out] end pointer / NULL
+ * #3: b [in]  base type
+ * #r:   [ret] return unsigned long long
  */
 unsigned long long C_SYMBOL(strtoull)(const char *s, char **e, int32_t b)
 {
@@ -243,4 +243,3 @@ unsigned long long C_SYMBOL(strtoull)(const char *s, char **e, int32_t b)
 
 	return (unsigned long long)n;
 }
-

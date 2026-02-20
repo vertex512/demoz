@@ -576,8 +576,8 @@ static const uint32_t crc32_table_lq[256] = {
  * #desc:
  *    get the crc32 table.
  *
- * #1: crc32 type
- * #r: crc32 table
+ * #1: type [in]  crc32 type
+ * #r:      [ret] crc32 table
  */
 const uint32_t *F_SYMBOL(crc32_table)(int32_t type)
 {
@@ -607,11 +607,11 @@ const uint32_t *F_SYMBOL(crc32_table)(int32_t type)
  * #desc:
  *    crc32 msb cyclic redundancy.
  *
- * #1: crc32 table
- * #2: init value
- * #3: input buffer
- * #4: input length
- * #r: crc32 value
+ * #1: t   [in]  crc32 table
+ * #2: c   [in]  init value
+ * #3: s   [in]  input buffer
+ * #4: len [in]  input length
+ * #r:     [ret] crc32 value
  */
 uint32_t F_SYMBOL(crc32_msb)(const uint32_t *t, uint32_t c, const uint8_t *s,
 		uint32_t len)
@@ -629,11 +629,11 @@ uint32_t F_SYMBOL(crc32_msb)(const uint32_t *t, uint32_t c, const uint8_t *s,
  * #desc:
  *    crc32 lsb cyclic redundancy.
  *
- * #1: crc32 table
- * #2: init value
- * #3: input buffer
- * #4: input length
- * #r: crc32 value
+ * #1: t   [in]  crc32 table
+ * #2: c   [in]  init value
+ * #3: s   [in]  input buffer
+ * #4: len [in]  input length
+ * #r:     [ret] crc32 value
  */
 uint32_t F_SYMBOL(crc32_lsb)(const uint32_t *t, uint32_t c, const uint8_t *s,
 		uint32_t len)
@@ -651,10 +651,10 @@ uint32_t F_SYMBOL(crc32_lsb)(const uint32_t *t, uint32_t c, const uint8_t *s,
  * #desc:
  *    add cksum size cyclic redundancy.
  *
- * #1: crc32 table
- * #2: init value
- * #3: length
- * #r: crc32 value
+ * #1: t   [in]  crc32 table
+ * #2: c   [in]  init value
+ * #3: len [in]  length
+ * #r:     [ret] crc32 value
  */
 uint32_t F_SYMBOL(crc32_cksum_size_msb)(const uint32_t *t, uint32_t c,
 		uint32_t len)
@@ -672,10 +672,10 @@ uint32_t F_SYMBOL(crc32_cksum_size_msb)(const uint32_t *t, uint32_t c,
  * #desc:
  *    crc32 single-time processing function.
  *
- * #1: input buffer
- * #2: input length
- * #3: crc32 type
- * #r: crc32 value
+ * #1: s    [in]  input buffer
+ * #2: len  [in]  input length
+ * #3: type [in]  crc32 type
+ * #r:      [ret] crc32 value
  */
 uint32_t F_SYMBOL(crc32)(const uint8_t *s, uint32_t len, int32_t type)
 {

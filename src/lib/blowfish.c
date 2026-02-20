@@ -314,9 +314,9 @@ static const uint32_t orig_S4[256] = {
  * #desc:
  *    blowfish encryption function.
  *
- * #1: blowfish struct context
- * #2: left value
- * #3: right value
+ * #1: ctx [in]     blowfish struct context
+ * #2: xl  [in/out] left value
+ * #3: xr  [in/out] right value
  */
 void F_SYMBOL(blowfish_encrypt)(struct blowfish_ctx *ctx,
 		uint32_t *xl, uint32_t *xr)
@@ -342,9 +342,9 @@ void F_SYMBOL(blowfish_encrypt)(struct blowfish_ctx *ctx,
  * #desc:
  *    blowfish decryption function.
  *
- * #1: blowfish struct context
- * #2: left value
- * #3: right value
+ * #1: ctx [in]     blowfish struct context
+ * #2: xl  [in/out] left value
+ * #3: xr  [in/out] right value
  */
 void F_SYMBOL(blowfish_decrypt)(struct blowfish_ctx *ctx,
 		uint32_t *xl, uint32_t *xr)
@@ -370,9 +370,9 @@ void F_SYMBOL(blowfish_decrypt)(struct blowfish_ctx *ctx,
  * #desc:
  *    setting the blowfish key expansion.
  *
- * #1: blowfish struct context
- * #2: input key
- * #3: key length (max-length: 72)
+ * #1: ctx [in/out] blowfish struct context
+ * #2: key [in]     input key
+ * #3: len [in]     key length (max-length: 72)
  */
 void F_SYMBOL(blowfish_setkey)(struct blowfish_ctx *ctx, const uint8_t *key,
 		uint32_t len)
@@ -420,11 +420,11 @@ void F_SYMBOL(blowfish_setkey)(struct blowfish_ctx *ctx, const uint8_t *key,
  * #desc:
  *    blowfish expensive key scheduling function.
  *
- * #1: blowfish struct context
- * #2: input data
- * #3: data length
- * #4: input key
- * #5: key length
+ * #1: ctx      [in/out] blowfish struct context
+ * #2: data     [in]     input data
+ * #3: data_len [in]     data length
+ * #4: key      [in]     input key
+ * #5: key_len  [in]     key length
  */
 void F_SYMBOL(blowfish_ekskey)(struct blowfish_ctx *ctx, const uint8_t *data,
 		uint32_t data_len, const uint8_t *key, uint32_t key_len)
@@ -533,9 +533,9 @@ void F_SYMBOL(blowfish_ekskey)(struct blowfish_ctx *ctx, const uint8_t *data,
  * #desc:
  *    blowfish initialization function.
  *
- * #1: blowfish struct context
- * #2: input key
- * #3: key length (zero skip set key)
+ * #1: ctx [out] blowfish struct context
+ * #2: key [in]  input key
+ * #3: len [in]  key length (zero skip set key)
  */
 void F_SYMBOL(blowfish_init)(struct blowfish_ctx *ctx, const uint8_t *key,
 		uint32_t len)

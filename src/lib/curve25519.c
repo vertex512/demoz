@@ -188,9 +188,9 @@ static const uint32_t _sc25519_minusR[8] = {
  * #desc:
  *    constant-time the numerical swap.
  *
- * #1: number
- * #2: number
- * #3: low bit (0: keep, 1: swap)
+ * #1: a   [in/out] number
+ * #2: b   [in/out] number
+ * #3: bit [in]     low bit (0: keep, 1: swap)
  */
 static void _fp25519_swap(uint32_t a[8], uint32_t b[8], uint32_t bit)
 {
@@ -206,8 +206,8 @@ static void _fp25519_swap(uint32_t a[8], uint32_t b[8], uint32_t bit)
  * #desc:
  *    check if a number is zero in constant-time.
  *
- * #1: number
- * #r: 0: non-zero, 1: is zero
+ * #1: a [in]  number
+ * #r:   [ret] 0: non-zero, 1: is zero
  */
 static uint32_t _fp25519_iszero(const uint32_t a[8])
 {
@@ -228,9 +228,9 @@ static uint32_t _fp25519_iszero(const uint32_t a[8])
  * #desc:
  *    prime field addition.
  *
- * #1: sum
- * #2: addend
- * #3: addend
+ * #1: r [out] sum
+ * #2: a [in]  addend
+ * #3: b [in]  addend
  */
 static void _fp25519_add(uint32_t r[8],
 		const uint32_t a[8], const uint32_t b[8])
@@ -267,9 +267,9 @@ static void _fp25519_add(uint32_t r[8],
  * #desc:
  *    prime field subtraction.
  *
- * #1: difference
- * #2: minuend
- * #3: subtract
+ * #1: r [out] difference
+ * #2: a [in]  minuend
+ * #3: b [in]  subtract
  */
 static void _fp25519_sub(uint32_t r[8],
 		const uint32_t a[8], const uint32_t b[8])
@@ -310,9 +310,9 @@ static void _fp25519_sub(uint32_t r[8],
  * #desc:
  *    prime field multiplication.
  *
- * #1: product
- * #2: multiplicand
- * #3: multiplier
+ * #1: r [out] product
+ * #2: a [in]  multiplicand
+ * #3: b [in]  multiplier
  */
 static void _fp25519_mul(uint32_t r[8],
 		const uint32_t a[8], const uint32_t b[8])
@@ -371,7 +371,7 @@ static void _fp25519_mul(uint32_t r[8],
  * #desc:
  *    prime field modular reduction (norm).
  *
- * #1: number
+ * #1: r [in/out] number
  */
 static void _fp25519_mod(uint32_t r[8])
 {
@@ -429,8 +429,8 @@ static void _fp25519_mod(uint32_t r[8])
  * #desc:
  *    modular inversion based on fermat's little theorem.
  *
- * #1: inverse modulus
- * #2: number
+ * #1: r [out] inverse modulus
+ * #2: z [in]  number
  */
 static void _fp25519_inv(uint32_t r[8], const uint32_t z[8])
 {
@@ -556,9 +556,9 @@ static void _fp25519_inv(uint32_t r[8], const uint32_t z[8])
  * #desc:
  *    multiplier/121665 and addition (x25519).
  *
- * #1: product
- * #2: multiplicand
- * #3: addend
+ * #1: r [out] product
+ * #2: a [in]  multiplicand
+ * #3: b [in]  addend
  */
 static void _fp25519_mul121665(uint32_t r[8],
 		const uint32_t a[8], const uint32_t b[8])
@@ -595,9 +595,9 @@ static void _fp25519_mul121665(uint32_t r[8],
  * #desc:
  *    fast exponentiation in constant-time.
  *
- * #1: result
- * #2: number
- * #3: exponential
+ * #1: r [out] result
+ * #2: a [in]  number
+ * #3: b [in]  exponential
  */
 static void _fp25519_pow(uint32_t r[8],
 		const uint32_t a[8], const uint32_t b[8])
@@ -621,9 +621,9 @@ static void _fp25519_pow(uint32_t r[8],
  * #desc:
  *    scalar high-word modular reduction fold.
  *
- * #1: result
- * #2: number
- * #3: high-word
+ * #1: r [out] result
+ * #2: a [in]  number
+ * #3: b [in]  high-word
  */
 static void _sc25519_modw(uint32_t r[8],
 		const uint32_t a[8], uint32_t b)
@@ -664,7 +664,7 @@ static void _sc25519_modw(uint32_t r[8],
  * #desc:
  *    scalar modular reduction (norm).
  *
- * #1: number
+ * #1: r [in/out] number
  */
 static void _sc25519_mod(uint32_t r[8])
 {
@@ -693,9 +693,9 @@ static void _sc25519_mod(uint32_t r[8])
  * #desc:
  *    scalar addition.
  *
- * #1: sum
- * #2: addend
- * #3: addend
+ * #1: r [out] sum
+ * #2: a [in]  addend
+ * #3: b [in]  addend
  */
 static void _sc25519_add(uint32_t r[8],
 		const uint32_t a[8], const uint32_t b[8])
@@ -718,9 +718,9 @@ static void _sc25519_add(uint32_t r[8],
  * #desc:
  *    scalar multiplication.
  *
- * #1: product
- * #2: multiplicand
- * #3: multiplier
+ * #1: r [out] product
+ * #2: a [in]  multiplicand
+ * #3: b [in]  multiplier
  */
 static void _sc25519_mul(uint32_t r[8],
 		const uint32_t a[8], const uint32_t b[8])
@@ -765,8 +765,8 @@ static void _sc25519_mul(uint32_t r[8],
  * #desc:
  *    sha512 digest modular reduction.
  *
- * #1: sha512 digest
- * #2: result
+ * #1: dig [in]  sha512 digest
+ * #2: r   [out] result
  */
 static void _sc25519_digest(const uint8_t dig[64], uint32_t r[8])
 {
@@ -788,9 +788,9 @@ static void _sc25519_digest(const uint8_t dig[64], uint32_t r[8])
  * #desc:
  *    x25519 montgomery ladder scalar multiplication.
  *
- * #1: input point
- * #2: base point
- * #3: scalar
+ * #1: k [in]  input point
+ * #2: b [in]  base point
+ * #3: r [out] scalar
  */
 static void _x25519_scalar_mul(const uint32_t k[8], const uint32_t b[8],
 		uint32_t r[8])
@@ -868,9 +868,9 @@ static void _x25519_scalar_mul(const uint32_t k[8], const uint32_t b[8],
  * #desc:
  *    edwards curve point addition.
  *
- * #1: addend
- * #2: addend
- * #3: result
+ * #1: xyz1 [in]  addend
+ * #2: xyz2 [in]  addend
+ * #3: xyz3 [out] result
  */
 static void _ed25519_point_add(const struct ed25519_point *xyz1,
 		const struct ed25519_point *xyz2, struct ed25519_point *xyz3)
@@ -934,8 +934,8 @@ static void _ed25519_point_add(const struct ed25519_point *xyz1,
  * #desc:
  *    edwards curve point doubling.
  *
- * #1: addend
- * #2: result
+ * #1: xyz1 [in]  addend
+ * #2: xyz3 [out] result
  */
 static void _ed25519_point_double(const struct ed25519_point *xyz1,
 		struct ed25519_point *xyz3)
@@ -992,9 +992,9 @@ static void _ed25519_point_double(const struct ed25519_point *xyz1,
  * #desc:
  *    ed25519 montgomery ladder scalar multiplication.
  *
- * #1: input point
- * #2: base point
- * #3: scalar
+ * #1: k    [in]  input point
+ * #2: xyz1 [in]  base point
+ * #3: xyz2 [out] scalar
  */
 static void _ed25519_scalar_mul(const uint32_t k[8],
 		const struct ed25519_point *xyz1, struct ed25519_point *xyz2)
@@ -1043,9 +1043,9 @@ static void _ed25519_scalar_mul(const uint32_t k[8],
  * #desc:
  *    curve point comparison is equal.
  *
- * #1: curve point
- * #2: curve point
- * #r: 0: p1 != p2, 1: p1 == p2
+ * #1: xyz1 [in]  curve point
+ * #2: xyz2 [in]  curve point
+ * #r:      [ret] 0: p1 != p2, 1: p1 == p2
  */
 static int32_t _ed25519_point_equal(const struct ed25519_point *xyz1,
 		const struct ed25519_point *xyz2)
@@ -1081,9 +1081,9 @@ static int32_t _ed25519_point_equal(const struct ed25519_point *xyz1,
  * #desc:
  *    calculate the corresponding curve point x.
  *
- * #1: curve point y
- * #2: sign of x
- * #3: curve point x
+ * #1: y    [in]  curve point y
+ * #2: sign [in]  sign of x
+ * #3: r    [out] curve point x
  */
 static void _ed25519_point_recover_x(const uint32_t y[8], uint32_t sign,
 		uint32_t r[8])
@@ -1145,8 +1145,8 @@ static void _ed25519_point_recover_x(const uint32_t y[8], uint32_t sign,
  * #desc:
  *    curve point compression.
  *
- * #1: curve point
- * #2: compress point
+ * #1: xyz1 [in]  curve point
+ * #2: r    [out] compress point
  */
 static void _ed25519_point_compress(const struct ed25519_point *xyz1,
 		uint32_t r[8])
@@ -1177,8 +1177,8 @@ static void _ed25519_point_compress(const struct ed25519_point *xyz1,
  * #desc:
  *    curve point decompression.
  *
- * #1: compress point
- * #2: curve point
+ * #1: k    [in]  compress point
+ * #2: xyz1 [out] curve point
  */
 static void _ed25519_point_decompress(const uint32_t k[8],
 		struct ed25519_point *xyz1)
@@ -1211,8 +1211,8 @@ static void _ed25519_point_decompress(const uint32_t k[8],
  * #desc:
  *    x25519 public key create function.
  *
- * #1: private key
- * #2: public key
+ * #1: pri [in]  private key
+ * #2: pub [out] public key
  */
 void F_SYMBOL(ecdh_x25519_public_key)(const uint8_t *pri, uint8_t *pub)
 {
@@ -1235,10 +1235,10 @@ void F_SYMBOL(ecdh_x25519_public_key)(const uint8_t *pri, uint8_t *pub)
  * #desc:
  *    x25519 shared key create function.
  *
- * #1: private key
- * #2: public key
- * #3: shared key
- * #r: 0: success, -1: fail
+ * #1: pri [in]  private key
+ * #2: pub [in]  public key
+ * #3: key [out] shared key
+ * #r:     [ret] 0: success, -1: fail
  */
 int32_t F_SYMBOL(ecdh_x25519_shared_key)(const uint8_t *pri,
 		const uint8_t *pub, uint8_t *key)
@@ -1268,9 +1268,9 @@ int32_t F_SYMBOL(ecdh_x25519_shared_key)(const uint8_t *pri,
  * #desc:
  *    ed25519 private and nonce operation function.
  *
- * #1: input private key
- * #2: private key
- * #3: nonce
+ * #1: inpri [in]  input private key
+ * #2: pri   [out] private key
+ * #3: ran   [out] nonce
  */
 void F_SYMBOL(eddsa_ed25519_nonce_key)(const uint8_t *inpri, uint8_t *pri,
 		uint8_t *ran)
@@ -1300,8 +1300,8 @@ void F_SYMBOL(eddsa_ed25519_nonce_key)(const uint8_t *inpri, uint8_t *pri,
  * #desc:
  *    ed25519 public key create function.
  *
- * #1: private key
- * #2: public key
+ * #1: pri [in]  private key
+ * #2: pub [out] public key
  */
 void F_SYMBOL(eddsa_ed25519_public_key)(const uint8_t *pri, uint8_t *pub)
 {
@@ -1322,10 +1322,10 @@ void F_SYMBOL(eddsa_ed25519_public_key)(const uint8_t *pri, uint8_t *pub)
  * #desc:
  *    ed25519 signature function.
  *
- * #1: private key
- * #2: input message
- * #3: message length
- * #4: signature
+ * #1: pri  [in]  private key
+ * #2: msg  [in]  input message
+ * #3: len  [in]  message length
+ * #4: sign [out] signature
  */
 void F_SYMBOL(eddsa_ed25519_sign)(const uint8_t *pri,
 		const uint8_t *msg, uint32_t len, uint8_t *sign)
@@ -1376,11 +1376,11 @@ void F_SYMBOL(eddsa_ed25519_sign)(const uint8_t *pri,
  * #desc:
  *    ed25519 signature verification function.
  *
- * #1: public key
- * #2: signature
- * #3: input message
- * #4: message length
- * #r: 0: success, -1: fail
+ * #1: pub  [in]  public key
+ * #2: sign [in]  signature
+ * #3: msg  [in]  input message
+ * #4: len  [in]  message length
+ * #r:      [ret] 0: success, -1: fail
  */
 int32_t F_SYMBOL(eddsa_ed25519_verify)(const uint8_t *pub,
 		const uint8_t *sign, const uint8_t *msg, uint32_t len)

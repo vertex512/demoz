@@ -30,10 +30,10 @@
  * #desc:
  *    change the child of the parent node.
  *
- * #1: root node
- * #2: parent node
- * #3: old node
- * #4: new node
+ * #1: root   [in/out] root node
+ * #2: parent [in/out] parent node
+ * #3: old    [in]     old node
+ * #4: new    [in]     new node
  */
 static void _rb_change_child(struct rb_root *root, struct rb_node *parent,
 		struct rb_node *old, struct rb_node *new)
@@ -59,8 +59,8 @@ static void _rb_change_child(struct rb_root *root, struct rb_node *parent,
  *       / \     / \
  *      l   r   s   l
  *
- * #1: root node
- * #2: parent of the rotate node
+ * #1: root   [in/out] root node
+ * #2: parent [in/out] parent of the rotate node
  */
 static void _rb_left_rotate(struct rb_root *root, struct rb_node *parent)
 {
@@ -95,8 +95,8 @@ static void _rb_left_rotate(struct rb_root *root, struct rb_node *parent)
  *     / \           / \
  *    l   r         r   s
  *
- * #1: root node
- * #2: parent of the rotate node
+ * #1: root   [in/out] root node
+ * #2: parent [in/out] parent of the rotate node
  */
 static void _rb_right_rotate(struct rb_root *root, struct rb_node *parent)
 {
@@ -123,8 +123,8 @@ static void _rb_right_rotate(struct rb_root *root, struct rb_node *parent)
  * #desc:
  *    fix the inserted node and balance rb-tree.
  *
- * #1: root node
- * #2: node to be fix
+ * #1: root [in/out] root node
+ * #2: node [in/out] node to be fix
  */
 void F_SYMBOL(rb_insert_fix)(struct rb_root *root, struct rb_node *node)
 {
@@ -231,9 +231,9 @@ void F_SYMBOL(rb_insert_fix)(struct rb_root *root, struct rb_node *node)
  * #desc:
  *    erase the node of the rb-tree.
  *
- * #1: root node
- * #2: erase node
- * #r: returns the parent node or NULL
+ * #1: root [in/out] root node
+ * #2: node [in/out] erase node
+ * #r:      [ret]    returns the parent node or NULL
  */
 static struct rb_node *_rb_erase(struct rb_root *root, struct rb_node *node)
 {
@@ -337,8 +337,8 @@ static struct rb_node *_rb_erase(struct rb_root *root, struct rb_node *node)
  * #desc:
  *    fix the colors of erased node and balance rb-tree.
  *
- * #1: root node
- * #2: parent node
+ * #1: root   [in/out] root node
+ * #2: parent [in/out] parent node
  */
 static void _rb_erase_color(struct rb_root *root, struct rb_node *parent)
 {
@@ -503,8 +503,8 @@ static void _rb_erase_color(struct rb_root *root, struct rb_node *parent)
  * #desc:
  *    erase and fix node in the rb-tree.
  *
- * #1: root node
- * #2: node to be erased
+ * #1: root [in/out] root node
+ * #2: node [in/out] node to be erased
  */
 void F_SYMBOL(rb_erase_fix)(struct rb_root *root, struct rb_node *node)
 {
@@ -517,10 +517,10 @@ void F_SYMBOL(rb_erase_fix)(struct rb_root *root, struct rb_node *node)
  * #desc:
  *    insert a node in an rb-tree.
  *
- * #1: root node
- * #2: new node
- * #3: cmp callback
- * #r: new node / NULL
+ * #1: root [in/out] root node
+ * #2: new  [in/out] new node
+ * #3: cmp  [in]     cmp callback
+ * #r:      [ret]    new node / NULL
  */
 struct rb_node *F_SYMBOL(rb_wrap_insert)(struct rb_root *root,
 		struct rb_node *new, int32_t (*cmp)(void *, void *))
@@ -552,10 +552,10 @@ struct rb_node *F_SYMBOL(rb_wrap_insert)(struct rb_root *root,
  * #desc:
  *    search a node in an rb-tree.
  *
- * #1: root node
- * #2: callback arg
- * #3: cmp callback
- * #r: search node / NULL
+ * #1: root [in/out] root node
+ * #2: arg  [in]     callback arg
+ * #3: cmp  [in]     cmp callback
+ * #r:      [ret]    search node / NULL
  */
 struct rb_node *F_SYMBOL(rb_wrap_search)(struct rb_root *root,
 		void *arg, int32_t (*cmp)(void *, void *))
@@ -581,9 +581,9 @@ struct rb_node *F_SYMBOL(rb_wrap_search)(struct rb_root *root,
  * #desc:
  *    erase a node in an rb-tree.
  *
- * #1: root node
- * #2: old node
- * #r: erase node / NULL
+ * #1: root [in/out] root node
+ * #2: old  [in/out] old node
+ * #r:      [ret]    erase node / NULL
  */
 struct rb_node *F_SYMBOL(rb_wrap_erase)(struct rb_root *root,
 		struct rb_node *old)
@@ -598,10 +598,10 @@ struct rb_node *F_SYMBOL(rb_wrap_erase)(struct rb_root *root,
  * #desc:
  *    search and erase a node in an rb-tree.
  *
- * #1: root node
- * #2: callback arg
- * #3: cmp callback
- * #r: erase node / NULL
+ * #1: root [in/out] root node
+ * #2: arg  [in]     callback arg
+ * #3: cmp  [in]     cmp callback
+ * #r:      [ret]    erase node / NULL
  */
 struct rb_node *F_SYMBOL(rb_wrap_erase2)(struct rb_root *root,
 		void *arg, int32_t (*cmp)(void *, void *))
@@ -617,8 +617,8 @@ struct rb_node *F_SYMBOL(rb_wrap_erase2)(struct rb_root *root,
  * #desc:
  *    returns the first node in the rb-tree.
  *
- * #1: root node
- * #r: first node / NULL
+ * #1: root [in/out] root node
+ * #r:      [ret]    first node / NULL
  */
 struct rb_node *F_SYMBOL(rb_wrap_first)(struct rb_root *root)
 {
@@ -636,8 +636,8 @@ struct rb_node *F_SYMBOL(rb_wrap_first)(struct rb_root *root)
  * #desc:
  *    returns the last node in the rb-tree.
  *
- * #1: root node
- * #r: last node / NULL
+ * #1: root [in/out] root node
+ * #r:      [ret]    last node / NULL
  */
 struct rb_node *F_SYMBOL(rb_wrap_last)(struct rb_root *root)
 {

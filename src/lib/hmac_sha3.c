@@ -32,11 +32,11 @@
  * #desc:
  *    hmac-sha3 struct context initialization.
  *
- * #1: hmac-sha3 struct context
- * #2: input key
- * #3: key length
- * #4: digest type
- * #r: 0: no error, -1: type or init error
+ * #1: ctx     [out] hmac-sha3 struct context
+ * #2: key     [in]  input key
+ * #3: key_len [in]  key length
+ * #4: type    [in]  digest type
+ * #r:         [ret] 0: no error, -1: type or init error
  */
 int32_t F_SYMBOL(hmac_sha3_init)(struct hmac_sha3_ctx *ctx,
 		const uint8_t *key, uint32_t key_len, int32_t type)
@@ -83,9 +83,9 @@ int32_t F_SYMBOL(hmac_sha3_init)(struct hmac_sha3_ctx *ctx,
  * #desc:
  *    hmac-sha3 processing buffer function.
  *
- * #1: hmac-sha3 struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] hmac-sha3 struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(hmac_sha3_process)(struct hmac_sha3_ctx *ctx, const uint8_t *s,
 		size_t len)
@@ -97,7 +97,7 @@ void F_SYMBOL(hmac_sha3_process)(struct hmac_sha3_ctx *ctx, const uint8_t *s,
  * #desc:
  *    hmac-sha3 process the remaining bytes in the buffer and end.
  *
- * #1: hmac-sha3 struct context
+ * #1: ctx [in/out] hmac-sha3 struct context
  */
 void F_SYMBOL(hmac_sha3_finish)(struct hmac_sha3_ctx *ctx)
 {
@@ -115,9 +115,9 @@ void F_SYMBOL(hmac_sha3_finish)(struct hmac_sha3_ctx *ctx)
  * #desc:
  *    hmac-sha3 single-time processing function.
  *
- * #1: hmac-sha3 struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] hmac-sha3 struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(hmac_sha3)(struct hmac_sha3_ctx *ctx, const uint8_t *s,
 		size_t len)

@@ -59,10 +59,10 @@ static const uint8_t b32d[256] = {
  * #desc:
  *    base32 encoding function.
  *
- * #1: input buffer
- * #2: input length
- * #3: output buffer
- * #4: remaining length of output buffer
+ * #1: s    [in]     input buffer
+ * #2: slen [in]     input length
+ * #3: t    [out]    output buffer
+ * #4: tlen [in/out] remaining length of output buffer
  */
 void F_SYMBOL(base32_enc)(const char *s, uint32_t slen, char *t,
 		uint32_t *tlen)
@@ -117,10 +117,11 @@ void F_SYMBOL(base32_enc)(const char *s, uint32_t slen, char *t,
  * #desc:
  *    base32 decoding.
  *
- * #1: input buffer (8byte)
- * #2: output buffer
- * #3: output buffer length
- * #r: >0: output size, -1: output buffer full, -2: invalid character error
+ * #1: s    [in]  input buffer (8byte)
+ * #2: t    [out] output buffer
+ * #3: tlen [in]  output buffer length
+ * #r:      [ret]
+ *    >0: output size, -1: output buffer full, -2: invalid character error
  */
 static int32_t _base32_dec_8(const char *s, char *t, uint32_t tlen)
 {
@@ -188,11 +189,11 @@ static int32_t _base32_dec_8(const char *s, char *t, uint32_t tlen)
  * #desc:
  *    base32 decoding function.
  *
- * #1: input buffer
- * #2: input length
- * #3: output buffer
- * #4: remaining length of output buffer
- * #r:
+ * #1: s    [in]     input buffer
+ * #2: slen [in]     input length
+ * #3: t    [out]    output buffer
+ * #4: tlen [in/out] remaining length of output buffer
+ * #r:      [ret]
  *    0: no error, >0: input error location, -1: output buffer full,
  *    -2: invalid character error, -3: input incomplete
  */

@@ -31,12 +31,12 @@
  * #desc:
  *    bcrypt password-hashing function.
  *
- * #1: password
- * #2: password length
- * #3: salt
- * #4: salt length
- * #5: output hashpass (length: BCRYPT_HASHPASS_LEN)
- * #6: cost (2^N)
+ * #1: pass     [in]  password
+ * #2: pass_len [in]  password length
+ * #3: salt     [in]  salt
+ * #4: salt_len [in]  salt length
+ * #5: ohp      [out] output hashpass (length: BCRYPT_HASHPASS_LEN)
+ * #6: k        [in]  cost (2^N)
  */
 void F_SYMBOL(bcrypt_hashpass)(const uint8_t *pass, uint32_t pass_len,
 		const uint8_t *salt, uint32_t salt_len, uint8_t *ohp,

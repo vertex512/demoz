@@ -69,8 +69,8 @@ static const uint32_t md5_number[64] = {
  * #desc:
  *    md5 compression function.
  *
- * #1: md5 struct context
- * #2: input block (length: MD5_BLOCKSIZE)
+ * #1: ctx [in/out] md5 struct context
+ * #2: s   [in]     input block (length: MD5_BLOCKSIZE)
  */
 static void _md5_compress(struct md5_ctx *ctx, const uint8_t *s)
 {
@@ -121,7 +121,7 @@ static void _md5_compress(struct md5_ctx *ctx, const uint8_t *s)
  * #desc:
  *    md5 struct context initialization.
  *
- * #1: md5 struct context
+ * #1: ctx [out] md5 struct context
  */
 void F_SYMBOL(md5_init)(struct md5_ctx *ctx)
 {
@@ -136,9 +136,9 @@ void F_SYMBOL(md5_init)(struct md5_ctx *ctx)
  * #desc:
  *    md5 processing buffer function.
  *
- * #1: md5 struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] md5 struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(md5_process)(struct md5_ctx *ctx, const uint8_t *s,
 		size_t len)
@@ -179,8 +179,8 @@ void F_SYMBOL(md5_process)(struct md5_ctx *ctx, const uint8_t *s,
  * #desc:
  *    md5 process the remaining bytes in the buffer and end.
  *
- * #1: md5 struct context
- * #2: total length
+ * #1: ctx [in/out] md5 struct context
+ * #2: len [in]     total length
  */
 void F_SYMBOL(md5_finish)(struct md5_ctx *ctx, uint64_t len)
 {
@@ -204,9 +204,9 @@ void F_SYMBOL(md5_finish)(struct md5_ctx *ctx, uint64_t len)
  * #desc:
  *    md5 single-time processing function.
  *
- * #1: md5 struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] md5 struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(md5)(struct md5_ctx *ctx, const uint8_t *s, size_t len)
 {

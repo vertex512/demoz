@@ -31,24 +31,24 @@
 /* @def: _
  * aes128 */
 #define AES_128_TYPE 0
-#define AES_128_KEYLEN 16
+#define AES_128_KEY_LEN 16
 #define AES_128_ROUNDS 10
 
 /* aes192 */
 #define AES_192_TYPE 1
-#define AES_192_KEYLEN 24
+#define AES_192_KEY_LEN 24
 #define AES_192_ROUNDS 12
 
 /* aes256 */
 #define AES_256_TYPE 2
-#define AES_256_KEYLEN 32
+#define AES_256_KEY_LEN 32
 #define AES_256_ROUNDS 14
 
 #define AES_BLOCKSIZE 16
-#define AES_KEYEXPLEN (AES_BLOCKSIZE * (AES_256_ROUNDS + 1))
+#define AES_KEYEXP_LEN (AES_BLOCKSIZE * (AES_256_ROUNDS + 1))
 
 struct aes_ctx {
-	uint8_t keyexp[AES_KEYEXPLEN];
+	uint8_t keyexp[AES_KEYEXP_LEN];
 	uint16_t keylen;
 	uint16_t rounds;
 };
@@ -93,7 +93,7 @@ void F_SYMBOL(aes_crypto_ctr)(struct aes_ctx *ctx, uint8_t *ran,
 		uint8_t *buf, size_t len)
 ;
 
-/* lib/aes_fast.c */
+/* lib/aes_sbox.c */
 
 extern
 int32_t F_SYMBOL(aes_init)(struct aes_ctx *ctx, const uint8_t *key,

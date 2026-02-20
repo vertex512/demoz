@@ -1,6 +1,6 @@
 /* @file: scrypt.c
  * #desc:
- *    the implementations of scrypt password-based key derivation function.
+ *    The implementations of scrypt password-based key derivation function.
  *
  * #copy:
  *    Copyright (C) 1970 Public Free Software
@@ -21,7 +21,6 @@
  */
 
 #include <demoz/config.h>
-#include <demoz/c/stddef.h>
 #include <demoz/c/stdint.h>
 #include <demoz/c/string.h>
 #include <demoz/lib/pbkdf2.h>
@@ -45,7 +44,7 @@
  * #desc:
  *    salsa20/8 block keystream function.
  *
- * #1: state buffer
+ * #1: state [in/out] state buffer
  */
 static void _salsa208_block(uint32_t state[16])
 {
@@ -76,9 +75,9 @@ static void _salsa208_block(uint32_t state[16])
  * #desc:
  *    scrypt block mix algorithm function.
  *
- * #1: scrypt block
- * #2: temporary buffer of y
- * #3: block number
+ * #1: b [in/out] scrypt block
+ * #2: y [in/out] temporary buffer of y
+ * #3: r [in]     block number
  */
 static void _scrypt_blockmix(uint8_t *b, uint8_t *y, uint32_t r)
 {
@@ -116,11 +115,11 @@ static void _scrypt_blockmix(uint8_t *b, uint8_t *y, uint32_t r)
  * #desc:
  *    scrypt rounds mix algorithm function.
  *
- * #1: scrypt block
- * #2: cpu/memory cost
- * #3: block number
- * #4: temporary buffer of v
- * #5: temporary buffer of y
+ * #1: b [in/out] scrypt block
+ * #2: n [in]     cpu/memory cost
+ * #3: r [in]     block number
+ * #4: v [in/out] temporary buffer of v
+ * #5: y [in/out] temporary buffer of y
  */
 static void _scrypt_romix(uint8_t *b, uint32_t n, uint32_t r, uint8_t *v,
 		uint8_t *y)
@@ -146,16 +145,16 @@ static void _scrypt_romix(uint8_t *b, uint32_t n, uint32_t r, uint8_t *v,
  * #desc:
  *    scrypt password-based key derivation function.
  *
- * #1: password
- * #2: password length
- * #3: salt
- * #4: salt length
- * #5: temporary buffer
- * #6: cpu/memory cost
- * #7: block number
- * #8: parallelization number
- * #9: output key
- * #10: key length
+ * #1: pass     [in]     password
+ * #2: pass_len [in]     password length
+ * #3: salt     [in]     salt
+ * #4: salt_len [in]     salt length
+ * #5: tmp      [in/out] temporary buffer
+ * #6: n        [in]     cpu/memory cost
+ * #7: r        [in]     block number
+ * #8: p        [in]     parallelization number
+ * #9: dk       [out]    output key
+ * #10: len     [in]     key length
  */
 void F_SYMBOL(scrypt)(const uint8_t *pass, uint32_t pass_len,
 		const uint8_t *salt, uint32_t salt_len, uint8_t *tmp,

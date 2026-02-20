@@ -360,9 +360,9 @@ const uint16_t config_table[10][4] = {
  * #desc:
  *    send bits to buffer.
  *
- * #1: deflate struct context
- * #2: bits value
- * #3: bits length
+ * #1: ctx [in/out] deflate struct context
+ * #2: v   [in]     bits value
+ * #3: len [in]     bits length
  */
 static void _send_bits(struct deflate_ctx *ctx, uint32_t v, uint32_t len)
 {
@@ -382,7 +382,7 @@ static void _send_bits(struct deflate_ctx *ctx, uint32_t v, uint32_t len)
  * #desc:
  *    flush bits to buffer.
  *
- * #1: deflate struct context
+ * #1: ctx [in/out] deflate struct context
  */
 static void _send_bits_finish(struct deflate_ctx *ctx)
 {
@@ -400,7 +400,7 @@ static void _send_bits_finish(struct deflate_ctx *ctx)
  * #desc:
  *    skip the remaining bits in the buffer byte.
  *
- * #1: deflate struct context
+ * #1: ctx [in/out] deflate struct context
  */
 static void _send_bits_skip(struct deflate_ctx *ctx)
 {
@@ -411,9 +411,9 @@ static void _send_bits_skip(struct deflate_ctx *ctx)
  * #desc:
  *    bit reverse conversion.
  *
- * #1: input
- * #2: length
- * #r: reverse
+ * #1: c   [in]  input
+ * #2: len [in]  length
+ * #r:     [ret] reverse
  */
 static uint16_t _bit_reverse(uint16_t c, uint16_t len)
 {
@@ -432,9 +432,9 @@ static uint16_t _bit_reverse(uint16_t c, uint16_t len)
  * #desc:
  *    generate codes based on length.
  *
- * #1: tree ctdata
- * #2: bit-length count
- * #3: codes number
+ * #1: tree     [in/out] tree ctdata
+ * #2: bl_count [in]     bit-length count
+ * #3: n        [in]     codes number
  */
 static void _gen_codes(struct deflate_ctdata *tree, const uint16_t *bl_count,
 		int32_t n)
@@ -459,9 +459,9 @@ static void _gen_codes(struct deflate_ctdata *tree, const uint16_t *bl_count,
  * #desc:
  *    minheap down shift.
  *
- * #1: deflate struct context
- * #2: tree ctdata
- * #3: parent node
+ * #1: ctx  [in/out] deflate struct context
+ * #2: tree [in]     tree ctdata
+ * #3: k    [in]     parent node
  */
 static void _heapdown(struct deflate_ctx *ctx,
 		const struct deflate_ctdata *tree, int32_t k)
@@ -498,8 +498,8 @@ static void _heapdown(struct deflate_ctx *ctx,
  * #desc:
  *    generate bit-length based on dynamic tree.
  *
- * #1: deflate struct context
- * #2: tree description
+ * #1: ctx  [in/out] deflate struct context
+ * #2: desc [in/out] tree description
  */
 static void _gen_bitlen(struct deflate_ctx *ctx, struct deflate_tree_desc *desc)
 {
@@ -559,8 +559,8 @@ static void _gen_bitlen(struct deflate_ctx *ctx, struct deflate_tree_desc *desc)
  * #desc:
  *    build dynamic huffman tree.
  *
- * #1: struct struct context
- * #2: tree description
+ * #1: ctx  [in/out] struct struct context
+ * #2: desc [in/out] tree description
  */
 static void _build_tree(struct deflate_ctx *ctx, struct deflate_tree_desc *desc)
 {
@@ -676,12 +676,12 @@ static void _build_tree(struct deflate_ctx *ctx, struct deflate_tree_desc *desc)
  * #desc:
  *    scan tree length to bit-length tree.
  *
- * #1: struct struct context
- * #2: input tree
- * #3: codes number
+ * #1: ctx  [in/out] struct struct context
+ * #2: tree [in/out] input tree
+ * #3: n    [in/out] codes number
  */
-static void _scan_tree(struct deflate_ctx *ctx,
-		struct deflate_ctdata *tree, int32_t n)
+static void _scan_tree(struct deflate_ctx *ctx, struct deflate_ctdata *tree,
+		int32_t n)
 {
 	struct deflate_ctdata *bl_tree = ctx->dyn_bltree;
 	int32_t count = 0, count_min = 4, count_max = 7;
@@ -732,9 +732,9 @@ static void _scan_tree(struct deflate_ctx *ctx,
  * #desc:
  *    send tree length according to bit-length tree.
  *
- * #1: struct struct context
- * #2: input tree
- * #3: codes number
+ * #1: ctx  [in/out] struct struct context
+ * #2: tree [in]     input tree
+ * #3: n    [in/out] codes number
  */
 static void _send_tree(struct deflate_ctx *ctx,
 		const struct deflate_ctdata *tree, int32_t n)
@@ -794,9 +794,9 @@ static void _send_tree(struct deflate_ctx *ctx,
  * #desc:
  *    send huffman coding block.
  *
- * #1: struct struct context
- * #2: literal/length tree
- * #3: distance tree
+ * #1: ctx   [in/out] struct struct context
+ * #2: ltree [in]     literal/length tree
+ * #3: dtree [in]     distance tree
  */
 static void _send_block(struct deflate_ctx *ctx,
 		const struct deflate_ctdata *ltree,
@@ -844,10 +844,10 @@ static void _send_block(struct deflate_ctx *ctx,
  * #desc:
  *    check bits overflow.
  *
- * #1: deflate struct context
- * #2: input tree
- * #3: codes number
- * #r: <0: overflow
+ * #1: ctx  [in/out] deflate struct context
+ * #2: tree [in]     input tree
+ * #3: n    [in]     codes number
+ * #r:      [ret]    0: no error, <0: overflow
  */
 static int32_t _bits_overflow(struct deflate_ctx *ctx,
 		const struct deflate_ctdata *tree, int32_t n)
@@ -883,7 +883,7 @@ static int32_t _bits_overflow(struct deflate_ctx *ctx,
  * #desc:
  *    initialization block.
  *
- * #1: deflate struct context
+ * #1: ctx [in/out] deflate struct context
  */
 static void _init_block(struct deflate_ctx *ctx)
 {
@@ -899,8 +899,8 @@ static void _init_block(struct deflate_ctx *ctx)
  * #desc:
  *    send compressed data block.
  *
- * #1: deflate struct context
- * #2: is finish
+ * #1: ctx   [in/out] deflate struct context
+ * #2: flush [in]     is finish
  */
 static void _flush_block(struct deflate_ctx *ctx, int32_t flush)
 {
@@ -974,10 +974,10 @@ static void _flush_block(struct deflate_ctx *ctx, int32_t flush)
  * #desc:
  *    deflate symbol add.
  *
- * #1: deflate struct context
- * #2: distance (0: literal)
- * #3: literal and length (length: - DEFLATE_MATCH_MIN)
- * #r: 0: not full, 1: symbol full
+ * #1: ctx  [in/out] deflate struct context
+ * #2: dist [in]     distance (0: literal)
+ * #3: ll   [in]     literal and length (length: - DEFLATE_MATCH_MIN)
+ * #r:      [ret]    0: not full, 1: symbol full
  */
 static int32_t _symbol_add(struct deflate_ctx *ctx, uint32_t dist, uint32_t ll)
 {
@@ -1000,9 +1000,9 @@ static int32_t _symbol_add(struct deflate_ctx *ctx, uint32_t dist, uint32_t ll)
  * #desc:
  *    update current hash.
  *
- * #1: deflate struct context
- * #2: start position of the window
- * #r: return new hash
+ * #1: ctx [in/out] deflate struct context
+ * #2: n   [in]     start position of the window
+ * #r:     [ret]    return new hash
  */
 static uint32_t _update_hash(struct deflate_ctx *ctx, uint32_t n)
 {
@@ -1015,9 +1015,9 @@ static uint32_t _update_hash(struct deflate_ctx *ctx, uint32_t n)
  * #desc:
  *    insert new hash and return prev hash.
  *
- * #1: deflate struct context
- * #2: start position of the window
- * #r: prev a position
+ * #1: ctx [in/out] deflate struct context
+ * #2: n   [in]     start position of the window
+ * #r:     [ret]    prev a position
  */
 static uint32_t _insert_hash(struct deflate_ctx *ctx, uint32_t n)
 {
@@ -1034,9 +1034,9 @@ static uint32_t _insert_hash(struct deflate_ctx *ctx, uint32_t n)
  * #desc:
  *    longest match function.
  *
- * #1: deflate struct context
- * #2: match position
- * #r: best length
+ * #1: ctx [in/out] deflate struct context
+ * #2: pos [in]     match position
+ * #r:     [ret]    best length
  */
 static uint32_t _longest_match(struct deflate_ctx *ctx, uint32_t pos)
 {
@@ -1101,7 +1101,7 @@ static uint32_t _longest_match(struct deflate_ctx *ctx, uint32_t pos)
  * #desc:
  *    fill sliding window.
  *
- * #1: deflate struct context
+ * #1: ctx [in/out] deflate struct context
  */
 static void _fill_window(struct deflate_ctx *ctx)
 {
@@ -1148,11 +1148,12 @@ static void _fill_window(struct deflate_ctx *ctx)
  * #desc:
  *    deflate slow function.
  *
- * #1: deflate struct context
- * #2: input buffer
- * #3: input length
- * #4: is finish
- * #r: 0: no error, >0 IS_FLUSH: flush block, IS_END: flush block and end
+ * #1: ctx   [in/out] deflate struct context
+ * #2: s     [in]     input buffer
+ * #3: len   [in]     input length
+ * #4: flush [in]     is finish
+ * #r:       [ret]
+ *    0: no error, >0 IS_FLUSH: flush block, IS_END: flush block and end
  */
 static int32_t _deflate_slow(struct deflate_ctx *ctx, const uint8_t *s,
 		uint32_t len, int32_t flush)
@@ -1276,11 +1277,12 @@ static int32_t _deflate_slow(struct deflate_ctx *ctx, const uint8_t *s,
  * #desc:
  *    deflate fast function.
  *
- * #1: deflate struct context
- * #2: input buffer
- * #3: input length
- * #4: is finish
- * #r: 0: no error, >0 IS_FLUSH: flush block, IS_END: flush block and end
+ * #1: ctx   [in/out] deflate struct context
+ * #2: s     [in]     input buffer
+ * #3: len   [in]     input length
+ * #4: flush [in]     is finish
+ * #r:       [ret]
+ *    0: no error, >0 IS_FLUSH: flush block, IS_END: flush block and end
  */
 static int32_t _deflate_fast(struct deflate_ctx *ctx, const uint8_t *s,
 		uint32_t len, int32_t flush)
@@ -1381,11 +1383,12 @@ static int32_t _deflate_fast(struct deflate_ctx *ctx, const uint8_t *s,
  * #desc:
  *    deflate stored function.
  *
- * #1: deflate struct context
- * #2: input buffer
- * #3: input length
- * #4: is finish
- * #r: 0: no error, >0 IS_FLUSH: flush block, IS_END: flush block and end
+ * #1: ctx   [in/out] deflate struct context
+ * #2: s     [in]     input buffer
+ * #3: len   [in]     input length
+ * #4: flush [in]     is finish
+ * #r:       [ret]
+ *    0: no error, >0 IS_FLUSH: flush block, IS_END: flush block and end
  */
 static int32_t _deflate_stored(struct deflate_ctx *ctx, const uint8_t *s,
 		uint32_t len, int32_t flush)
@@ -1461,9 +1464,9 @@ static int32_t _deflate_stored(struct deflate_ctx *ctx, const uint8_t *s,
  * #desc:
  *    deflate initialization.
  *
- * #1: deflate struct context
- * #2: compress level
- * #r: 0: no error, -1: level error
+ * #1: ctx [out] deflate struct context
+ * #2: lev [in]  compress level
+ * #r:     [ret] 0: no error, -1: level error
  */
 int32_t F_SYMBOL(deflate_init)(struct deflate_ctx *ctx, int32_t lev)
 {
@@ -1516,11 +1519,12 @@ int32_t F_SYMBOL(deflate_init)(struct deflate_ctx *ctx, int32_t lev)
  * #desc:
  *    deflate compression function.
  *
- * #1: deflate struct context
- * #2: input buffer
- * #3: input length
- * #4: is finish
- * #r: 0: no error, >0 IS_FLUSH: flush block, IS_END: flush block and end
+ * #1: ctx   [in/out] deflate struct context
+ * #2: s     [in]     input buffer
+ * #3: len   [in]     input length
+ * #4: flush [in]     is finish
+ * #r:       [ret]
+ *    0: no error, >0 IS_FLUSH: flush block, IS_END: flush block and end
  */
 int32_t F_SYMBOL(deflate)(struct deflate_ctx *ctx, const uint8_t *s,
 		uint32_t len, int32_t flush)

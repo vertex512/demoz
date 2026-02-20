@@ -28,8 +28,8 @@
  * #desc;
  *    return an integer absolute value.
  *
- * #1: number
- * #r: absolute value
+ * #1: n [in]  number
+ * #r:   [ret] absolute value
  */
 int C_SYMBOL(abs)(int n)
 {
@@ -40,8 +40,8 @@ int C_SYMBOL(abs)(int n)
  * #desc;
  *    return an integer absolute value.
  *
- * #1: number
- * #r: absolute value
+ * #1: n [in]  number
+ * #r:   [ret] absolute value
  */
 long C_SYMBOL(labs)(long n)
 {
@@ -52,8 +52,8 @@ long C_SYMBOL(labs)(long n)
  * #desc;
  *    return an integer absolute value.
  *
- * #1: number
- * #r: absolute value
+ * #1: n [in]  number
+ * #r:   [ret] absolute value
  */
 long long C_SYMBOL(llabs)(long long n)
 {

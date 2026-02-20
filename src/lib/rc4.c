@@ -29,9 +29,9 @@
  * #desc:
  *    rc4 initialization function.
  *
- * #1: rc4 struct context
- * #2: input key
- * #3: key length (max-length: 256)
+ * #1: ctx [out] rc4 struct context
+ * #2: key [in]  input key
+ * #3: len [in]  key length (max-length: 256)
  */
 void F_SYMBOL(rc4_init)(struct rc4_ctx *ctx, const uint8_t *key, uint32_t len) {
 	for (int32_t i = 0; i < 256; i++)
@@ -52,9 +52,9 @@ void F_SYMBOL(rc4_init)(struct rc4_ctx *ctx, const uint8_t *key, uint32_t len) {
  * #desc:
  *    rc4 stream encryption function.
  *
- * #1: rc4 struct context
- * #2: buffer
- * #3: length
+ * #1: ctx [in/out] rc4 struct context
+ * #2: buf [in/out] buffer
+ * #3: len [in]     length
  */
 void F_SYMBOL(rc4_crypto)(struct rc4_ctx *ctx, uint8_t *buf, uint32_t len) {
 	int32_t i = ctx->i, j = ctx->j;

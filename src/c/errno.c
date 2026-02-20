@@ -29,7 +29,7 @@
  * #desc:
  *    internal function for get and set error number.
  *
- * #r: returns errno internal pointer
+ * #r: [ret] return the errno internal pointer
  */
 int32_t *C_SYMBOL(___errno)(void)
 {
@@ -44,8 +44,8 @@ int32_t *C_SYMBOL(___errno)(void)
  * #desc:
  *    error number to string.
  *
- * #1: error number
- * #r: returns error number string
+ * #1: err [in]  error number
+ * #r:     [ret] return the error number string
  */
 const char *C_SYMBOL(strerror)(int32_t err)
 {

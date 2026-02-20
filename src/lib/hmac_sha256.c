@@ -32,9 +32,9 @@
  * #desc:
  *    hmac-sha256 struct context initialization.
  *
- * #1: hmac-sha256 struct context
- * #2: input key
- * #3: key length
+ * #1: ctx     [out] hmac-sha256 struct context
+ * #2: key     [in]  input key
+ * #3: key_len [in]  key length
  */
 void F_SYMBOL(hmac_sha256_init)(struct hmac_sha256_ctx *ctx,
 		const uint8_t *key, uint32_t key_len)
@@ -67,9 +67,9 @@ void F_SYMBOL(hmac_sha256_init)(struct hmac_sha256_ctx *ctx,
  * #desc:
  *    hmac-sha256 processing buffer function.
  *
- * #1: hmac-sha256 struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] hmac-sha256 struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(hmac_sha256_process)(struct hmac_sha256_ctx *ctx,
 		const uint8_t *s, size_t len)
@@ -81,8 +81,8 @@ void F_SYMBOL(hmac_sha256_process)(struct hmac_sha256_ctx *ctx,
  * #desc:
  *    hmac-sha256 process the remaining bytes in the buffer and end.
  *
- * #1: hmac-sha256 struct context
- * #2: total length
+ * #1: ctx [in/out] hmac-sha256 struct context
+ * #2: len [in]     total length
  */
 void F_SYMBOL(hmac_sha256_finish)(struct hmac_sha256_ctx *ctx,
 		uint64_t len)
@@ -102,9 +102,9 @@ void F_SYMBOL(hmac_sha256_finish)(struct hmac_sha256_ctx *ctx,
  * #desc:
  *    hmac-sha256 single-time processing function.
  *
- * #1: hmac-sha256 struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] hmac-sha256 struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(hmac_sha256)(struct hmac_sha256_ctx *ctx, const uint8_t *s,
 		size_t len)
@@ -117,9 +117,9 @@ void F_SYMBOL(hmac_sha256)(struct hmac_sha256_ctx *ctx, const uint8_t *s,
  * #desc:
  *    hmac-sha224 initialize the hmac-sha256 struct context.
  *
- * #1: hmac-sha256 struct context
- * #2: input key
- * #3: key length
+ * #1: ctx     [out] hmac-sha256 struct context
+ * #2: key     [in]  input key
+ * #3: key_len [in]  key length
  */
 void F_SYMBOL(hmac_sha224_init)(struct hmac_sha256_ctx *ctx,
 		const uint8_t *key, uint32_t key_len)
@@ -152,9 +152,9 @@ void F_SYMBOL(hmac_sha224_init)(struct hmac_sha256_ctx *ctx,
  * #desc:
  *    hmac-sha224 processing buffer function.
  *
- * #1: hmac-sha256 struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] hmac-sha256 struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(hmac_sha224_process)(struct hmac_sha256_ctx *ctx,
 		const uint8_t *s, size_t len)
@@ -166,8 +166,8 @@ void F_SYMBOL(hmac_sha224_process)(struct hmac_sha256_ctx *ctx,
  * #desc:
  *    hmac-sha224 process the remaining bytes in the buffer and end.
  *
- * #1: hmac-sha256 struct context
- * #2: total length
+ * #1: ctx [in/out] hmac-sha256 struct context
+ * #2: len [in]     total length
  */
 void F_SYMBOL(hmac_sha224_finish)(struct hmac_sha256_ctx *ctx,
 		uint64_t len)
@@ -187,9 +187,9 @@ void F_SYMBOL(hmac_sha224_finish)(struct hmac_sha256_ctx *ctx,
  * #desc:
  *    hmac-sha224 single-time processing function.
  *
- * #1: hmac-sha256 struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] hmac-sha256 struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(hmac_sha224)(struct hmac_sha256_ctx *ctx, const uint8_t *s,
 		size_t len)

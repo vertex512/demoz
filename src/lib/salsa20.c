@@ -46,10 +46,10 @@ static const uint8_t salsa20_constant[] = "expand 32-byte k";
  * #desc:
  *    salsa20 initialization function.
  *
- * #1: salsa20 struct context
- * #2: key
- * #3: nonce
- * #4: counter
+ * #1: ctx [out] salsa20 struct context
+ * #2: key [in]  key
+ * #3: ran [in]  nonce
+ * #4: ctr [in]  counter
  */
 void F_SYMBOL(salsa20_init)(struct salsa20_ctx *ctx, const uint8_t *key,
 		const uint8_t *ran, const uint8_t *ctr)
@@ -81,8 +81,8 @@ void F_SYMBOL(salsa20_init)(struct salsa20_ctx *ctx, const uint8_t *key,
  * #desc:
  *    salsa20 block keystream function.
  *
- * #1: salsa20 struct context
- * #2: rounds
+ * #1: ctx [in/out] salsa20 struct context
+ * #2: n   [in]     rounds
  */
 void F_SYMBOL(salsa20_block)(struct salsa20_ctx *ctx, int32_t n)
 {
@@ -113,9 +113,9 @@ void F_SYMBOL(salsa20_block)(struct salsa20_ctx *ctx, int32_t n)
  * #desc:
  *    salsa20 stream encryption function.
  *
- * #1: salsa20 struct context
- * #2: buffer
- * #3: length
+ * #1: ctx [in/out] salsa20 struct context
+ * #2: buf [in/out] buffer
+ * #3: len [in]     length
  */
 void F_SYMBOL(salsa20_crypto)(struct salsa20_ctx *ctx, uint8_t *buf,
 		size_t len)

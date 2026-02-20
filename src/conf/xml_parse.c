@@ -97,8 +97,8 @@ static const uint8_t xml_name_table[256] = {
  * #desc:
  *    get the xml token.
  *
- * #1: input string
- * #r: token value (-1: unknown token)
+ * #1: s [in]  input string
+ * #r:   [ret] token value (-1: unknown token)
  */
 static int32_t _xml_token(const char *s)
 {
@@ -159,8 +159,8 @@ static int32_t _xml_token(const char *s)
  * #desc:
  *    get the length of the xml string.
  *
- * #1: xml struct context
- * #r: string length (-1: error)
+ * #1: ctx [in/out] xml struct context
+ * #r:     [ret]    string length (-1: error)
  */
 static int32_t _xml_string(struct xml_ctx *ctx)
 {
@@ -201,8 +201,8 @@ static int32_t _xml_string(struct xml_ctx *ctx)
  * #desc:
  *    get the length of the xml comment string.
  *
- * #1: xml struct context
- * #r: string length (-1: error)
+ * #1: ctx [in/out] xml struct context
+ * #r:     [ret]    string length (-1: error)
  */
 static int32_t _xml_comment(struct xml_ctx *ctx)
 {
@@ -236,8 +236,8 @@ static int32_t _xml_comment(struct xml_ctx *ctx)
  * #desc:
  *    get the length of the xml character data.
  *
- * #1: xml struct context
- * #r: string length (-1: error)
+ * #1: ctx [in/out] xml struct context
+ * #r:     [ret]    string length (-1: error)
  */
 static int32_t _xml_cdata(struct xml_ctx *ctx)
 {
@@ -271,8 +271,8 @@ static int32_t _xml_cdata(struct xml_ctx *ctx)
  * #desc:
  *    parsing xml statement attributes.
  *
- * #1: xml struct context
- * #r: 0: no error, -1: error, -2: call error
+ * #1: ctx [in/out] xml struct context
+ * #r:     [ret]    0: no error, -1: error, -2: call error
  */
 static int32_t _xml_statement_attr(struct xml_ctx *ctx)
 {
@@ -356,8 +356,8 @@ static int32_t _xml_statement_attr(struct xml_ctx *ctx)
  * #desc:
  *    parsing xml statement.
  *
- * #1: xml struct context
- * #r: 0: no error, -1: error, -2: call error
+ * #1: ctx [in/out] xml struct context
+ * #r:     [ret]    0: no error, -1: error, -2: call error
  */
 static int32_t _xml_statement(struct xml_ctx *ctx)
 {
@@ -458,8 +458,8 @@ static int32_t _xml_statement(struct xml_ctx *ctx)
  * #desc:
  *    parsing xml doctype.
  *
- * #1: xml struct context
- * #r: 0: no error, -1: error, -2: call error
+ * #1: ctx [in/out] xml struct context
+ * #r:     [ret]    0: no error, -1: error, -2: call error
  */
 static int32_t _xml_doctype(struct xml_ctx *ctx)
 {
@@ -608,8 +608,8 @@ static int32_t _xml_doctype(struct xml_ctx *ctx)
  * #desc:
  *    parsing xml element attributes.
  *
- * #1: xml struct context
- * #r: 0: no error, 1: empty element, -1: error, -2: call error
+ * #1: ctx [in/out] xml struct context
+ * #r:     [ret]    0: no error, 1: empty element, -1: error, -2: call error
  */
 static int32_t _xml_element_attr(struct xml_ctx *ctx)
 {
@@ -691,8 +691,8 @@ static int32_t _xml_element_attr(struct xml_ctx *ctx)
  * #desc:
  *    parsing xml element.
  *
- * #1: xml struct context
- * #r: 0: no error, 1: empty element, -1: error, -2: call error
+ * #1: ctx [in/out] xml struct context
+ * #r:     [ret]    0: no error, 1: empty element, -1: error, -2: call error
  */
 static int32_t _xml_element_start(struct xml_ctx *ctx)
 {
@@ -806,8 +806,8 @@ static int32_t _xml_element_start(struct xml_ctx *ctx)
  * #desc:
  *    parsing xml end-element.
  *
- * #1: xml struct context
- * #r: 0: no error, -1: error, -2: call error
+ * #1: ctx [in/out] xml struct context
+ * #r:     [ret]    0: no error, -1: error, -2: call error
  */
 static int32_t _xml_element_end(struct xml_ctx *ctx)
 {
@@ -900,8 +900,8 @@ static int32_t _xml_element_end(struct xml_ctx *ctx)
  * #desc:
  *    parsing xml element.
  *
- * #1: xml struct context
- * #r: 0: no error, -1: error, -2: call error
+ * #1: ctx [in/out] xml struct context
+ * #r:     [ret]    0: no error, -1: error, -2: call error
  */
 static int32_t _xml_element(struct xml_ctx *ctx)
 {
@@ -993,9 +993,9 @@ static int32_t _xml_element(struct xml_ctx *ctx)
  * #desc:
  *    xml (extensible markup language) parser.
  *
- * #1: xml struct context
- * #2: input buffer
- * #r: 0: no error, -1: error, -2: call error
+ * #1: ctx [in/out] xml struct context
+ * #2: s   [in]     input buffer
+ * #r:     [ret]    0: no error, -1: error, -2: call error
  */
 int32_t F_SYMBOL(xml_parse)(struct xml_ctx *ctx, const char *s)
 {

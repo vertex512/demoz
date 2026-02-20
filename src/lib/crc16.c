@@ -168,8 +168,8 @@ static const uint16_t crc16_table_l[256] = {
  * #desc:
  *    get the crc16 table.
  *
- * #1: crc16 type
- * #r: crc16 table
+ * #1: type [in]  crc16 type
+ * #r:      [ret] crc16 table
  */
 const uint16_t *F_SYMBOL(crc16_table)(int32_t type)
 {
@@ -189,11 +189,11 @@ const uint16_t *F_SYMBOL(crc16_table)(int32_t type)
  * #desc:
  *    crc16 msb cyclic redundancy.
  *
- * #1: crc16 table
- * #2: init value
- * #3: input buffer
- * #4: input length
- * #r: crc16 value
+ * #1: t   [in]  crc16 table
+ * #2: c   [in]  init value
+ * #3: s   [in]  input buffer
+ * #4: len [in]  input length
+ * #r:     [ret] crc16 value
  */
 uint16_t F_SYMBOL(crc16_msb)(const uint16_t *t, uint16_t c, const uint8_t *s,
 		uint32_t len)
@@ -211,11 +211,11 @@ uint16_t F_SYMBOL(crc16_msb)(const uint16_t *t, uint16_t c, const uint8_t *s,
  * #desc:
  *    crc16 lsb cyclic redundancy.
  *
- * #1: crc16 table
- * #2: init value
- * #3: input buffer
- * #4: input length
- * #r: crc16 value
+ * #1: t   [in]  crc16 table
+ * #2: c   [in]  init value
+ * #3: s   [in]  input buffer
+ * #4: len [in]  input length
+ * #r:     [ret] crc16 value
  */
 uint16_t F_SYMBOL(crc16_lsb)(const uint16_t *t, uint16_t c, const uint8_t *s,
 		uint32_t len)
@@ -233,10 +233,10 @@ uint16_t F_SYMBOL(crc16_lsb)(const uint16_t *t, uint16_t c, const uint8_t *s,
  * #desc:
  *    crc16 single-time processing function.
  *
- * #1: input buffer
- * #2: input length
- * #3: crc16 type
- * #r: crc16 value
+ * #1: s    [in]  input buffer
+ * #2: len  [in]  input length
+ * #3: type [in]  crc16 type
+ * #r:      [ret] crc16 value
  */
 uint32_t F_SYMBOL(crc16)(const uint8_t *s, uint32_t len, int32_t type)
 {

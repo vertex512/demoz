@@ -31,8 +31,8 @@
  * #desc:
  *    big number move.
  *
- * #1: target
- * #2: source
+ * #1: t [out] target
+ * #2: s [in]  source
  */
 void F_SYMBOL(bn4352_move)(bn4352_t *t, const bn4352_t *s)
 {
@@ -43,8 +43,8 @@ void F_SYMBOL(bn4352_move)(bn4352_t *t, const bn4352_t *s)
  * #desc:
  *    big number swap.
  *
- * #1: target
- * #2: source
+ * #1: a [in/out] target
+ * #2: b [in/out] source
  */
 void F_SYMBOL(bn4352_swap)(bn4352_t *a, bn4352_t *b)
 {
@@ -58,8 +58,8 @@ void F_SYMBOL(bn4352_swap)(bn4352_t *a, bn4352_t *b)
  * #desc:
  *    big number value set (single a word).
  *
- * #1: target
- * #2: number
+ * #1: t [out] target
+ * #2: n [in]  number
  */
 void F_SYMBOL(bn4352_set1)(bn4352_t *t, uint32_t n)
 {
@@ -71,9 +71,9 @@ void F_SYMBOL(bn4352_set1)(bn4352_t *t, uint32_t n)
  * #desc:
  *    copy from bytes to big number.
  *
- * #1: target
- * #2: source bytes
- * #3: bytes length
+ * #1: t   [out] target
+ * #2: s   [in]  source bytes
+ * #3: len [in]  bytes length
  */
 void F_SYMBOL(bn4352_from_bytes)(bn4352_t *t, const uint8_t *s, uint32_t len)
 {
@@ -85,9 +85,9 @@ void F_SYMBOL(bn4352_from_bytes)(bn4352_t *t, const uint8_t *s, uint32_t len)
  * #desc:
  *    copy from big number to bytes.
  *
- * #1: source
- * #2: target bytes
- * #3: bytes length
+ * #1: s   [in]  source
+ * #2: t   [out] target bytes
+ * #3: len [in]  bytes length
  */
 void F_SYMBOL(bn4352_to_bytes)(const bn4352_t *s, uint8_t *t, uint32_t len)
 {
@@ -98,8 +98,8 @@ void F_SYMBOL(bn4352_to_bytes)(const bn4352_t *s, uint8_t *t, uint32_t len)
  * #desc:
  *    get the bits length of big number.
  *
- * #1: target
- * #r: bits number
+ * #1: t [in]  target
+ * #r:   [ret] bits number
  */
 int32_t F_SYMBOL(bn4352_bits)(const bn4352_t *t)
 {
@@ -135,8 +135,8 @@ int32_t F_SYMBOL(bn4352_bits)(const bn4352_t *t)
  * #desc:
  *    big number left shift.
  *
- * #1: target
- * #2: bits number
+ * #1: t [out] target
+ * #2: n [in]  bits number
  */
 void F_SYMBOL(bn4352_lshift)(bn4352_t *t, uint32_t n)
 {
@@ -173,8 +173,8 @@ void F_SYMBOL(bn4352_lshift)(bn4352_t *t, uint32_t n)
  * #desc:
  *    big number right shift.
  *
- * #1: target
- * #2: bits number
+ * #1: t [in/out] target
+ * #2: n [in]     bits number
  */
 void F_SYMBOL(bn4352_rshift)(bn4352_t *t, uint32_t n)
 {
@@ -212,9 +212,9 @@ void F_SYMBOL(bn4352_rshift)(bn4352_t *t, uint32_t n)
  * #desc:
  *    big number and operation.
  *
- * #1: result
- * #2: number
- * #3: number
+ * #1: r [out] result
+ * #2: a [in]  number
+ * #3: b [in]  number
  */
 void F_SYMBOL(bn4352_and)(bn4352_t *r,
 		const bn4352_t *a, const bn4352_t *b)
@@ -233,9 +233,9 @@ void F_SYMBOL(bn4352_and)(bn4352_t *r,
  * #desc:
  *    big number or operation.
  *
- * #1: result
- * #2: number
- * #3: number
+ * #1: r [out] result
+ * #2: a [in]  number
+ * #3: b [in]  number
  */
 void F_SYMBOL(bn4352_or)(bn4352_t *r,
 		const bn4352_t *a, const bn4352_t *b)
@@ -254,9 +254,9 @@ void F_SYMBOL(bn4352_or)(bn4352_t *r,
  * #desc:
  *    big number xor operation.
  *
- * #1: result
- * #2: number
- * #3: number
+ * #1: r [out] result
+ * #2: a [in]  number
+ * #3: b [in]  number
  */
 void F_SYMBOL(bn4352_xor)(bn4352_t *r,
 		const bn4352_t *a, const bn4352_t *b)
@@ -275,8 +275,8 @@ void F_SYMBOL(bn4352_xor)(bn4352_t *r,
  * #desc:
  *    big number not operation.
  *
- * #1: result
- * #2: number
+ * #1: r [out] result
+ * #2: a [in]  number
  */
 void F_SYMBOL(bn4352_not)(bn4352_t *r,
 		const bn4352_t *a)
@@ -294,9 +294,9 @@ void F_SYMBOL(bn4352_not)(bn4352_t *r,
  * #desc:
  *    big number compare (unsigned).
  *
- * #1: number
- * #2: number
- * #r: 0: a==b, 1: a>b, -1: a<b
+ * #1: a [in]  number
+ * #2: b [in]  number
+ * #r:   [ret] 0: a==b, 1: a>b, -1: a<b
  */
 int32_t F_SYMBOL(bn4352_ucmp)(const bn4352_t *a, const bn4352_t *b)
 {
@@ -317,9 +317,9 @@ int32_t F_SYMBOL(bn4352_ucmp)(const bn4352_t *a, const bn4352_t *b)
  * #desc:
  *    big number compare (unsigned, single a word).
  *
- * #1: number
- * #2: number
- * #r: 0: a==b, 1: a>b, -1: a<b
+ * #1: a [in]  number
+ * #2: b [in]  number
+ * #r:   [ret] 0: a==b, 1: a>b, -1: a<b
  */
 int32_t F_SYMBOL(bn4352_ucmp_1)(const bn4352_t *a, uint32_t b)
 {
@@ -344,9 +344,9 @@ int32_t F_SYMBOL(bn4352_ucmp_1)(const bn4352_t *a, uint32_t b)
  * #desc:
  *    big number compare (signed).
  *
- * #1: number
- * #2: number
- * #r: 0: a==b, 1: a>b, -1: a<b
+ * #1: a [in]  number
+ * #2: b [in]  number
+ * #r:   [ret] 0: a==b, 1: a>b, -1: a<b
  */
 int32_t F_SYMBOL(bn4352_cmp)(const bn4352_t *a, const bn4352_t *b)
 {
@@ -372,9 +372,9 @@ int32_t F_SYMBOL(bn4352_cmp)(const bn4352_t *a, const bn4352_t *b)
  * #desc:
  *    big number compare (signed, single a word).
  *
- * #1: number
- * #2: number
- * #r: 0: a==b, 1: a>b, -1: a<b
+ * #1: a [in]  number
+ * #2: b [in]  number
+ * #r:   [ret] 0: a==b, 1: a>b, -1: a<b
  */
 int32_t F_SYMBOL(bn4352_cmp_1)(const bn4352_t *a, uint32_t b)
 {
@@ -402,10 +402,10 @@ int32_t F_SYMBOL(bn4352_cmp_1)(const bn4352_t *a, uint32_t b)
  * #desc:
  *    big number addition (unsigned).
  *
- * #1: sum
- * #2: addend
- * #3: addend
- * #r: overflow
+ * #1: r [out] sum
+ * #2: a [in]  addend
+ * #3: b [in]  addend
+ * #r:   [ret] overflow
  */
 uint32_t F_SYMBOL(bn4352_uadd)(bn4352_t *r,
 		const bn4352_t *a, const bn4352_t *b)
@@ -430,10 +430,10 @@ uint32_t F_SYMBOL(bn4352_uadd)(bn4352_t *r,
  * #desc:
  *    big number addition (unsigned, single a word).
  *
- * #1: sum
- * #2: addend
- * #3: addend
- * #r: overflow
+ * #1: r [out] sum
+ * #2: a [in]  addend
+ * #3: b [in]  addend
+ * #r:   [ret] overflow
  */
 uint32_t F_SYMBOL(bn4352_uadd_1)(bn4352_t *r,
 		const bn4352_t *a, uint32_t b)
@@ -457,10 +457,10 @@ uint32_t F_SYMBOL(bn4352_uadd_1)(bn4352_t *r,
  * #desc:
  *    big number subtraction (unsigned).
  *
- * #1: difference
- * #2: minuend
- * #3: subtract
- * #r: overflow
+ * #1: r [out] difference
+ * #2: a [in]  minuend
+ * #3: b [in]  subtract
+ * #r:   [ret] overflow
  */
 uint32_t F_SYMBOL(bn4352_usub)(bn4352_t *r,
 		const bn4352_t *a, const bn4352_t *b)
@@ -485,10 +485,10 @@ uint32_t F_SYMBOL(bn4352_usub)(bn4352_t *r,
  * #desc:
  *    big number subtraction (unsigned, single a word).
  *
- * #1: difference
- * #2: minuend
- * #3: subtract
- * #r: overflow
+ * #1: r [out] difference
+ * #2: a [in]  minuend
+ * #3: b [in]  subtract
+ * #r:   [ret] overflow
  */
 uint32_t F_SYMBOL(bn4352_usub_1)(bn4352_t *r,
 		const bn4352_t *a, uint32_t b)
@@ -512,9 +512,9 @@ uint32_t F_SYMBOL(bn4352_usub_1)(bn4352_t *r,
  * #desc:
  *    big number karatsuba multiplication.
  *
- * #1: product
- * #2: multiplicand
- * #3: multiplier
+ * #1: r [out] product
+ * #2: a [in]  multiplicand
+ * #3: b [in]  multiplier
  */
 static void _umul_karatsuba_2(uint32_t *r,
 		const uint32_t *a, const uint32_t *b)
@@ -642,9 +642,9 @@ static void _umul_karatsuba_2(uint32_t *r,
  * #desc:
  *    big number karatsuba multiplication.
  *
- * #1: product
- * #2: multiplicand
- * #3: multiplier
+ * #1: r [out] product
+ * #2: a [in]  multiplicand
+ * #3: b [in]  multiplier
  */
 static void _umul_karatsuba_2_1(uint32_t *r,
 		const uint32_t *a, const uint32_t *b)
@@ -772,9 +772,9 @@ static void _umul_karatsuba_2_1(uint32_t *r,
  * #desc:
  *    big number karatsuba multiplication.
  *
- * #1: product
- * #2: multiplicand
- * #3: multiplier
+ * #1: r [out] product
+ * #2: a [in]  multiplicand
+ * #3: b [in]  multiplier
  */
 static void _umul_karatsuba(uint32_t *r,
 		const uint32_t *a, const uint32_t *b)
@@ -878,9 +878,9 @@ static void _umul_karatsuba(uint32_t *r,
  * #desc:
  *    big number multiplication (unsigned).
  *
- * #1: product
- * #2: multiplicand
- * #3: multiplier
+ * #1: r [out] product
+ * #2: a [in]  multiplicand
+ * #3: b [in]  multiplier
  */
 void F_SYMBOL(bn4352_umul)(bn4352_t *r,
 		const bn4352_t *a, const bn4352_t *b)
@@ -927,10 +927,10 @@ e:
  * #desc:
  *    big number multiplication (unsigned, single a word).
  *
- * #1: product
- * #2: multiplicand
- * #3: multiplier
- * #r: overflow
+ * #1: r [out] product
+ * #2: a [in]  multiplicand
+ * #3: b [in]  multiplier
+ * #r:   [ret] overflow
  */
 uint32_t F_SYMBOL(bn4352_umul_1)(bn4352_t *r,
 		const bn4352_t *a, uint32_t b)
@@ -954,9 +954,9 @@ uint32_t F_SYMBOL(bn4352_umul_1)(bn4352_t *r,
  * #desc:
  *    division of the big number compare.
  *
- * #1: number
- * #2: number
- * #r: 0: a==b, 1: a>b, -1: a<b
+ * #1: a [in]  number
+ * #2: b [in]  number
+ * #r:   [ret] 0: a==b, 1: a>b, -1: a<b
  */
 static int32_t _udiv_ucmp(const uint32_t *a, const uint32_t *b)
 {
@@ -979,8 +979,8 @@ static int32_t _udiv_ucmp(const uint32_t *a, const uint32_t *b)
  * #desc:
  *    division of the big number left shift.
  *
- * #1: target
- * #2: bits number
+ * #1: t [in/out] target
+ * #2: n [in]     bits number
  */
 static void _udiv_lshift(uint32_t *t, uint32_t n)
 {
@@ -1019,8 +1019,8 @@ static void _udiv_lshift(uint32_t *t, uint32_t n)
  * #desc:
  *    division of the big number right shift.
  *
- * #1: target
- * #2: bits number
+ * #1: t [in/out] target
+ * #2: n [in]     bits number
  */
 static void _udiv_rshift(uint32_t *t, uint32_t n)
 {
@@ -1060,9 +1060,9 @@ static void _udiv_rshift(uint32_t *t, uint32_t n)
  * #desc:
  *    division of the big number subtraction.
  *
- * #1: difference
- * #2: minuend
- * #3: subtract
+ * #1: r [out] difference
+ * #2: a [in]  minuend
+ * #3: b [in]  subtract
  */
 static void _udiv_usub(uint32_t *r,
 		const uint32_t *a, const uint32_t *b)
@@ -1084,12 +1084,12 @@ static void _udiv_usub(uint32_t *r,
  * #desc:
  *    big number division.
  *
- * #1: quotient
- * #2: remainder
- * #3: dividend
- * #4: divisor
- * #5: dividend length
- * #6: divisor length
+ * #1: quo   [out] quotient
+ * #2: rem   [out] remainder
+ * #3: a     [in]  dividend
+ * #4: b     [in]  divisor
+ * #5: a_len [in]  dividend length
+ * #6: b_len [in]  divisor length
  */
 static void _udiv_base(uint32_t *quo, uint32_t *rem,
 		const uint32_t *a, const uint32_t *b,
@@ -1131,10 +1131,10 @@ static void _udiv_base(uint32_t *quo, uint32_t *rem,
  * #desc:
  *    big number division (unsigned).
  *
- * #1: quotient
- * #2: remainder
- * #3: dividend
- * #4: divisor
+ * #1: quo [out] quotient
+ * #2: rem [out] remainder
+ * #3: a   [in]  dividend
+ * #4: b   [in]  divisor
  */
 void F_SYMBOL(bn4352_udiv)(bn4352_t *quo, bn4352_t *rem,
 		const bn4352_t *a, const bn4352_t *b)
@@ -1174,10 +1174,10 @@ void F_SYMBOL(bn4352_udiv)(bn4352_t *quo, bn4352_t *rem,
  * #desc:
  *    big number division (unsigned, single a word).
  *
- * #1: quotient
- * #2: remainder
- * #3: dividend
- * #4: divisor
+ * #1: quo [out] quotient
+ * #2: rem [out] remainder
+ * #3: a   [in]  dividend
+ * #4: b   [in]  divisor
  */
 void F_SYMBOL(bn4352_udiv_1)(bn4352_t *quo, bn4352_t *rem,
 		const bn4352_t *a, uint32_t b)
@@ -1192,9 +1192,9 @@ void F_SYMBOL(bn4352_udiv_1)(bn4352_t *quo, bn4352_t *rem,
  * #desc:
  *    big number addition (signed).
  *
- * #1: sum
- * #2: addend
- * #3: addend
+ * #1: r [out] sum
+ * #2: a [in]  addend
+ * #3: b [in]  addend
  */
 void F_SYMBOL(bn4352_add)(bn4352_t *r,
 		const bn4352_t *a, const bn4352_t *b)
@@ -1224,9 +1224,9 @@ void F_SYMBOL(bn4352_add)(bn4352_t *r,
  * #desc:
  *    big number addition (signed, single a word).
  *
- * #1: sum
- * #2: addend
- * #3: addend
+ * #1: r [out] sum
+ * #2: a [in]  addend
+ * #3: b [in]  addend
  */
 void F_SYMBOL(bn4352_add_1)(bn4352_t *r,
 		const bn4352_t *a, uint32_t b)
@@ -1241,9 +1241,9 @@ void F_SYMBOL(bn4352_add_1)(bn4352_t *r,
  * #desc:
  *    big number subtraction (signed).
  *
- * #1: difference
- * #2: minuend
- * #3: subtract
+ * #1: r [out] difference
+ * #2: a [in]  minuend
+ * #3: b [in]  subtract
  */
 void F_SYMBOL(bn4352_sub)(bn4352_t *r,
 		const bn4352_t *a, const bn4352_t *b)
@@ -1259,9 +1259,9 @@ void F_SYMBOL(bn4352_sub)(bn4352_t *r,
  * #desc:
  *    big number subtraction (signed, single a word).
  *
- * #1: difference
- * #2: minuend
- * #3: subtract
+ * #1: r [out] difference
+ * #2: a [in]  minuend
+ * #3: b [in]  subtract
  */
 void F_SYMBOL(bn4352_sub_1)(bn4352_t *r,
 		const bn4352_t *a, uint32_t b)
@@ -1277,9 +1277,9 @@ void F_SYMBOL(bn4352_sub_1)(bn4352_t *r,
  * #desc:
  *    big number multiplication (signed).
  *
- * #1: product
- * #2: multiplicand
- * #3: multiplier
+ * #1: r [out] product
+ * #2: a [in]  multiplicand
+ * #3: b [in]  multiplier
  */
 void F_SYMBOL(bn4352_mul)(bn4352_t *r,
 		const bn4352_t *a, const bn4352_t *b)
@@ -1295,9 +1295,9 @@ void F_SYMBOL(bn4352_mul)(bn4352_t *r,
  * #desc:
  *    big number multiplication (single a word).
  *
- * #1: product
- * #2: multiplicand
- * #3: multiplier
+ * #1: r [out] product
+ * #2: a [in]  multiplicand
+ * #3: b [in]  multiplier
  */
 void F_SYMBOL(bn4352_mul_1)(bn4352_t *r,
 		const bn4352_t *a, uint32_t b)
@@ -1313,10 +1313,10 @@ void F_SYMBOL(bn4352_mul_1)(bn4352_t *r,
  * #desc:
  *    big number division (signed).
  *
- * #1: quotient
- * #2: remainder
- * #3: dividend
- * #4: divisor
+ * #1: quo [out] quotient
+ * #2: rem [out] remainder
+ * #3: a   [in]  dividend
+ * #4: b   [in]  divisor
  */
 void F_SYMBOL(bn4352_div)(bn4352_t *quo, bn4352_t *rem,
 		const bn4352_t *a, const bn4352_t *b)
@@ -1337,10 +1337,10 @@ void F_SYMBOL(bn4352_div)(bn4352_t *quo, bn4352_t *rem,
  * #desc:
  *    big number division (single a word).
  *
- * #1: quotient
- * #2: remainder
- * #3: dividend
- * #4: divisor
+ * #1: quo [out] quotient
+ * #2: rem [out] remainder
+ * #3: a   [in]  dividend
+ * #4: b   [in]  divisor
  */
 void F_SYMBOL(bn4352_div_1)(bn4352_t *quo, bn4352_t *rem,
 		const bn4352_t *a, uint32_t b)
@@ -1361,10 +1361,10 @@ void F_SYMBOL(bn4352_div_1)(bn4352_t *quo, bn4352_t *rem,
  * #desc:
  *    big number division modular (signed).
  *
- * #1: quotient
- * #2: remainder
- * #3: dividend
- * #4: divisor
+ * #1: quo [out] quotient
+ * #2: rem [out] remainder
+ * #3: a   [in]  dividend
+ * #4: b   [in]  divisor
  */
 void F_SYMBOL(bn4352_divmod)(bn4352_t *quo, bn4352_t *rem,
 		const bn4352_t *a, const bn4352_t *b)
@@ -1384,10 +1384,10 @@ void F_SYMBOL(bn4352_divmod)(bn4352_t *quo, bn4352_t *rem,
  * #desc:
  *    big number division modular (signed, single a word).
  *
- * #1: quotient
- * #2: remainder
- * #3: dividend
- * #4: divisor
+ * #1: quo [out] quotient
+ * #2: rem [out] remainder
+ * #3: a   [in]  dividend
+ * #4: b   [in]  divisor
  */
 void F_SYMBOL(bn4352_divmod_1)(bn4352_t *quo, bn4352_t *rem,
 		const bn4352_t *a, uint32_t b)
@@ -1404,10 +1404,10 @@ void F_SYMBOL(bn4352_divmod_1)(bn4352_t *quo, bn4352_t *rem,
  * #desc:
  *    big number fast modular exponentiation.
  *
- * #1: result
- * #2: number
- * #3: exponential
- * #4: modules
+ * #1: r [out] result
+ * #2: a [in]  number
+ * #3: e [in]  exponential
+ * #4: m [in]  modules
  */
 void F_SYMBOL(bn4352_modpow)(bn4352_t *r,
 		const bn4352_t *a, const bn4352_t *e, const bn4352_t *m)
@@ -1439,11 +1439,11 @@ void F_SYMBOL(bn4352_modpow)(bn4352_t *r,
  * #desc:
  *    big number extended euclidean algorithm (non-recursive).
  *
- * #1: greatest common divisor
- * #2: bezout coefficient
- * #3: bezout coefficient
- * #4: number
- * #5: number
+ * #1: r [out] greatest common divisor
+ * #2: x [out] bezout coefficient
+ * #3: y [out] bezout coefficient
+ * #4: a [in]  number
+ * #5: b [in]  number
  */
 void F_SYMBOL(bn4352_gcd)(bn4352_t *r, bn4352_t *x, bn4352_t *y,
 		const bn4352_t *a, const bn4352_t *b)
@@ -1488,10 +1488,10 @@ void F_SYMBOL(bn4352_gcd)(bn4352_t *r, bn4352_t *x, bn4352_t *y,
  * #desc:
  *    big number modular inverse.
  *
- * #1: inverse modulus
- * #2: number
- * #3: modulus
- * #r: 0: success, -1: fail
+ * #1: r [out] inverse modulus
+ * #2: a [in]  number
+ * #3: b [in]  modulus
+ * #r:   [ret] 0: success, -1: fail
  */
 int32_t F_SYMBOL(bn4352_inv)(bn4352_t *r,
 		const bn4352_t *a, const bn4352_t *b)
@@ -1516,9 +1516,9 @@ int32_t F_SYMBOL(bn4352_inv)(bn4352_t *r,
  * #desc:
  *    big number redc montgomery reduction initialization.
  *
- * #1: redc context
- * #2: modules
- * #r: 0: success, -1: fail
+ * #1: s [out] redc context
+ * #2: n [in]  modules
+ * #r:   [ret] 0: success, -1: fail
  */
 int32_t F_SYMBOL(bn4352_redc_init)(bn4352_redc_t *s, const bn4352_t *n)
 {
@@ -1551,9 +1551,9 @@ int32_t F_SYMBOL(bn4352_redc_init)(bn4352_redc_t *s, const bn4352_t *n)
  * #desc:
  *    big number redc montgomery reduction (norm).
  *
- * #1: redc context
- * #2: result
- * #3: number
+ * #1: s [in]  redc context
+ * #2: r [out] result
+ * #3: a [in]  number
  */
 void F_SYMBOL(bn4352_redc_mod)(const bn4352_redc_t *s,
 		bn4352_t *r, const bn4352_t *a)
@@ -1581,9 +1581,9 @@ void F_SYMBOL(bn4352_redc_mod)(const bn4352_redc_t *s,
  * #desc:
  *    big number redc montgomery domain.
  *
- * #1: redc context
- * #2: result
- * #3: number
+ * #1: s [in]  redc context
+ * #2: r [out] result
+ * #3: a [in]  number
  */
 void F_SYMBOL(bn4352_redc_mont)(const bn4352_redc_t *s,
 		bn4352_t *r, const bn4352_t *a)
@@ -1599,11 +1599,11 @@ void F_SYMBOL(bn4352_redc_mont)(const bn4352_redc_t *s,
  * #desc:
  *    big number redc montgomery modular exponentiation.
  *
- * #1: result
- * #2: number
- * #3: exponential
- * #4: modules
- * #r: 0: success, -1: fail
+ * #1: r [out] result
+ * #2: a [in]  number
+ * #3: e [in]  exponential
+ * #4: m [in]  modules
+ * #r:   [ret] 0: success, -1: fail
  */
 int32_t F_SYMBOL(bn4352_redc_pow)(bn4352_t *r,
 		const bn4352_t *a, const bn4352_t *e, const bn4352_t *m)
@@ -1642,10 +1642,10 @@ int32_t F_SYMBOL(bn4352_redc_pow)(bn4352_t *r,
  * #desc:
  *    string to big number conversion.
  *
- * #1: result
- * #2: string pointer
- * #3: end pointer / NULL
- * #4: base type
+ * #1: t [out] result
+ * #2: s [in]  string pointer
+ * #3: e [out] end pointer / NULL
+ * #4: b [in]  base type
  */
 void F_SYMBOL(bn4352_str2num)(bn4352_t *t,
 		const char *s, char **e, int32_t b)
@@ -1712,11 +1712,11 @@ void F_SYMBOL(bn4352_str2num)(bn4352_t *t,
  * #desc:
  *    padding character to buffer.
  *
- * #1: buffer offset
- * #2: buffer
- * #3: character
- * #4: padding length
- * #r: padding length (+offset)
+ * #1: n [in]  buffer offset
+ * #2: p [out] buffer
+ * #3: c [in]  character
+ * #4: x [in]  padding length
+ * #r:   [ret] padding length (+offset)
  */
 static int32_t _out_pad(int32_t n, char *p, char c, int32_t x)
 {
@@ -1730,10 +1730,10 @@ static int32_t _out_pad(int32_t n, char *p, char c, int32_t x)
  * #desc:
  *    unsigned number to decimal conversion.
  *
- * #1: buffer offset
- * #2: buffer
- * #3: input number
- * #r: output length (+offset)
+ * #1: n [in]  buffer offset
+ * #2: p [out] buffer
+ * #3: v [in]  input number
+ * #r:   [ret] output length (+offset)
  */
 static int32_t _int2str_d(int32_t n, char *p, uint64_t v)
 {
@@ -1758,8 +1758,8 @@ static int32_t _int2str_d(int32_t n, char *p, uint64_t v)
  * #desc:
  *    big number to string conversion.
  *
- * #1: number
- * #2: output buffer
+ * #1: a [in]  number
+ * #2: p [out] output buffer
  */
 void F_SYMBOL(bn4352_num2str)(const bn4352_t *a, char *p)
 {

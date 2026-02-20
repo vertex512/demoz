@@ -31,12 +31,12 @@
  * #desc:
  *    generate rsa encryption and decryption key.
  *
- * #1: prime P
- * #2: prime Q
- * #3: encryption key
- * #4: decryption key
- * #5: modulus
- * #r: 0: success, -1: fail
+ * #1: p [in]  prime P
+ * #2: q [in]  prime Q
+ * #3: e [out] encryption key
+ * #4: d [out] decryption key
+ * #5: n [out] modulus
+ * #r:   [ret] 0: success, -1: fail
  */
 int32_t F_SYMBOL(rsa3072_genkey)(const uint8_t *p, const uint8_t *q,
 		uint8_t *e, uint8_t *d, uint8_t *n)
@@ -75,10 +75,10 @@ int32_t F_SYMBOL(rsa3072_genkey)(const uint8_t *p, const uint8_t *q,
  * #desc:
  *    rsa encryption function.
  *
- * #1: encryption key
- * #2: modulus
- * #3: message and cipher
- * #r: 0: success, -1: fail
+ * #1: e   [in]     encryption key
+ * #2: n   [in]     modulus
+ * #3: msg [in/out] message and cipher
+ * #r:     [ret]    0: success, -1: fail
  */
 int32_t F_SYMBOL(rsa3072_encrypt)(const uint8_t *e, const uint8_t *n,
 		uint8_t *msg)
@@ -106,10 +106,10 @@ int32_t F_SYMBOL(rsa3072_encrypt)(const uint8_t *e, const uint8_t *n,
  * #desc:
  *    rsa decryption function.
  *
- * #1: decryption key
- * #2: modulus
- * #3: message and cipher
- * #r: 0: success, -1: fail
+ * #1: d   [in]     decryption key
+ * #2: n   [in]     modulus
+ * #3: msg [in/out] message and cipher
+ * #r:     [ret]    0: success, -1: fail
  */
 int32_t F_SYMBOL(rsa3072_decrypt)(const uint8_t *d, const uint8_t *n,
 		uint8_t *msg)
@@ -137,13 +137,13 @@ int32_t F_SYMBOL(rsa3072_decrypt)(const uint8_t *d, const uint8_t *n,
  * #desc:
  *    generate rsa chinese remainder theorem parameter.
  *
- * #1: prime P
- * #2: prime Q
- * #3: decryption key
- * #4: crt P parameter
- * #5: crt Q parameter
- * #6: Q inverse
- * #r: 0: success, -1: fail
+ * #1: p    [in]  prime P
+ * #2: q    [in]  prime Q
+ * #3: d    [in]  decryption key
+ * #4: dp   [out] crt P parameter
+ * #5: dq   [out] crt Q parameter
+ * #6: qinv [out] Q inverse
+ * #r:      [ret] 0: success, -1: fail
  */
 int32_t F_SYMBOL(rsa3072_gencrt)(const uint8_t *p, const uint8_t *q,
 		const uint8_t *d, uint8_t *dp, uint8_t *dq, uint8_t *qinv)
@@ -179,13 +179,13 @@ int32_t F_SYMBOL(rsa3072_gencrt)(const uint8_t *p, const uint8_t *q,
  * #desc:
  *    rsa chinese remainder theorem decryption.
  *
- * #1: prime P
- * #2: prime Q
- * #3: crt P parameter
- * #4: crt Q parameter
- * #5: Q inverse
- * #6: message and cipher
- * #r: 0: success, -1: fail
+ * #1: p    [in]     prime P
+ * #2: q    [in]     prime Q
+ * #3: dp   [in]     crt P parameter
+ * #4: dq   [in]     crt Q parameter
+ * #5: qinv [in]     Q inverse
+ * #6: msg  [in/out] message and cipher
+ * #r:      [ret]    0: success, -1: fail
  */
 int32_t F_SYMBOL(rsa3072_crt_decrypt)(const uint8_t *p, const uint8_t *q,
 		const uint8_t *dp, const uint8_t *dq, const uint8_t *qinv,

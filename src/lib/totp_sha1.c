@@ -31,11 +31,11 @@
  * #desc:
  *    totp-sha1 one-time password function.
  *
- * #1: input key
- * #2: key length
- * #3: time base (time / time_step)
- * #4: code digest length (1~8)
- * #r: return code digest
+ * #1: key       [in]  input key
+ * #2: key_len   [in]  key length
+ * #3: time_base [in]  time base (time / time_step)
+ * #4: n         [in]  code digest length (1~8)
+ * #r:           [ret] return code digest
  */
 uint32_t F_SYMBOL(totp_sha1)(const uint8_t *key, uint32_t key_len,
 		uint64_t time_base, uint32_t n)

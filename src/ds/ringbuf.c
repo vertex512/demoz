@@ -30,10 +30,10 @@
  * #desc:
  *    write to the ring buffer.
  *
- * #1: ring buffer head
- * #2: input buffer
- * #3: input length
- * #r: length of write
+ * #1: head [in/out] ring buffer head
+ * #2: s    [in]     input buffer
+ * #3: len  [in]     input length
+ * #r:      [rdt]    length of write
  */
 uint32_t F_SYMBOL(ringbuf_write)(struct ringbuf_head *head, const uint8_t *s,
 		uint32_t len)
@@ -61,10 +61,10 @@ uint32_t F_SYMBOL(ringbuf_write)(struct ringbuf_head *head, const uint8_t *s,
  * #desc:
  *    read from the ring buffer.
  *
- * #1: ring buffer head
- * #2: output buffer
- * #3: buffer length
- * #r: length of read
+ * #1: head [in/out] ring buffer head
+ * #2: s    [out]    output buffer
+ * #3: len  [in]     buffer length
+ * #r:      [ret]    length of read
  */
 uint32_t F_SYMBOL(ringbuf_read)(struct ringbuf_head *head, uint8_t *s,
 		uint32_t len)
@@ -92,11 +92,11 @@ uint32_t F_SYMBOL(ringbuf_read)(struct ringbuf_head *head, uint8_t *s,
  * #desc:
  *    peek only the ring buffer.
  *
- * #1: ring buffer head
- * #2: output buffer
- * #3: buffer length
- * #4: offset of read
- * #r: output length
+ * #1: head [in/out] ring buffer head
+ * #2: s    [out]    output buffer
+ * #3: len  [in]     buffer length
+ * #4: off  [in]     offset of read
+ * #r:      [ret]    output length
  */
 uint32_t F_SYMBOL(ringbuf_peek)(struct ringbuf_head *head, uint8_t *s,
 		uint32_t len, uint32_t off)

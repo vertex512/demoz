@@ -41,8 +41,8 @@
  * #desc:
  *    xxh64 compress function.
  *
- * #1: xxh64 struct context
- * #2: input block (length: XXHASH64_BLOCKSIZE)
+ * #1: ctx [in/out] xxh64 struct context
+ * #2: s   [in]     input block (length: XXHASH64_BLOCKSIZE)
  */
 static void _xxhash64_compress(struct xxhash64_ctx *ctx, const uint8_t *s)
 {
@@ -84,8 +84,8 @@ static void _xxhash64_compress(struct xxhash64_ctx *ctx, const uint8_t *s)
  * #desc:
  *    xxh64 struct context initialization.
  *
- * #1: xxh64 struct context
- * #2: init seed (default: 0)
+ * #1: ctx  [out] xxh64 struct context
+ * #2: seed [in]  init seed (default: 0)
  */
 void F_SYMBOL(xxhash64_init)(struct xxhash64_ctx *ctx, uint64_t seed)
 {
@@ -101,9 +101,9 @@ void F_SYMBOL(xxhash64_init)(struct xxhash64_ctx *ctx, uint64_t seed)
  * #desc:
  *    xxh64 processing buffer function.
  *
- * #1: xxh64 struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] xxh64 struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(xxhash64_process)(struct xxhash64_ctx *ctx, const uint8_t *s,
 		size_t len)
@@ -144,9 +144,9 @@ void F_SYMBOL(xxhash64_process)(struct xxhash64_ctx *ctx, const uint8_t *s,
  * #desc:
  *    xxh64 process the remaining bytes in the buffer and end.
  *
- * #1: xxh64 struct context
- * #2: total length
- * #r: return hash digest
+ * #1: ctx [in/out] xxh64 struct context
+ * #2: len [in]     total length
+ * #r:     [ret]    return hash digest
  */
 uint64_t F_SYMBOL(xxhash64_finish)(struct xxhash64_ctx *ctx, uint64_t len)
 {
@@ -219,10 +219,10 @@ uint64_t F_SYMBOL(xxhash64_finish)(struct xxhash64_ctx *ctx, uint64_t len)
  * #desc:
  *    xxh64 single-time processing function.
  *
- * #1: xxh64 struct context
- * #2: input buffer
- * #3: input length
- * #r: return hash digest
+ * #1: ctx [in/out] xxh64 struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
+ * #r:     [ret]    return hash digest
  */
 uint64_t F_SYMBOL(xxhash64)(struct xxhash64_ctx *ctx, const uint8_t *s,
 		size_t len)

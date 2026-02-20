@@ -51,10 +51,10 @@ static const uint8_t chacha20_constant[] = "expand 32-byte k";
  * #desc:
  *    chacha20 initialization function.
  *
- * #1: chacha20 struct context
- * #2: key
- * #3: nonce
- * #4: counter
+ * #1: ctx [out] chacha20 struct context
+ * #2: key [in]  key
+ * #3: ran [in]  nonce
+ * #4: ctr [in]  counter
  */
 void F_SYMBOL(chacha20_init)(struct chacha20_ctx *ctx, const uint8_t *key,
 		const uint8_t *ran, const uint8_t *ctr)
@@ -86,10 +86,10 @@ void F_SYMBOL(chacha20_init)(struct chacha20_ctx *ctx, const uint8_t *key,
  * #desc:
  *    chacha20-ietf initialization function.
  *
- * #1: chacha20 struct context
- * #2: key
- * #3: nonce
- * #4: counter
+ * #1: ctx [out] chacha20 struct context
+ * #2: key [in]  key
+ * #3: ran [in]  nonce
+ * #4: ctr [in]  counter
  */
 void F_SYMBOL(chacha20_ietf_init)(struct chacha20_ctx *ctx, const uint8_t *key,
 		const uint8_t *ran, const uint8_t *ctr)
@@ -121,8 +121,8 @@ void F_SYMBOL(chacha20_ietf_init)(struct chacha20_ctx *ctx, const uint8_t *key,
  * #desc:
  *    chacha20 block keystream function.
  *
- * #1: chacha20 struct context
- * #2: rounds
+ * #1: ctx [in/out] chacha20 struct context
+ * #2: n   [in]     rounds
  */
 void F_SYMBOL(chacha20_block)(struct chacha20_ctx *ctx, int32_t n)
 {
@@ -153,9 +153,9 @@ void F_SYMBOL(chacha20_block)(struct chacha20_ctx *ctx, int32_t n)
  * #desc:
  *    chacha20 stream encryption function.
  *
- * #1: chacha20 struct context
- * #2: buffer
- * #3: length
+ * #1: ctx [in/out] chacha20 struct context
+ * #2: buf [in/out] buffer
+ * #3: len [in]     length
  */
 void F_SYMBOL(chacha20_crypto)(struct chacha20_ctx *ctx, uint8_t *buf,
 		size_t len)

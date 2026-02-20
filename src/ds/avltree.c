@@ -31,10 +31,10 @@
  * #desc:
  *    change the child of the parent node.
  *
- * #1: root node
- * #2: parent node
- * #3: old node
- * #4: new node
+ * #1: root   [in/out] root node
+ * #2: parent [in/out] parent node
+ * #3: old    [in]     old node
+ * #4: new    [in]     new node
  */
 static void _avl_change_child(struct avl_root *root, struct avl_node *parent,
 		struct avl_node *old, struct avl_node *new)
@@ -52,7 +52,7 @@ static void _avl_change_child(struct avl_root *root, struct avl_node *parent,
  * #desc:
  *    update the node height.
  *
- * #1: avl-tree node
+ * #1: node [in/out] avl-tree node
  */
 static void _avl_update_height(struct avl_node *node)
 {
@@ -66,7 +66,7 @@ static void _avl_update_height(struct avl_node *node)
  * #desc:
  *    get the balance factor of the node.
  *
- * #1: avl-tree node
+ * #1: node [in] avl-tree node
  */
 static int32_t _avl_balance_factor(struct avl_node *node)
 {
@@ -88,8 +88,8 @@ static int32_t _avl_balance_factor(struct avl_node *node)
  *       / \     / \
  *      l   r   s   l
  *
- * #1: root node
- * #2: parent of the rotate node
+ * #1: root   [in/out] root node
+ * #2: parent [in/out] parent of the rotate node
  */
 static void _avl_left_rotate(struct avl_root *root, struct avl_node *parent)
 {
@@ -128,8 +128,8 @@ static void _avl_left_rotate(struct avl_root *root, struct avl_node *parent)
  *     / \           / \
  *    l   r         r   s
  *
- * #1: root node
- * #2: parent of the rotate node
+ * #1: root   [in/out] root node
+ * #2: parent [in/out] parent of the rotate node
  */
 static void _avl_right_rotate(struct avl_root *root, struct avl_node *parent)
 {
@@ -160,8 +160,8 @@ static void _avl_right_rotate(struct avl_root *root, struct avl_node *parent)
  * #desc:
  *    fix the avl-tree balance.
  *
- * #1: root node
- * #2: node to be fix
+ * #1: root [in/out] root node
+ * #2: node [in/out] node to be fix
  */
 void F_SYMBOL(avl_balance)(struct avl_root *root, struct avl_node *node)
 {
@@ -193,8 +193,8 @@ void F_SYMBOL(avl_balance)(struct avl_root *root, struct avl_node *node)
  * #desc:
  *    erase and fix the node balance in the avl-tree.
  *
- * #1: root node
- * #2: node to be erased
+ * #1: root [in/out] root node
+ * #2: node [in/out] node to be erased
  */
 void F_SYMBOL(avl_erase_fix)(struct avl_root *root, struct avl_node *node)
 {
@@ -307,10 +307,10 @@ void F_SYMBOL(avl_erase_fix)(struct avl_root *root, struct avl_node *node)
  * #desc:
  *    insert a node in an avl-tree.
  *
- * #1: root node
- * #2: new node
- * #3: cmp callback
- * #r: new node / NULL
+ * #1: root [in/out] root node
+ * #2: new  [in/out] new node
+ * #3: cmp  [in]     cmp callback
+ * #r:      [ret]    new node / NULL
  */
 struct avl_node *F_SYMBOL(avl_wrap_insert)(struct avl_root *root,
 		struct avl_node *new, int32_t (*cmp)(void *, void *))
@@ -342,10 +342,10 @@ struct avl_node *F_SYMBOL(avl_wrap_insert)(struct avl_root *root,
  * #desc:
  *    search a node in an avl-tree.
  *
- * #1: root node
- * #2: callback arg
- * #3: cmp callback
- * #r: search node / NULL
+ * #1: root [in/out] root node
+ * #2: arg  [in]     callback arg
+ * #3: cmp  [in]     cmp callback
+ * #r:      [ret]    search node / NULL
  */
 struct avl_node *F_SYMBOL(avl_wrap_search)(struct avl_root *root,
 		void *arg, int32_t (*cmp)(void *, void *))
@@ -371,9 +371,9 @@ struct avl_node *F_SYMBOL(avl_wrap_search)(struct avl_root *root,
  * #desc:
  *    erase a node in an avl-tree.
  *
- * #1: root node
- * #2: old node
- * #r: erase node / NULL
+ * #1: root [in/out] root node
+ * #2: old  [in/out] old node
+ * #r:      [ret]    erase node / NULL
  */
 struct avl_node *F_SYMBOL(avl_wrap_erase)(struct avl_root *root,
 		struct avl_node *old)
@@ -388,10 +388,10 @@ struct avl_node *F_SYMBOL(avl_wrap_erase)(struct avl_root *root,
  * #desc:
  *    search and erase a node in an avl-tree.
  *
- * #1: root node
- * #2: callback arg
- * #3: cmp callback
- * #r: erase node / NULL
+ * #1: root [in/out] root node
+ * #2: arg  [in]     callback arg
+ * #3: cmp  [in]     cmp callback
+ * #r:      [ret]    erase node / NULL
  */
 struct avl_node *F_SYMBOL(avl_wrap_erase2)(struct avl_root *root,
 		void *arg, int32_t (*cmp)(void *, void *))
@@ -407,8 +407,8 @@ struct avl_node *F_SYMBOL(avl_wrap_erase2)(struct avl_root *root,
  * #desc:
  *    returns the first node in the avl-tree.
  *
- * #1: root node
- * #r: first node / NULL
+ * #1: root [in/out] root node
+ * #r:      [ret]    first node / NULL
  */
 struct avl_node *F_SYMBOL(avl_wrap_first)(struct avl_root *root)
 {
@@ -426,8 +426,8 @@ struct avl_node *F_SYMBOL(avl_wrap_first)(struct avl_root *root)
  * #desc:
  *    returns the last node in the avl-tree.
  *
- * #1: root node
- * #r: last node / NULL
+ * #1: root [in/out] root node
+ * #r:      [ret]    last node / NULL
  */
 struct avl_node *F_SYMBOL(avl_wrap_last)(struct avl_root *root)
 {

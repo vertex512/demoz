@@ -105,9 +105,9 @@ static const uint32_t _sc256_R[8] = {
  * #desc:
  *    constant-time the numerical swap.
  *
- * #1: number
- * #2: number
- * #3: low bit (0: keep, 1: swap)
+ * #1: a   [in/out] number
+ * #2: b   [in/out] number
+ * #3: bit [in]     low bit (0: keep, 1: swap)
  */
 static void _fp256_swap(uint32_t a[8], uint32_t b[8], uint32_t bit)
 {
@@ -123,9 +123,9 @@ static void _fp256_swap(uint32_t a[8], uint32_t b[8], uint32_t bit)
  * #desc:
  *    constant-time the move numerical.
  *
- * #1: number
- * #2: number
- * #3: low bit (0: keep, 1: swap)
+ * #1: a   [in/out] number
+ * #2: b   [in]     number
+ * #3: bit [in]     low bit (0: keep, 1: swap)
  */
 static void _fp256_move(uint32_t a[8], const uint32_t b[8], uint32_t bit)
 {
@@ -140,8 +140,8 @@ static void _fp256_move(uint32_t a[8], const uint32_t b[8], uint32_t bit)
  * #desc:
  *    check if a number is zero in constant-time.
  *
- * #1: number
- * #r: 0: non-zero, 1: is zero
+ * #1: a [in]  number
+ * #r:   [ret] 0: non-zero, 1: is zero
  */
 static uint32_t _fp256_iszero(const uint32_t a[8])
 {
@@ -162,9 +162,9 @@ static uint32_t _fp256_iszero(const uint32_t a[8])
  * #desc:
  *    prime field addition.
  *
- * #1: sum
- * #2: addend
- * #3: addend
+ * #1: r [out] sum
+ * #2: a [in]  addend
+ * #3: b [in]  addend
  */
 static void _fp256_add(uint32_t r[8],
 		const uint32_t a[8], const uint32_t b[8])
@@ -192,9 +192,9 @@ static void _fp256_add(uint32_t r[8],
  * #desc:
  *    prime field subtraction.
  *
- * #1: difference
- * #2: minuend
- * #3: subtract
+ * #1: r [out] difference
+ * #2: a [in]  minuend
+ * #3: b [in]  subtract
  */
 static void _fp256_sub(uint32_t r[8],
 		const uint32_t a[8], const uint32_t b[8])
@@ -222,9 +222,9 @@ static void _fp256_sub(uint32_t r[8],
  * #desc:
  *    prime field multiplication.
  *
- * #1: product
- * #2: multiplicand
- * #3: multiplier
+ * #1: r [out] product
+ * #2: a [in]  multiplicand
+ * #3: b [in]  multiplier
  */
 static void _fp256_mul(uint32_t r[8],
 		const uint32_t a[8], const uint32_t b[8])
@@ -331,7 +331,7 @@ static void _fp256_mul(uint32_t r[8],
  * #desc:
  *    prime field modular reduction (norm).
  *
- * #1: number
+ * #1: r [in/out] number
  */
 static void _fp256_mod(uint32_t r[8])
 {
@@ -357,8 +357,8 @@ static void _fp256_mod(uint32_t r[8])
  * #desc:
  *    modular inversion based on fermat's little theorem.
  *
- * #1: inverse modulus
- * #2: number
+ * #1: r [out] inverse modulus
+ * #2: z [in]  number
  */
 static void _fp256_inv(uint32_t r[8], const uint32_t z[8])
 {
@@ -383,9 +383,9 @@ static void _fp256_inv(uint32_t r[8], const uint32_t z[8])
  * #desc:
  *    scalar high-word modular reduction fold.
  *
- * #1: result
- * #2: number
- * #3: high-word
+ * #1: r [out] result
+ * #2: a [in]  number
+ * #3: b [in]  high-word
  */
 static void _sc256_modw(uint32_t r[8],
 		const uint32_t a[8], uint32_t b)
@@ -429,7 +429,7 @@ static void _sc256_modw(uint32_t r[8],
  * #desc:
  *    scalar modular reduction (norm).
  *
- * #1: number
+ * #1: r [in/out] number
  */
 static void _sc256_mod(uint32_t r[8])
 {
@@ -456,9 +456,9 @@ static void _sc256_mod(uint32_t r[8])
  * #desc:
  *    scalar addition.
  *
- * #1: sum
- * #2: addend
- * #3: addend
+ * #1: r [out] sum
+ * #2: a [in]  addend
+ * #3: b [in]  addend
  */
 static void _sc256_add(uint32_t r[8],
 		const uint32_t a[8], const uint32_t b[8])
@@ -481,9 +481,9 @@ static void _sc256_add(uint32_t r[8],
  * #desc:
  *    scalar multiplication.
  *
- * #1: product
- * #2: multiplicand
- * #3: multiplier
+ * #1: r [out] product
+ * #2: a [in]  multiplicand
+ * #3: b [in]  multiplier
  */
 static void _sc256_mul(uint32_t r[8],
 		const uint32_t a[8], const uint32_t b[8])
@@ -528,8 +528,8 @@ static void _sc256_mul(uint32_t r[8],
  * #desc:
  *    modular inversion based on fermat's little theorem.
  *
- * #1: inverse modulus
- * #2: number
+ * #1: r [out] inverse modulus
+ * #2: z [in]  number
  */
 static void _sc256_inv(uint32_t r[8], const uint32_t z[8])
 {
@@ -554,8 +554,8 @@ static void _sc256_inv(uint32_t r[8], const uint32_t z[8])
  * #desc:
  *    sha256 digest modular reduction.
  *
- * #1: sha256 digest
- * #2: result
+ * #1: dig [in]  sha256 digest
+ * #2: r   [out] result
  */
 static void _sc256_digest(const uint8_t dig[32], uint32_t r[8])
 {
@@ -573,10 +573,10 @@ static void _sc256_digest(const uint8_t dig[32], uint32_t r[8])
  * #desc:
  *    nonprime field subtraction.
  *
- * #1: difference
- * #2: minuend
- * #3: subtract
- * #r: overflow
+ * #1: r [out] difference
+ * #2: a [in]  minuend
+ * #3: b [in]  subtract
+ * #r:   [ret] overflow
  */
 static uint32_t _p256_sub(uint32_t r[8],
 		const uint32_t a[8], const uint32_t b[8])
@@ -598,9 +598,9 @@ static uint32_t _p256_sub(uint32_t r[8],
  * #desc:
  *    jacobian-affine curve point addition.
  *
- * #1: addend
- * #2: addend
- * #3: result
+ * #1: xyz1 [in]  addend
+ * #2: xyz2 [in]  addend
+ * #3: xyz3 [out] result
  */
 static void _p256_point_add(const struct p256_point *xyz1,
 		const struct p256_point *xyz2, struct p256_point *xyz3)
@@ -656,8 +656,8 @@ static void _p256_point_add(const struct p256_point *xyz1,
  * #desc:
  *    jacobian curve point doubling.
  *
- * #1: addend
- * #2: result
+ * #1: xyz1 [in]  addend
+ * #2: xyz3 [out] result
  */
 static void _p256_point_double(const struct p256_point *xyz1,
 		struct p256_point *xyz3)
@@ -714,8 +714,8 @@ static void _p256_point_double(const struct p256_point *xyz1,
  * #desc:
  *    jacobian to affine coordinates conversion.
  *
- * #1: jacobian point
- * #2: affine point
+ * #1: xyz1 [in]  jacobian point
+ * #2: xy2  [out] affine point
  */
 static void _p256_point_to_affine(const struct p256_point *xyz1,
 		struct p256_point *xy2)
@@ -740,9 +740,9 @@ static void _p256_point_to_affine(const struct p256_point *xyz1,
  * #desc:
  *    p-256 signed binary ladder scalar multiplication.
  *
- * #1: input point
- * #2: base point
- * #3: scalar
+ * #1: k   [in]  input point
+ * #2: xy1 [in]  base point
+ * #3: xy2 [out] scalar
  */
 static void _p256_scalar_mul(const uint32_t k[8],
 		const struct p256_point *xy1, struct p256_point *xy2)
@@ -789,8 +789,8 @@ static void _p256_scalar_mul(const uint32_t k[8],
  * #desc:
  *    input point legality check.
  *
- * #1: input point
- * #r: 0: no error, -1: error
+ * #1: k [in]  input point
+ * #r:   [ret] 0: no error, -1: error
  */
 static int32_t _p256_check_key(const uint32_t k[8])
 {
@@ -805,8 +805,8 @@ static int32_t _p256_check_key(const uint32_t k[8])
  * #desc:
  *    curve point legality check.
  *
- * #1: curve point
- * #r: 0: no error, -1: error
+ * #1: xy1 [in]  curve point
+ * #r:     [ret] 0: no error, -1: error
  */
 static int32_t _p256_check_point(const struct p256_point *xy1)
 {
@@ -839,9 +839,9 @@ static int32_t _p256_check_point(const struct p256_point *xy1)
  * #desc:
  *    affine curve point addition.
  *
- * #1: addend
- * #2: addend
- * #3: result
+ * #1: xy1 [in]  addend
+ * #2: xy2 [in]  addend
+ * #3: xy3 [out] result
  */
 static void _p256_affine_add(const struct p256_point *xy1,
 		const struct p256_point *xy2, struct p256_point *xy3)
@@ -887,9 +887,9 @@ static void _p256_affine_add(const struct p256_point *xy1,
  * #desc:
  *    p-256 public key create function.
  *
- * #1: private key
- * #2: public key
- * #r: 0: success, -1: fail
+ * #1: pri [in]  private key
+ * #2: pub [out] public key
+ * #r:     [ret] 0: success, -1: fail
  */
 int32_t F_SYMBOL(ecdh_p256_public_key)(const uint8_t *pri, uint8_t *pub)
 {
@@ -913,10 +913,10 @@ int32_t F_SYMBOL(ecdh_p256_public_key)(const uint8_t *pri, uint8_t *pub)
  * #desc:
  *    p-256 shared key create function.
  *
- * #1: private key
- * #2: public key
- * #3: shared key
- * #r: 0: success, -1: fail
+ * #1: pri [in]  private key
+ * #2: pub [in]  public key
+ * #3: key [in]  shared key
+ * #r:     [ret] 0: success, -1: fail
  */
 int32_t F_SYMBOL(ecdh_p256_shared_key)(const uint8_t *pri,
 		const uint8_t *pub, uint8_t *key)
@@ -945,8 +945,8 @@ int32_t F_SYMBOL(ecdh_p256_shared_key)(const uint8_t *pri,
  * #desc:
  *    p-256 public key create function.
  *
- * #1: private key
- * #2: public key
+ * #1: pri [in]  private key
+ * #2: pub [out] public key
  */
 void F_SYMBOL(ecdsa_p256_public_key)(const uint8_t *pri, uint8_t *pub)
 {
@@ -966,12 +966,12 @@ void F_SYMBOL(ecdsa_p256_public_key)(const uint8_t *pri, uint8_t *pub)
  * #desc:
  *    p-256 signature function.
  *
- * #1: private key
- * #2: nonce
- * #3: input message
- * #4: message length
- * #5: signature
- * #r: 0: success, -1: fail
+ * #1: pri  [in]  private key
+ * #2: ran  [in]  nonce
+ * #3: msg  [in]  input message
+ * #4: len  [in]  message length
+ * #5: sign [out] signature
+ * #r:      [ret] 0: success, -1: fail
  */
 int32_t F_SYMBOL(ecdsa_p256_sign)(const uint8_t *pri, const uint8_t *ran,
 		const uint8_t *msg, uint32_t len, uint8_t *sign)
@@ -1017,11 +1017,11 @@ int32_t F_SYMBOL(ecdsa_p256_sign)(const uint8_t *pri, const uint8_t *ran,
  * #desc:
  *    p-256 signature verification function.
  *
- * #1: public key
- * #2: signature
- * #3: input message
- * #4: message length
- * #r: 0: success, -1: fail
+ * #1: pub  [in]  public key
+ * #2: sign [in]  signature
+ * #3: msg  [in]  input message
+ * #4: len  [in]  message length
+ * #r:      [ret] 0: success, -1: fail
  */
 int32_t F_SYMBOL(ecdsa_p256_verify)(const uint8_t *pub,
 		const uint8_t *sign, const uint8_t *msg, uint32_t len)

@@ -70,11 +70,11 @@ struct printf_ctx {
  * #desc:
  *    padding character to buffer.
  *
- * #1: buffer offset
- * #2: buffer
- * #3: character
- * #4: padding length
- * #r: padding length (+offset)
+ * #1: n [in]  buffer offset
+ * #2: p [out] buffer
+ * #3: c [in]  character
+ * #4: x [in]  padding length
+ * #r:   [ret] padding length (+offset)
  */
 static int32_t _out_pad(int32_t n, char *p, char c, int32_t x)
 {
@@ -88,10 +88,10 @@ static int32_t _out_pad(int32_t n, char *p, char c, int32_t x)
  * #desc:
  *    unsigned number to octal conversion.
  *
- * #1: buffer offset
- * #2: buffer
- * #3: input number
- * #r: output length (+offset)
+ * #1: n [in]  buffer offset
+ * #2: p [out] buffer
+ * #3: v [in]  input number
+ * #r:   [ret] output length (+offset)
  */
 static int32_t _int2str_o(int32_t n, char *p, uint64_t v)
 {
@@ -116,10 +116,10 @@ static int32_t _int2str_o(int32_t n, char *p, uint64_t v)
  * #desc:
  *    unsigned number to decimal conversion.
  *
- * #1: buffer offset
- * #2: buffer
- * #3: input number
- * #r: output length (+offset)
+ * #1: n [in]  buffer offset
+ * #2: p [out] buffer
+ * #3: v [in]  input number
+ * #r:   [ret] output length (+offset)
  */
 static int32_t _int2str_d(int32_t n, char *p, uint64_t v)
 {
@@ -144,10 +144,10 @@ static int32_t _int2str_d(int32_t n, char *p, uint64_t v)
  * #desc:
  *    unsigned number to hexadecimal conversion.
  *
- * #1: buffer offset
- * #2: buffer
- * #3: input number
- * #r: output length (+offset)
+ * #1: n [in]  buffer offset
+ * #2: p [out] buffer
+ * #3: v [in]  input number
+ * #r:   [ret] output length (+offset)
  */
 static int32_t _int2str_x(int32_t n, char *p, uint64_t v)
 {
@@ -173,10 +173,10 @@ static int32_t _int2str_x(int32_t n, char *p, uint64_t v)
  * #desc:
  *    unsigned number to hexadecimal (uppercase) conversion.
  *
- * #1: buffer offset
- * #2: buffer
- * #3: input number
- * #r: output length (+offset)
+ * #1: n [in]  buffer offset
+ * #2: p [out] buffer
+ * #3: v [in]  input number
+ * #r:   [ret] output length (+offset)
  */
 static int32_t _int2str_X(int32_t n, char *p, uint64_t v)
 {
@@ -202,11 +202,11 @@ static int32_t _int2str_X(int32_t n, char *p, uint64_t v)
  * #desc:
  *    floating number to string conversion.
  *
- * #1: buffer offset
- * #2: buffer
- * #3: input floating
- * #4: floating precision
- * #r: output length (+offset)
+ * #1: n   [in]  buffer offset
+ * #2: p   [out] buffer
+ * #3: v   [in]  input floating
+ * #4: pre [in]  floating precision
+ * #r:     [ret] output length (+offset)
  */
 static int32_t _dou2str_df(int32_t n, char *p, double v, int32_t pre)
 {
@@ -324,8 +324,8 @@ static int32_t _dou2str_df(int32_t n, char *p, double v, int32_t pre)
  * #desc:
  *    print in integer (signed decimal) format.
  *
- * #1: printf struct context
- * #r: 0: no error, -1: error
+ * #1: ctx [in]  printf struct context
+ * #r:     [ret] 0: no error, -1: error
  */
 static int32_t _printf_di(struct printf_ctx *ctx)
 {
@@ -387,8 +387,8 @@ static int32_t _printf_di(struct printf_ctx *ctx)
  * #desc:
  *    print in integer (unsigned octal/decimal/hexadecimal) format.
  *
- * #1: printf struct context
- * #r: 0: no error, -1: error
+ * #1: ctx [in]  printf struct context
+ * #r:     [ret] 0: no error, -1: error
  */
 static int32_t _printf_oux(struct printf_ctx *ctx)
 {
@@ -466,8 +466,8 @@ static int32_t _printf_oux(struct printf_ctx *ctx)
  * #desc:
  *    print in character format.
  *
- * #1: printf struct context
- * #r: 0: no error, -1: error
+ * #1: ctx [in]  printf struct context
+ * #r:     [ret] 0: no error, -1: error
  */
 static int32_t _printf_c(struct printf_ctx *ctx)
 {
@@ -508,8 +508,8 @@ static int32_t _printf_c(struct printf_ctx *ctx)
  * #desc:
  *    print in string format.
  *
- * #1: printf struct context
- * #r: 0: no error, -1: error
+ * #1: ctx [in]  printf struct context
+ * #r:     [ret] 0: no error, -1: error
  */
 static int32_t _printf_s(struct printf_ctx *ctx)
 {
@@ -555,8 +555,8 @@ static int32_t _printf_s(struct printf_ctx *ctx)
  * #desc:
  *    print in floating format.
  *
- * #1: printf struct context
- * #r: 0: no error, -1: error
+ * #1: ctx [in]  printf struct context
+ * #r:     [ret] 0: no error, -1: error
  */
 static int32_t _printf_f(struct printf_ctx *ctx)
 {
@@ -621,10 +621,10 @@ static int32_t _printf_f(struct printf_ctx *ctx)
  * #desc:
  *    output padding character.
  *
- * #1: printf struct context
- * #2: character
- * #3: padding length
- * #r: 0: no error, -1: error
+ * #1: ctx [in]  printf struct context
+ * #2: c   [in]  character
+ * #3: len [in]  padding length
+ * #r:     [ret] 0: no error, -1: error
  */
 static int32_t _printf_pad(struct printf_ctx *ctx, char c, int32_t len)
 {
@@ -647,11 +647,11 @@ static int32_t _printf_pad(struct printf_ctx *ctx, char c, int32_t len)
  * #desc:
  *    formatted output conversion.
  *
- * #1: format string
- * #2: variable parameter pointer
- * #3: callback arg
- * #4: callback
- * #r: 0: no error, -1: error
+ * #1: fmt [in]  format string
+ * #2: ap  [in]  variable parameter pointer
+ * #3: arg [in]  callback arg
+ * #4: out [in]  callback
+ * #r:     [ret] 0: no error, -1: error
  */
 int32_t C_SYMBOL(___printf)(const char *fmt, va_list ap, void *arg,
 		int32_t (*out)(const char *, int32_t, void *))

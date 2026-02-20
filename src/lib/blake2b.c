@@ -70,8 +70,8 @@ static const uint8_t blake2b_sigma[12][16] = {
  * #desc:
  *    blake2b compression function.
  *
- * #1: blake2b struct context
- * #2: input block (length: BLAKE2B_BLOCKSIZE)
+ * #1: ctx [in/out] blake2b struct context
+ * #2: s   [in]     input block (length: BLAKE2B_BLOCKSIZE)
  */
 static void _blake2b_compress(struct blake2b_ctx *ctx, const uint8_t *s)
 {
@@ -126,9 +126,9 @@ static void _blake2b_compress(struct blake2b_ctx *ctx, const uint8_t *s)
  * #desc:
  *    blake2b struct context initialization.
  *
- * #1: blake2b struct context
- * #2: digest length (max: BLAKE2B_512_LEN)
- * #r: 0: no error, -1: digest size error
+ * #1: ctx   [out] blake2b struct context
+ * #2: dsize [in]  digest length (max: BLAKE2B_512_LEN)
+ * #r:       [ret] 0: no error, -1: digest size error
  */
 int32_t F_SYMBOL(blake2b_init)(struct blake2b_ctx *ctx, uint32_t dsize)
 {
@@ -157,8 +157,8 @@ int32_t F_SYMBOL(blake2b_init)(struct blake2b_ctx *ctx, uint32_t dsize)
  * #desc:
  *    initialize the blake2b struct context with parameters.
  *
- * #1: blake2b struct context
- * #2: blake2b parameters
+ * #1: ctx [in/out] blake2b struct context
+ * #2: p   [in]     blake2b parameters
  */
 void F_SYMBOL(blake2b_init_param)(struct blake2b_ctx *ctx,
 		const struct blake2b_param *p)
@@ -180,9 +180,9 @@ void F_SYMBOL(blake2b_init_param)(struct blake2b_ctx *ctx,
  * #desc:
  *    blake2b processing buffer function.
  *
- * #1: blake2b struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] blake2b struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(blake2b_process)(struct blake2b_ctx *ctx, const uint8_t *s,
 		size_t len)
@@ -225,7 +225,7 @@ void F_SYMBOL(blake2b_process)(struct blake2b_ctx *ctx, const uint8_t *s,
  * #desc:
  *    blake2b process the remaining bytes in the buffer and end.
  *
- * #1: blake2b struct context
+ * #1: ctx [in/out] blake2b struct context
  */
 void F_SYMBOL(blake2b_finish)(struct blake2b_ctx *ctx)
 {
@@ -241,9 +241,9 @@ void F_SYMBOL(blake2b_finish)(struct blake2b_ctx *ctx)
  * #desc:
  *    blake2b single-time processing function.
  *
- * #1: blake2b struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] blake2b struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(blake2b)(struct blake2b_ctx *ctx, const uint8_t *s,
 		size_t len)

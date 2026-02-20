@@ -51,9 +51,9 @@ static const uint8_t chacha20_constant[] = "expand 32-byte k";
  * #desc:
  *    xchacha20 key generation.
  *
- * #1: xchacha20 struct context
- * #2: key
- * #3: nonce
+ * #1: state [out] chacha20 state
+ * #2: key   [in]  key
+ * #3: ran   [in]  nonce
  */
 static void _hchacha20_keygen(uint32_t state[16], const uint8_t *key,
 		const uint8_t *ran)
@@ -96,10 +96,10 @@ static void _hchacha20_keygen(uint32_t state[16], const uint8_t *key,
  * #desc:
  *    xchacha20 initialization function.
  *
- * #1: xchacha20 struct context
- * #2: key
- * #3: nonce
- * #4: counter
+ * #1: ctx [out] xchacha20 struct context
+ * #2: key [in]  key
+ * #3: ran [in]  nonce
+ * #4: ctr [in]  counter
  */
 void F_SYMBOL(xchacha20_init)(struct xchacha20_ctx *ctx, const uint8_t *key,
 		const uint8_t *ran, const uint8_t *ctr)
@@ -134,8 +134,8 @@ void F_SYMBOL(xchacha20_init)(struct xchacha20_ctx *ctx, const uint8_t *key,
  * #desc:
  *    xchacha20 block keystream function.
  *
- * #1: xchacha20 struct context
- * #2: rounds
+ * #1: ctx [in/out] xchacha20 struct context
+ * #2: n   [in]     rounds
  */
 void F_SYMBOL(xchacha20_block)(struct xchacha20_ctx *ctx, int32_t n)
 {
@@ -166,9 +166,9 @@ void F_SYMBOL(xchacha20_block)(struct xchacha20_ctx *ctx, int32_t n)
  * #desc:
  *    xchacha20 stream encryption function.
  *
- * #1: xchacha20 struct context
- * #2: buffer
- * #3: length
+ * #1: ctx [in/out] xchacha20 struct context
+ * #2: buf [in/out] buffer
+ * #3: len [in]     length
  */
 void F_SYMBOL(xchacha20_crypto)(struct xchacha20_ctx *ctx, uint8_t *buf,
 		size_t len)

@@ -186,8 +186,8 @@ static const uint16_t base_dist[INFLATE_DIST_CODES] = {
  * #desc:
  *    fill the bits buffer.
  *
- * #1: inflate struct context
- * #r: 0: no error, 1: remaining bits are less than the expected.
+ * #1: ctx [in/out] inflate struct context
+ * #r:     [ret]    0: no error, 1: remaining bits are less than the expected
  */
 static int32_t _bits_fill(struct inflate_ctx *ctx)
 {
@@ -206,10 +206,10 @@ static int32_t _bits_fill(struct inflate_ctx *ctx)
  * #desc:
  *    peek at the bits in the buffer.
  *
- * #1: inflate struct context
- * #2: bits value
- * #3: bits length
- * #r: 0: no error, -1: bits of no extra
+ * #1: ctx [in/out] inflate struct context
+ * #2: v   [out]    bits value
+ * #3: len [in]     bits length
+ * #r:     [ret]    0: no error, -1: bits of no extra
  */
 static int32_t _bits_peek(struct inflate_ctx *ctx, uint32_t *v, uint32_t len)
 {
@@ -223,10 +223,10 @@ static int32_t _bits_peek(struct inflate_ctx *ctx, uint32_t *v, uint32_t len)
  * #desc:
  *    bits in the dump buffer.
  *
- * #1: inflate struct context
- * #2: bits value
- * #3: bits length
- * #r: 0: no error, -1: bits of no extra
+ * #1: ctx [in/out] inflate struct context
+ * #2: v   [out]    bits value
+ * #3: len [in]     bits length
+ * #r:     [ret]    0: no error, -1: bits of no extra
  */
 static int32_t _bits_dump(struct inflate_ctx *ctx, uint32_t *v, uint32_t len)
 {
@@ -240,7 +240,7 @@ static int32_t _bits_dump(struct inflate_ctx *ctx, uint32_t *v, uint32_t len)
  * #desc:
  *    skip extra bits in the buffer byte.
  *
- * #1: inflate struct context
+ * #1: ctx [in/out] inflate struct context
  */
 static void _bits_skip(struct inflate_ctx *ctx)
 {
@@ -251,9 +251,9 @@ static void _bits_skip(struct inflate_ctx *ctx)
  * #desc:
  *    generate bit-length based on symbol.
  *
- * #1: inflate struct context
- * #2: bit-length of the codes
- * #r: 0: no error, -1: bits overflow
+ * #1: desc [in/out] inflate symbol description
+ * #2: lens [in]     bit-length of the codes
+ * #r:      [ret]    0: no error, -1: bits overflow
  */
 static int32_t _build_sym(struct inflate_sym_desc *desc, const uint8_t *lens)
 {
@@ -309,10 +309,10 @@ static int32_t _build_sym(struct inflate_sym_desc *desc, const uint8_t *lens)
  * #desc:
  *    decoding the symbol codes.
  *
- * #1: inflate struct context
- * #2: input bits
- * #3: input the length and return the length used
- * #r: -1: decode error, >=0: symbol codes
+ * #1: desc [in/out] inflate symbol description
+ * #2: v    [in]     input bits
+ * #3: len  [in/out] input the length and return the length used
+ * #r:      [ret]    -1: decode error, >=0: symbol codes
  */
 static int32_t _decode_sym(const struct inflate_sym_desc *desc, uint32_t v,
 		uint32_t *len)
@@ -341,7 +341,7 @@ static int32_t _decode_sym(const struct inflate_sym_desc *desc, uint32_t v,
  * #desc:
  *    build the fixed symbol.
  *
- * #1: inflate struct context
+ * #1: ctx [in/out] inflate struct context
  */
 static void _build_fixed(struct inflate_ctx *ctx)
 {
@@ -372,11 +372,11 @@ static void _build_fixed(struct inflate_ctx *ctx)
  * #desc:
  *    inflate block function.
  *
- * #1: inflate struct context
- * #2: input buffer
- * #3: input length
- * #4: is finish
- * #r:
+ * #1: ctx   [in/out] inflate struct context
+ * #2: s     [in]     input buffer
+ * #3: len   [in]     input length
+ * #4: flush [in]     is finish
+ * #r:       [ret]
  *    0: no error, >0 IS_FLUSH: flush block, IS_END: flush block and end,
  *    <0: ERR_INCOMP ...
  */
@@ -662,7 +662,7 @@ e:
  * #desc:
  *    inflate initialization.
  *
- * #1: inflate struct context
+ * #1: ctx [out] inflate struct context
  */
 void F_SYMBOL(inflate_init)(struct inflate_ctx *ctx)
 {
@@ -683,11 +683,11 @@ void F_SYMBOL(inflate_init)(struct inflate_ctx *ctx)
  * #desc:
  *    deflate decompression function.
  *
- * #1: inflate struct context
- * #2: input buffer
- * #3: input length
- * #4: is finish
- * #r:
+ * #1: ctx   [in/out] inflate struct context
+ * #2: s     [in]     input buffer
+ * #3: len   [in]     input length
+ * #4: flush [in]     is finish
+ * #r:       [ret]
  *    0: no error, >0 IS_FLUSH: flush block, IS_END: flush block and end,
  *    <0: ERR_INCOMP ...
  */

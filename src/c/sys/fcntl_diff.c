@@ -31,8 +31,8 @@
  * #desc:
  *    open flags difference conversion.
  *
- * #1: open flags
- * #r: open flags
+ * #1: flags [in]  open flags
+ * #r:       [ret] open flags
  */
 uint32_t C_SYMBOL(___fcntl_oflags)(uint32_t flags)
 {
@@ -76,8 +76,8 @@ uint32_t C_SYMBOL(___fcntl_oflags)(uint32_t flags)
  * #desc:
  *    open flags difference inverse conversion.
  *
- * #1: open flags
- * #r: open flags
+ * #1: flags [in]  open flags
+ * #r:       [ret] open flags
  */
 uint32_t C_SYMBOL(___fcntl_oflags_inv)(uint32_t flags)
 {
@@ -121,9 +121,9 @@ uint32_t C_SYMBOL(___fcntl_oflags_inv)(uint32_t flags)
  * #desc:
  *    flock struct difference conversion.
  *
- * #1: flock struct
- * #2: flock struct
- * #r: 0: no error, -1: error
+ * #1: a [in]  flock struct
+ * #2: b [out] flock struct
+ * #r:   [ret] 0: no error, -1: error
  */
 int32_t C_SYMBOL(___fcntl_flock)(struct x_flock *a, void *b)
 {
@@ -174,9 +174,9 @@ int32_t C_SYMBOL(___fcntl_flock)(struct x_flock *a, void *b)
  * #desc:
  *    flock struct difference inverse conversion.
  *
- * #1: flock struct
- * #2: flock struct
- * #r: 0: no error, -1: error
+ * #1: a [in]  flock struct
+ * #2: b [out] flock struct
+ * #r:   [ret] 0: no error, -1: error
  */
 int32_t C_SYMBOL(___fcntl_flock_inv)(void *a, struct x_flock *b)
 {

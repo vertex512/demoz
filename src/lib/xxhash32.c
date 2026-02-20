@@ -41,8 +41,8 @@
  * #desc:
  *    xxh32 compress function.
  *
- * #1: xxh32 struct context
- * #2: input block (length: XXHASH32_BLOCKSIZE)
+ * #1: ctx [in/out] xxh32 struct context
+ * #2: s   [in]     input block (length: XXHASH32_BLOCKSIZE)
  */
 static void _xxhash32_compress(struct xxhash32_ctx *ctx, const uint8_t *s)
 {
@@ -80,8 +80,8 @@ static void _xxhash32_compress(struct xxhash32_ctx *ctx, const uint8_t *s)
  * #desc:
  *    xxh32 struct context initialization.
  *
- * #1: xxh32 struct context
- * #2: init seed (default: 0)
+ * #1: ctx  [out] xxh32 struct context
+ * #2: seed [in]  init seed (default: 0)
  */
 void F_SYMBOL(xxhash32_init)(struct xxhash32_ctx *ctx, uint32_t seed)
 {
@@ -97,9 +97,9 @@ void F_SYMBOL(xxhash32_init)(struct xxhash32_ctx *ctx, uint32_t seed)
  * #desc:
  *    xxh32 processing buffer function.
  *
- * #1: xxh32 struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] xxh32 struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(xxhash32_process)(struct xxhash32_ctx *ctx, const uint8_t *s,
 		size_t len)
@@ -140,9 +140,9 @@ void F_SYMBOL(xxhash32_process)(struct xxhash32_ctx *ctx, const uint8_t *s,
  * #desc:
  *    xxh32 process the remaining bytes in the buffer and end.
  *
- * #1: xxh32 struct context
- * #2: total length
- * #r: return hash digest
+ * #1: ctx [in/out] xxh32 struct context
+ * #2: len [in]     total length
+ * #r:     [ret]    return hash digest
  */
 uint32_t F_SYMBOL(xxhash32_finish)(struct xxhash32_ctx *ctx, size_t len)
 {
@@ -189,10 +189,10 @@ uint32_t F_SYMBOL(xxhash32_finish)(struct xxhash32_ctx *ctx, size_t len)
  * #desc:
  *    xxh32 single-time processing function.
  *
- * #1: xxh32 struct context
- * #2: input buffer
- * #3: input length
- * #r: return hash digest
+ * #1: ctx [in/out] xxh32 struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
+ * #r:     [ret]    return hash digest
  */
 uint32_t F_SYMBOL(xxhash32)(struct xxhash32_ctx *ctx, const uint8_t *s,
 		size_t len)

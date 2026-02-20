@@ -77,8 +77,8 @@ struct polyvec {
  * #desc:
  *    montgomery reduction (-q+1..q-1).
  *
- * #1: number
- * #r: result
+ * #1: a [in]  number
+ * #r:   [ret] result
  */
 static int16_t _montgomery_reduce(int32_t a)
 {
@@ -92,8 +92,8 @@ static int16_t _montgomery_reduce(int32_t a)
  * #desc:
  *    barrett reduction (-(q-1)/2..(q-1)/2).
  *
- * #1: number
- * #r: result
+ * #1: a [in]  number
+ * #r:   [ret] result
  */
 static int16_t _barrett_reduce(int16_t a)
 {
@@ -108,7 +108,7 @@ static int16_t _barrett_reduce(int16_t a)
  * #desc:
  *    polynomial barrett reduction.
  *
- * #1: polynomial
+ * #1: r [in/out] polynomial
  */
 static void _poly_reduce(struct poly *r)
 {
@@ -120,7 +120,7 @@ static void _poly_reduce(struct poly *r)
  * #desc:
  *    polynomial number-theoretic transform.
  *
- * #1: polynomial
+ * #1: r [in/out] polynomial
  */
 static void _poly_ntt(struct poly *r)
 {
@@ -149,7 +149,7 @@ static void _poly_ntt(struct poly *r)
  *    inplace inverse number-theoretic transform and multiplication
  *    by montgomery factor.
  *
- * #1: polynomial
+ * #1: r [in/out] polynomial
  */
 static void _poly_invntt(struct poly *r)
 {
@@ -177,9 +177,9 @@ static void _poly_invntt(struct poly *r)
  * #desc:
  *    polynomial multiplication with montgomery reduction in ntt domain.
  *
- * #1: output polynomial
- * #2: input polynomial
- * #3: input polynomial
+ * #1: r [out] output polynomial
+ * #2: a [in]  input polynomial
+ * #3: b [in]  input polynomial
  */
 static void _poly_basemul(struct poly *r,
 		const struct poly *a, const struct poly *b)
@@ -221,7 +221,7 @@ static void _poly_basemul(struct poly *r,
  * #desc:
  *    coefficients of a polynomial from normal domain to montgomery domain.
  *
- * #1: polynomial
+ * #1: r [in/out] polynomial
  */
 static void _poly_mont(struct poly *r)
 {
@@ -233,9 +233,9 @@ static void _poly_mont(struct poly *r)
  * #desc:
  *    polynomial additional (no modular reduction).
  *
- * #1: output polynomial
- * #2: input polynomial
- * #3: input polynomial
+ * #1: r [out] output polynomial
+ * #2: a [in]  input polynomial
+ * #3: b [in]  input polynomial
  */
 static void _poly_add(struct poly *r,
 		const struct poly *a, const struct poly *b)
@@ -248,9 +248,9 @@ static void _poly_add(struct poly *r,
  * #desc:
  *    polynomial subtraction (no modular reduction).
  *
- * #1: output polynomial
- * #2: input polynomial
- * #3: input polynomial
+ * #1: r [out] output polynomial
+ * #2: a [in]  input polynomial
+ * #3: b [in]  input polynomial
  */
 static void _poly_sub(struct poly *r,
 		const struct poly *a, const struct poly *b)
@@ -263,8 +263,8 @@ static void _poly_sub(struct poly *r,
  * #desc:
  *    compression polynomial u vector.
  *
- * #1: input polynomial
- * #2: output buffer
+ * #1: a [in]  input polynomial
+ * #2: r [out] output buffer
  */
 static void _poly_compress_du(const struct poly *a, uint8_t *r)
 {
@@ -297,8 +297,8 @@ static void _poly_compress_du(const struct poly *a, uint8_t *r)
  * #desc:
  *    decompression polynomial u vector.
  *
- * #1: input buffer
- * #2: output polynomial
+ * #1: a [in]  input buffer
+ * #2: r [out] output polynomial
  */
 static void _poly_decompress_du(const uint8_t *a, struct poly *r)
 {
@@ -322,8 +322,8 @@ static void _poly_decompress_du(const uint8_t *a, struct poly *r)
  * #desc:
  *    compression polynomial v vector.
  *
- * #1: input polynomial
- * #2: output buffer
+ * #1: a [in]  input polynomial
+ * #2: r [out] output buffer
  */
 static void _poly_compress_dv(const struct poly *a, uint8_t *r)
 {
@@ -355,8 +355,8 @@ static void _poly_compress_dv(const struct poly *a, uint8_t *r)
  * #desc:
  *    decompression polynomial v vector.
  *
- * #1: input buffer
- * #2: output polynomial
+ * #1: a [in]  input buffer
+ * #2: r [out] output polynomial
  */
 static void _poly_decompress_dv(const uint8_t *a, struct poly *r)
 {
@@ -371,8 +371,8 @@ static void _poly_decompress_dv(const uint8_t *a, struct poly *r)
  * #desc:
  *    polynomial to bytes conversion.
  *
- * #1: input polynomial
- * #2: output buffer
+ * #1: a [in]  input polynomial
+ * #2: r [out] output buffer
  */
 static void _poly_tobytes(const struct poly *a, uint8_t *r)
 {
@@ -395,8 +395,8 @@ static void _poly_tobytes(const struct poly *a, uint8_t *r)
  * #desc:
  *    bytes to polynomial conversion.
  *
- * #1: output polynomial
- * #2: input buffer
+ * #1: r [out] output polynomial
+ * #2: a [in]  input buffer
  */
 static void _poly_frombytes(struct poly *r, const uint8_t *a)
 {
@@ -416,8 +416,8 @@ static void _poly_frombytes(struct poly *r, const uint8_t *a)
  * #desc:
  *    polynomial to 32-bytes message conversion.
  *
- * #1: input polynomial
- * #2: output buffer
+ * #1: a [in]  input polynomial
+ * #2: r [out] output buffer
  */
 static void _poly_tomsg(const struct poly *a, uint8_t *r)
 {
@@ -443,8 +443,8 @@ static void _poly_tomsg(const struct poly *a, uint8_t *r)
  * #desc:
  *    32-bytes message to polynomial conversion.
  *
- * #1: output polynomial
- * #2: input buffer
+ * #1: r [out] output polynomial
+ * #2: a [in]  input buffer
  */
 static void _poly_frommsg(struct poly *r, const uint8_t *a)
 {
@@ -464,8 +464,8 @@ static void _poly_frommsg(struct poly *r, const uint8_t *a)
  * #desc:
  *     compression polynomial vector u.
  *
- * #1: input polynomial vector
- * #2: output buffer
+ * #1: a [in]  input polynomial vector
+ * #2: r [out] output buffer
  */
 static void _polyvec_compress(const struct polyvec *a, uint8_t *r)
 {
@@ -479,8 +479,8 @@ static void _polyvec_compress(const struct polyvec *a, uint8_t *r)
  * #desc:
  *     decompression polynomial vector u.
  *
- * #1: input buffer
- * #2: output polynomial vector
+ * #1: a [in]  input buffer
+ * #2: r [out] output polynomial vector
  */
 static void _polyvec_decompress(const uint8_t *a, struct polyvec *r)
 {
@@ -494,8 +494,8 @@ static void _polyvec_decompress(const uint8_t *a, struct polyvec *r)
  * #desc:
  *    polynomial vector to bytes conversion.
  *
- * #1: input polynomial vector
- * #2: output buffer
+ * #1: a [in]  input polynomial vector
+ * #2: r [out] output buffer
  */
 static void _polyvec_tobytes(const struct polyvec *a, uint8_t *r)
 {
@@ -509,8 +509,8 @@ static void _polyvec_tobytes(const struct polyvec *a, uint8_t *r)
  * #desc:
  *    bytes to polynomial vector conversion.
  *
- * #1: input buffer
- * #2: output polynomial vector
+ * #1: r [out] output polynomial vector
+ * #2: a [in]  input buffer
  */
 static void _polyvec_frombytes(struct polyvec *r, const uint8_t *a)
 {
@@ -524,7 +524,7 @@ static void _polyvec_frombytes(struct polyvec *r, const uint8_t *a)
  * #desc:
  *    polynomial vector number-theoretic transform.
  *
- * #1: polynomial vector
+ * #1: r [in/out] polynomial vector
  */
 static void _polyvec_ntt(struct polyvec *r)
 {
@@ -536,7 +536,7 @@ static void _polyvec_ntt(struct polyvec *r)
  * #desc:
  *    polynomial vector inverse number-theoretic transform.
  *
- * #1: polynomial vector
+ * #1: r [in/out] polynomial vector
  */
 static void _polyvec_invntt(struct polyvec *r)
 {
@@ -548,9 +548,9 @@ static void _polyvec_invntt(struct polyvec *r)
  * #desc:
  *    polynomial vector matrix multiplication.
  *
- * #1: output polynomial
- * #2: input polynomial vector
- * #3: input polynomial vector
+ * #1: r [out] output polynomial
+ * #2: a [in]  input polynomial vector
+ * #3: b [in]  input polynomial vector
  */
 static void _polyvec_basemul(struct poly *r,
 		const struct polyvec *a, const struct polyvec *b)
@@ -570,7 +570,7 @@ static void _polyvec_basemul(struct poly *r,
  * #desc:
  *    polynomial vector reduction.
  *
- * #1: polynomial vector
+ * #1: r [in/out] polynomial vector
  */
 static void _polyvec_reduce(struct polyvec *r)
 {
@@ -582,9 +582,9 @@ static void _polyvec_reduce(struct polyvec *r)
  * #desc:
  *    polynomial vector additional (no modular reduction).
  *
- * #1: output polynomial vector
- * #2: input polynomial vector
- * #3: input polynomial vector
+ * #1: r [out] output polynomial vector
+ * #2: a [in]  input polynomial vector
+ * #3: b [in]  input polynomial vector
  */
 static void _polyvec_add(struct polyvec *r,
 		const struct polyvec *a, const struct polyvec *b)
@@ -597,11 +597,11 @@ static void _polyvec_add(struct polyvec *r,
  * #desc:
  *    uniform sampling of ntt representations.
  *
- * #1: output coeffs
- * #2: coeffs number
- * #3: input buffer
- * #4: input length
- * #r: return sample number
+ * #1: r   [out] output coeffs
+ * #2: n   [in]  coeffs number
+ * #3: buf [in]  input buffer
+ * #4: len [in]  input length
+ * #r:     [ret] return sample number
  */
 static uint32_t _sample_ntt(int16_t *r, uint32_t n, const uint8_t *buf,
 		uint32_t len)
@@ -628,10 +628,10 @@ static uint32_t _sample_ntt(int16_t *r, uint32_t n, const uint8_t *buf,
  * #desc:
  *    uniform sampling of ntt representations and xof.
  *
- * #1: output polynomial
- * #2: input seed
- * #3: nonce x
- * #4: nonce y
+ * #1: r    [out] output polynomial
+ * #2: seed [in]  input seed
+ * #3: x    [in]  nonce x
+ * #4: y    [in]  nonce y
  */
 static void _sample_ntt_xof(struct poly *r, const uint8_t *seed,
 		uint8_t x, uint8_t y)
@@ -657,8 +657,8 @@ static void _sample_ntt_xof(struct poly *r, const uint8_t *seed,
  * #desc:
  *    extract the polynomial of the central binomial distribution 2.
  *
- * #1: output polynomial
- * #2: input buffer
+ * #1: r   [out] output polynomial
+ * #2: buf [in]  binput buffer
  */
 static void _poly_cbd2(struct poly *r, const uint8_t *buf)
 {
@@ -688,8 +688,8 @@ static void _poly_cbd2(struct poly *r, const uint8_t *buf)
  * #desc:
  *    extract the polynomial of the central binomial distribution 3.
  *
- * #1: output polynomial
- * #2: input buffer
+ * #1: r   [out] output polynomial
+ * #2: buf [in]  input buffer
  */
 static void _poly_cbd3(struct poly *r, const uint8_t *buf)
 {
@@ -719,9 +719,9 @@ static void _poly_cbd3(struct poly *r, const uint8_t *buf)
  * #desc:
  *    uniformly sample from the distribution eta1.
  *
- * #1: output polynomial
- * #2: input seed
- * #3: nonce
+ * #1: r    [out] output polynomial
+ * #2: seed [in]  input seed
+ * #3: ran  [in]  nonce
  */
 static void _sample_poly_eta1_prf(struct poly *r, const uint8_t *seed,
 		uint8_t ran)
@@ -743,9 +743,9 @@ static void _sample_poly_eta1_prf(struct poly *r, const uint8_t *seed,
  * #desc:
  *    uniformly sample from the distribution eta2.
  *
- * #1: output polynomial
- * #2: input seed
- * #3: nonce
+ * #1: r    [out] output polynomial
+ * #2: seed [in]  input seed
+ * #3: ran  [in]  nonce
  */
 static void _sample_poly_eta2_prf(struct poly *r, const uint8_t *seed,
 		uint8_t ran)
@@ -767,9 +767,9 @@ static void _sample_poly_eta2_prf(struct poly *r, const uint8_t *seed,
  * #desc:
  *    output sha3-256 digest (32-bytes).
  *
- * #1: input buffer
- * #2: input length
- * #3: output digest
+ * #1: in  [in]  input buffer
+ * #2: len [in]  input length
+ * #3: out [out] output digest
  */
 static void _hash_h(const uint8_t *in, uint32_t len, uint8_t *out)
 {
@@ -785,9 +785,9 @@ static void _hash_h(const uint8_t *in, uint32_t len, uint8_t *out)
  * #desc:
  *    output sha3-512 digest (64-bytes).
  *
- * #1: input buffer
- * #2: input length
- * #3: output digest
+ * #1: in  [in]  input buffer
+ * #2: len [in]  input length
+ * #3: out [out] output digest
  */
 static void _hash_g(const uint8_t *in, uint32_t len, uint8_t *out)
 {
@@ -803,9 +803,9 @@ static void _hash_g(const uint8_t *in, uint32_t len, uint8_t *out)
  * #desc:
  *    output sha3 shake256 digest (32-bytes).
  *
- * #1: input buffer
- * #2: input length
- * #3: output digest
+ * #1: in  [in]  input buffer
+ * #2: len [in]  input length
+ * #3: out [out] output digest
  */
 static void _hash_j(const uint8_t *in, uint32_t len, uint8_t *out)
 {
@@ -819,11 +819,11 @@ static void _hash_j(const uint8_t *in, uint32_t len, uint8_t *out)
 
 /* @func: mlkem512_pke_genkey
  * #desc:
- *    mlkem512 k-pke generate encryption and decryption key function.
+ *    mlkem k-pke generate encryption and decryption key function.
  *
- * #1: nonce
- * #2: encryption key
- * #3: decryption key
+ * #1: ran [in]  nonce
+ * #2: ekp [out] encryption key
+ * #3: dkp [out] decryption key
  */
 void F_SYMBOL(mlkem512_pke_genkey)(const uint8_t *ran, uint8_t *ekp,
 		uint8_t *dkp)
@@ -875,12 +875,12 @@ void F_SYMBOL(mlkem512_pke_genkey)(const uint8_t *ran, uint8_t *ekp,
 
 /* @func: mlkem512_pke_encrypt
  * #desc:
- *    mlkem512 k-pke encryption function.
+ *    mlkem k-pke encryption function.
  *
- * #1: nonce
- * #2: encryption key
- * #3: input nmessage
- * #4: output ciphertext
+ * #1: ran [in]  nonce
+ * #2: ekp [in]  encryption key
+ * #3: msg [in]  input nmessage
+ * #4: ct  [out] output ciphertext
  */
 void F_SYMBOL(mlkem512_pke_encrypt)(const uint8_t *ran, const uint8_t *ekp,
 		const uint8_t *msg, uint8_t *ct)
@@ -938,11 +938,11 @@ void F_SYMBOL(mlkem512_pke_encrypt)(const uint8_t *ran, const uint8_t *ekp,
 
 /* @func: mlkem512_pke_decrypt
  * #desc:
- *    mlkem512 k-pke decryption function.
+ *    mlkem k-pke decryption function.
  *
- * #1: decryption key
- * #2: input ciphertext
- * #3: output message
+ * #1: dkp [in] decryption key
+ * #2: ct  [in] input ciphertext
+ * #3: msg [in] output message
  */
 void F_SYMBOL(mlkem512_pke_decrypt)(const uint8_t *dkp, const uint8_t *ct,
 		uint8_t *msg)
@@ -968,12 +968,12 @@ void F_SYMBOL(mlkem512_pke_decrypt)(const uint8_t *dkp, const uint8_t *ct,
 
 /* @func: mlkem512_genkey
  * #desc:
- *    mlkem512 generate encapsulation and decapsulation key function.
+ *    mlkem generate encapsulation and decapsulation key function.
  *
- * #1: nonce of k-pke
- * #2: nonce of dk
- * #3: encapsulation key
- * #4: decapsulation key
+ * #1: ran  [in]  nonce of k-pke
+ * #2: ran2 [in]  nonce of dk
+ * #3: ek   [out] encapsulation key
+ * #4: dk   [out] decapsulation key
  */
 void F_SYMBOL(mlkem512_genkey)(const uint8_t *ran, const uint8_t *ran2,
 		uint8_t *ek, uint8_t *dk)
@@ -994,12 +994,12 @@ void F_SYMBOL(mlkem512_genkey)(const uint8_t *ran, const uint8_t *ran2,
 
 /* @func: mlkem512_encaps
  * #desc:
- *    mlkem512 encapsulation the function and generate a shared key.
+ *    mlkem encapsulation the function and generate a shared key.
  *
- * #1: nonce message
- * #2: encapsulation key
- * #3: output ciphertext
- * #4: output shared key
+ * #1: msg [in]  nonce message
+ * #2: ek  [in]  encapsulation key
+ * #3: ct  [out] output ciphertext
+ * #4: sk  [out] output shared key
  */
 void F_SYMBOL(mlkem512_encaps)(const uint8_t *msg, const uint8_t *ek,
 		uint8_t *ct, uint8_t *sk)
@@ -1022,11 +1022,11 @@ void F_SYMBOL(mlkem512_encaps)(const uint8_t *msg, const uint8_t *ek,
 
 /* @func: mlkem512_decaps
  * #desc:
- *    mlkem512 decapsulation the function and generate a shared key.
+ *    mlkem decapsulation the function and generate a shared key.
  *
- * #1: decapsulation key
- * #2: input ciphertext
- * #3: output shared key
+ * #1: dk [in]  decapsulation key
+ * #2: ct [in]  input ciphertext
+ * #3: sk [out] output shared key
  */
 void F_SYMBOL(mlkem512_decaps)(const uint8_t *dk, const uint8_t *ct,
 		uint8_t *sk)

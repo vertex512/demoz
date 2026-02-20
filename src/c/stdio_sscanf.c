@@ -31,10 +31,10 @@
  * #desc:
  *    string convert to formatted value.
  *
- * #1: input string
- * #2: formatted string
- * #3: variable argument
- * #r: >0: number of matching, <0: format error
+ * #1: s   [in]  input string
+ * #2: fmt [in]  formatted string
+ * #3: ap  [in]  variable argument
+ * #r:     [ret] >0: number of matching, <0: format error
  */
 int32_t C_SYMBOL(vsscanf)(const char *s, const char *fmt, va_list ap)
 {
@@ -45,10 +45,10 @@ int32_t C_SYMBOL(vsscanf)(const char *s, const char *fmt, va_list ap)
  * #desc:
  *    string convert to formatted value.
  *
- * #1: input string
- * #2: formatted string
- * #N: variable argument
- * #r: >0: number of matching, <0: format error
+ * #1: s   [in]  input string
+ * #2: fmt [in]  formatted string
+ * #N:     [out] variable argument
+ * #r:     [ret] >0: number of matching, <0: format error
  */
 int32_t C_SYMBOL(sscanf)(const char *s, const char *fmt, ...)
 {

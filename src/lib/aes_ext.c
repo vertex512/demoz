@@ -30,9 +30,9 @@
  * #desc:
  *    aes encryption cbc (cipher block chaining) mode.
  *
- * #1: aes struct context
- * #2: invector
- * #3: state buffer
+ * #1: ctx   [in]     aes struct context
+ * #2: iv    [in/out] invector
+ * #3: state [in/out] state buffer
  */
 void F_SYMBOL(aes_encrypt_cbc)(struct aes_ctx *ctx, uint8_t *iv,
 		uint8_t *state)
@@ -50,9 +50,9 @@ void F_SYMBOL(aes_encrypt_cbc)(struct aes_ctx *ctx, uint8_t *iv,
  * #desc:
  *    aes decryption cbc (cipher block chaining) mode.
  *
- * #1: aes struct context
- * #2: invector
- * #3: state buffer
+ * #1: ctx   [in]     aes struct context
+ * #2: iv    [in/out] invector
+ * #3: state [in/out] state buffer
  */
 void F_SYMBOL(aes_decrypt_cbc)(struct aes_ctx *ctx, uint8_t *iv,
 		uint8_t *state)
@@ -73,9 +73,9 @@ void F_SYMBOL(aes_decrypt_cbc)(struct aes_ctx *ctx, uint8_t *iv,
  * #desc:
  *    aes encryption cfb (cipher feedback) mode.
  *
- * #1: aes struct context
- * #2: invector
- * #3: state buffer
+ * #1: ctx   [in]     aes struct context
+ * #2: iv    [in/out] invector
+ * #3: state [in/out] state buffer
  */
 void F_SYMBOL(aes_encrypt_cfb)(struct aes_ctx *ctx, uint8_t *iv,
 		uint8_t *state)
@@ -92,9 +92,9 @@ void F_SYMBOL(aes_encrypt_cfb)(struct aes_ctx *ctx, uint8_t *iv,
  * #desc:
  *    aes decryption cfb (cipher feedback) mode.
  *
- * #1: aes struct context
- * #2: invector
- * #3: state buffer
+ * #1: ctx   [in]     aes struct context
+ * #2: iv    [in/out] invector
+ * #3: state [in/out] state buffer
  */
 void F_SYMBOL(aes_decrypt_cfb)(struct aes_ctx *ctx, uint8_t *iv,
 		uint8_t *state)
@@ -115,10 +115,10 @@ void F_SYMBOL(aes_decrypt_cfb)(struct aes_ctx *ctx, uint8_t *iv,
  * #desc:
  *    aes stream encryption ofb (output feedback) mode.
  *
- * #1: aes struct context
- * #2: invector
- * #3: buffer
- * #4: length
+ * #1: ctx [in]     aes struct context
+ * #2: iv  [in/out] invector
+ * #3: buf [in/out] buffer
+ * #4: len [in]     length
  */
 void F_SYMBOL(aes_crypto_ofb)(struct aes_ctx *ctx, uint8_t *iv,
 		uint8_t *buf, size_t len)
@@ -141,10 +141,10 @@ void F_SYMBOL(aes_crypto_ofb)(struct aes_ctx *ctx, uint8_t *iv,
  * #desc:
  *    aes stream encryption ctr (counter) mode.
  *
- * #1: aes struct context
- * #2: nonce
- * #3: buffer
- * #4: length
+ * #1: ctx [in]     aes struct context
+ * #2: ran [in/out] nonce
+ * #3: buf [in/out] buffer
+ * #4: len [in]     length
  */
 void F_SYMBOL(aes_crypto_ctr)(struct aes_ctx *ctx, uint8_t *ran,
 		uint8_t *buf, size_t len)

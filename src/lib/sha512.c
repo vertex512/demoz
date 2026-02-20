@@ -83,8 +83,8 @@ static const uint64_t sha512_constants[80] = {
  * #desc:
  *    sha512 compression function.
  *
- * #1: sha512 struct context
- * #2: input block (length: SHA512_BLOCKSIZE)
+ * #1: ctx [in/out] sha512 struct context
+ * #2: s   [in]     input block (length: SHA512_BLOCKSIZE)
  */
 static void _sha512_compress(struct sha512_ctx *ctx, const uint8_t *s)
 {
@@ -140,7 +140,7 @@ static void _sha512_compress(struct sha512_ctx *ctx, const uint8_t *s)
  * #desc:
  *    sha512 struct context initialization.
  *
- * #1: sha512 struct context
+ * #1: ctx [out] sha512 struct context
  */
 void F_SYMBOL(sha512_init)(struct sha512_ctx *ctx)
 {
@@ -159,7 +159,7 @@ void F_SYMBOL(sha512_init)(struct sha512_ctx *ctx)
  * #desc:
  *    initialize the sha512 struct context with sha384.
  *
- * #1: sha512 struct context
+ * #1: ctx [out] sha512 struct context
  */
 void F_SYMBOL(sha384_init)(struct sha512_ctx *ctx)
 {
@@ -178,9 +178,9 @@ void F_SYMBOL(sha384_init)(struct sha512_ctx *ctx)
  * #desc:
  *    sha512 processing buffer function.
  *
- * #1: sha512 struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] sha512 struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(sha512_process)(struct sha512_ctx *ctx, const uint8_t *s,
 		size_t len)
@@ -221,8 +221,8 @@ void F_SYMBOL(sha512_process)(struct sha512_ctx *ctx, const uint8_t *s,
  * #desc:
  *    sha512 process the remaining bytes in the buffer and end.
  *
- * #1: sha512 struct context
- * #2: total length
+ * #1: ctx [in/out] sha512 struct context
+ * #2: len [in]     total length
  */
 void F_SYMBOL(sha512_finish)(struct sha512_ctx *ctx, uint64_t len)
 {
@@ -249,9 +249,9 @@ void F_SYMBOL(sha512_finish)(struct sha512_ctx *ctx, uint64_t len)
  * #desc:
  *    sha512 single-time processing function.
  *
- * #1: sha512 struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] sha512 struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(sha512)(struct sha512_ctx *ctx, const uint8_t *s,
 		size_t len)

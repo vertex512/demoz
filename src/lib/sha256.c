@@ -67,8 +67,8 @@ static const uint32_t sha256_constants[64] = {
  * #desc:
  *    sha256 compression function.
  *
- * #1: sha256 struct context
- * #2: input block (length: SHA256_BLOCKSIZE)
+ * #1: ctx [in/out] sha256 struct context
+ * #2: s   [in]     input block (length: SHA256_BLOCKSIZE)
  */
 static void _sha256_compress(struct sha256_ctx *ctx, const uint8_t *s)
 {
@@ -120,7 +120,7 @@ static void _sha256_compress(struct sha256_ctx *ctx, const uint8_t *s)
  * #desc:
  *    sha256 struct context initialization.
  *
- * #1: sha256 struct context
+ * #1: ctx [out] sha256 struct context
  */
 void F_SYMBOL(sha256_init)(struct sha256_ctx *ctx)
 {
@@ -139,7 +139,7 @@ void F_SYMBOL(sha256_init)(struct sha256_ctx *ctx)
  * #desc:
  *    initialize the sha256 struct context with sha224.
  *
- * #1: sha256 struct context
+ * #1: ctx [out] sha256 struct context
  */
 void F_SYMBOL(sha224_init)(struct sha256_ctx *ctx)
 {
@@ -158,9 +158,9 @@ void F_SYMBOL(sha224_init)(struct sha256_ctx *ctx)
  * #desc:
  *    sha256 processing buffer function.
  *
- * #1: sha256 struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] sha256 struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(sha256_process)(struct sha256_ctx *ctx, const uint8_t *s,
 		size_t len)
@@ -201,8 +201,8 @@ void F_SYMBOL(sha256_process)(struct sha256_ctx *ctx, const uint8_t *s,
  * #desc:
  *    sha256 process the remaining bytes in the buffer and end.
  *
- * #1: sha256 struct context
- * #2: total length
+ * #1: ctx [in/out] sha256 struct context
+ * #2: len [in]     total length
  */
 void F_SYMBOL(sha256_finish)(struct sha256_ctx *ctx, uint64_t len)
 {
@@ -229,9 +229,9 @@ void F_SYMBOL(sha256_finish)(struct sha256_ctx *ctx, uint64_t len)
  * #desc:
  *    sha256 single-time processing function.
  *
- * #1: sha256 struct context
- * #2: input buffer
- * #3: input length
+ * #1: ctx [in/out] sha256 struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
  */
 void F_SYMBOL(sha256)(struct sha256_ctx *ctx, const uint8_t *s,
 		size_t len)

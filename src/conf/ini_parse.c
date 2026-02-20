@@ -66,10 +66,10 @@ static const uint8_t ini_name[256] = {
  * #desc:
  *    parse ini section.
  *
- * #1: ini struct context
- * #2: input row
- * #3: row length
- * #r: 0: no error, -1: error, -2: call error
+ * #1: ctx [in/out] ini struct context
+ * #2: a   [in]     input row
+ * #3: n   [in]     row length
+ * #r:     [ret]    0: no error, -1: error, -2: call error
  */
 static int32_t _ini_section(struct ini_ctx *ctx, const char *a, int32_t n)
 {
@@ -145,10 +145,10 @@ static int32_t _ini_section(struct ini_ctx *ctx, const char *a, int32_t n)
  * #desc:
  *    parse ini key and value.
  *
- * #1: ini struct context
- * #2: input row
- * #3: row length
- * #r: 0: no error, -1: error, -2: call error
+ * #1: ctx [in/out] ini struct context
+ * #2: a   [in]     input row
+ * #3: n   [in]     row length
+ * #r:     [ret]    0: no error, -1: error, -2: call error
  */
 static int32_t _ini_key(struct ini_ctx *ctx, const char *a, int32_t n)
 {
@@ -249,13 +249,13 @@ static int32_t _ini_key(struct ini_ctx *ctx, const char *a, int32_t n)
 	return (st == 3) ? 0 : -1;
 }
 
-/* @func: ini_parser
+/* @func: ini_parse
  * #desc:
  *    ini (initial configuration) parser.
  *
- * #1: ini struct context
- * #2: input string
- * #r: 0: no error, -1: error, -2: call error
+ * #1: ctx [in/out] ini struct context
+ * #2: s   [in]     input string
+ * #r:     [ret]    0: no error, -1: error, -2: call error
  */
 int32_t F_SYMBOL(ini_parse)(struct ini_ctx *ctx, const char *s)
 {

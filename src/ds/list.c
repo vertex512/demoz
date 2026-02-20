@@ -29,9 +29,9 @@
  * #desc:
  *    add a new node in the linked list.
  *
- * #1: list head
- * #2: new node
- * #r: new node
+ * #1: head [in/out] list head
+ * #2: new  [in/out] new node
+ * #r:      [ret]    new node
  */
 struct list_node *F_SYMBOL(list_add)(struct list_head *head,
 		struct list_node *new)
@@ -54,9 +54,9 @@ struct list_node *F_SYMBOL(list_add)(struct list_head *head,
  * #desc:
  *    add a new node in the linked list (add to tail).
  *
- * #1: list head
- * #2: new node
- * #r: new node
+ * #1: head [in/out] list head
+ * #2: new  [in/out] new node
+ * #r:      [ret]    new node
  */
 struct list_node *F_SYMBOL(list_add_tail)(struct list_head *head,
 		struct list_node *new)
@@ -80,9 +80,9 @@ struct list_node *F_SYMBOL(list_add_tail)(struct list_head *head,
  * #desc:
  *    delete a node in the linked list.
  *
- * #1: list head
- * #2: old node
- * #r: old node
+ * #1: head [in/out] list head
+ * #2: old  [in/out] old node
+ * #r:      [ret]    old node
  */
 struct list_node *F_SYMBOL(list_del)(struct list_head *head,
 		struct list_node *old)
@@ -110,10 +110,10 @@ struct list_node *F_SYMBOL(list_del)(struct list_head *head,
  * #desc:
  *    insert a new node in the linked list node.
  *
- * #1: list head
- * #2: list node
- * #3: new node
- * #r: new node
+ * #1: head [in/out] list head
+ * #2: node [in/out] list node
+ * #3: new  [in/out] new node
+ * #r:      [ret]    new node
  */
 struct list_node *F_SYMBOL(list_insert)(struct list_head *head,
 		struct list_node *node, struct list_node *new)
@@ -140,10 +140,10 @@ struct list_node *F_SYMBOL(list_insert)(struct list_head *head,
  * #desc:
  *    insert a new node in the linked list node (add to tail).
  *
- * #1: list head
- * #2: list node
- * #3: new node
- * #r: new node
+ * #1: head [in/out] list head
+ * #2: node [in/out] list node
+ * #3: new  [in/out] new node
+ * #r:      [ret]    new node
  */
 struct list_node *F_SYMBOL(list_insert_tail)(struct list_head *head,
 		struct list_node *node, struct list_node *new)
@@ -165,9 +165,9 @@ struct list_node *F_SYMBOL(list_insert_tail)(struct list_head *head,
  * #desc:
  *    node swap in a linked list.
  *
- * #1: list head
- * #2: old node
- * #3: new node
+ * #1: head [in/out] list head
+ * #2: old  [in/out] old node
+ * #3: new  [in/out] new node
  */
 void F_SYMBOL(list_swap)(struct list_head *head,
 		struct list_node *old, struct list_node *new)

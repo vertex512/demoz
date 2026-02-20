@@ -30,10 +30,10 @@
  * #desc:
  *    copy memory area.
  *
- * #1: target pointer
- * #2: source pointer
- * #3: length
- * #r: target pointer
+ * #1: t   [out] target pointer
+ * #2: s   [in]  source pointer
+ * #3: len [in]  length
+ * #r:     [ret] target pointer
  */
 void *C_SYMBOL(memcpy)(void *t, const void *s, size_t len)
 {
@@ -161,10 +161,10 @@ void *C_SYMBOL(memcpy)(void *t, const void *s, size_t len)
  * #desc:
  *    copy memory area (memory overlap and then copy).
  *
- * #1: target pointer
- * #2: source pointer
- * #3: length
- * #r: target pointer
+ * #1: t   [out] target pointer
+ * #2: s   [in]  source pointer
+ * #3: len [in]  length
+ * #r:     [ret] target pointer
  */
 void *C_SYMBOL(memmove)(void *t, const void *s, size_t len)
 {
@@ -182,10 +182,10 @@ void *C_SYMBOL(memmove)(void *t, const void *s, size_t len)
  * #desc:
  *    fill memory with a constant byte.
  *
- * #1: target pointer
- * #2: character
- * #3: length
- * #r: target pointer
+ * #1: t   [out] target pointer
+ * #2: c   [in]  character
+ * #3: len [in]  length
+ * #r:     [ret] target pointer
  */
 void *C_SYMBOL(memset)(void *t, int8_t c, size_t len)
 {
@@ -217,10 +217,10 @@ void *C_SYMBOL(memset)(void *t, int8_t c, size_t len)
  * #desc:
  *    scan memory for a character.
  *
- * #1: source pointer
- * #2: character
- * #3: length
- * #r: target location / NULL pointer
+ * #1: s   [in]  source pointer
+ * #2: c   [in]  character
+ * #3: len [in]  length
+ * #r:     [ret] target location / NULL pointer
  */
 void *C_SYMBOL(memchr)(const void *s, uint8_t c, size_t len)
 {
@@ -236,10 +236,10 @@ void *C_SYMBOL(memchr)(const void *s, uint8_t c, size_t len)
  * #desc:
  *    scan memory for a character from the back.
  *
- * #1: source pointer
- * #2: character
- * #3: length
- * #r: target location / NULL pointer
+ * #1: s   [in]  source pointer
+ * #2: c   [in]  character
+ * #3: len [in]  length
+ * #r:     [ret] target location / NULL pointer
  */
 void *C_SYMBOL(memrchr)(const void *s, uint8_t c, size_t len)
 {
@@ -255,10 +255,10 @@ void *C_SYMBOL(memrchr)(const void *s, uint8_t c, size_t len)
  * #desc:
  *    compare memory areas.
  *
- * #1: source1 pointer
- * #2: source2 pointer
- * #3: length
- * #r: 0: equal, 0<N>0: *s2 - *s1
+ * #1: s1  [in]  source1 pointer
+ * #2: s2  [in]  source2 pointer
+ * #3: len [in]  length
+ * #r:     [ret] 0: equal, 0<N>0: *s2 - *s1
  */
 int32_t C_SYMBOL(memcmp)(const void *s1, const void *s2, size_t len)
 {
@@ -275,8 +275,8 @@ int32_t C_SYMBOL(memcmp)(const void *s1, const void *s2, size_t len)
  * #desc:
  *    calculate the length of a string.
  *
- * #1: string pointer
- * #r: string length
+ * #1: s [in]  string pointer
+ * #r:   [ret] string length
  */
 size_t C_SYMBOL(strlen)(const char *s)
 {
@@ -290,9 +290,9 @@ size_t C_SYMBOL(strlen)(const char *s)
  * #desc:
  *    calculate the length of a string.
  *
- * #1: string pointer
- * #2: string length-max
- * #r: string length
+ * #1: s   [in]  string pointer
+ * #2: len [in]  string length-max
+ * #r:     [ret] string length
  */
 size_t C_SYMBOL(strnlen)(const char *s, size_t len)
 {
@@ -306,9 +306,9 @@ size_t C_SYMBOL(strnlen)(const char *s, size_t len)
  * #desc:
  *    copy string.
  *
- * #1: target pointer
- * #2: source pointer
- * #r: target pointer
+ * #1: t [out] target pointer
+ * #2: s [in]  source pointer
+ * #r:   [ret] target pointer
  */
 char *C_SYMBOL(strcpy)(char *t, const char *s)
 {
@@ -324,10 +324,10 @@ char *C_SYMBOL(strcpy)(char *t, const char *s)
  * #desc:
  *    copy the string into the buffer and zero the rest.
  *
- * #1: target pointer
- * #2: source pointer
- * #3: target length-max
- * #r: target pointer
+ * #1: t   [out] target pointer
+ * #2: s   [in]  source pointer
+ * #3: len [in]  target length-max
+ * #r:     [ret] target pointer
  */
 char *C_SYMBOL(strncpy)(char *t, const char *s, size_t len)
 {
@@ -343,9 +343,9 @@ char *C_SYMBOL(strncpy)(char *t, const char *s, size_t len)
  * #desc:
  *    string append or catenate.
  *
- * #1: target pointer
- * #2: source pointer
- * #r: target pointer
+ * #1: t [out] target pointer
+ * #2: s [in]  source pointer
+ * #r:   [ret] target pointer
  */
 char *C_SYMBOL(strcat)(char *t, const char *s)
 {
@@ -359,10 +359,10 @@ char *C_SYMBOL(strcat)(char *t, const char *s)
  * #desc:
  *    string append or catenate.
  *
- * #1: target pointer
- * #2: source pointer
- * #3: source length-max
- * #r: target pointer
+ * #1: t   [out] target pointer
+ * #2: s   [in]  source pointer
+ * #3: len [in]  source length-max
+ * #r:     [ret] target pointer
  */
 char *C_SYMBOL(strncat)(char *t, const char *s, size_t len)
 {
@@ -380,9 +380,9 @@ char *C_SYMBOL(strncat)(char *t, const char *s, size_t len)
  * #desc:
  *    locate character in string.
  *
- * #1: string pointer
- * #2: character
- * #r: string pointer
+ * #1: s [in]  string pointer
+ * #2: c [in]  character
+ * #r:   [ret] string pointer
  */
 char *C_SYMBOL(strchr)(const char *s, uint8_t c)
 {
@@ -398,9 +398,9 @@ char *C_SYMBOL(strchr)(const char *s, uint8_t c)
  * #desc:
  *    locate the character in the string from the end.
  *
- * #1: string pointer
- * #2: character
- * #r: string pointer
+ * #1: s [in]  string pointer
+ * #2: c [in]  character
+ * #r:   [ret] string pointer
  */
 char *C_SYMBOL(strrchr)(const char *s, uint8_t c)
 {
@@ -413,9 +413,9 @@ char *C_SYMBOL(strrchr)(const char *s, uint8_t c)
  * #desc:
  *    compare two string.
  *
- * #1: string1 pointer
- * #2: string2 pointer
- * #r: 0: equal, 0<N>0: *s1 - *s2
+ * #1: s1 [in]  string1 pointer
+ * #2: s2 [in]  string2 pointer
+ * #r:    [ret] 0: equal, 0<N>0: *s1 - *s2
  */
 int32_t C_SYMBOL(strcmp)(const char *s1, const char *s2)
 {
@@ -428,10 +428,10 @@ int32_t C_SYMBOL(strcmp)(const char *s1, const char *s2)
  * #desc:
  *    compare two string.
  *
- * #1: string1 pointer
- * #2: string2 pointer
- * #3: length
- * #r: 0: equal, 0<N>0: *s1 - *s2
+ * #1: s1  [in]  string1 pointer
+ * #2: s2  [in]  string2 pointer
+ * #3: len [in]  length
+ * #r:     [ret] 0: equal, 0<N>0: *s1 - *s2
  */
 int32_t C_SYMBOL(strncmp)(const char *s1, const char *s2, size_t len)
 {
@@ -447,9 +447,9 @@ int32_t C_SYMBOL(strncmp)(const char *s1, const char *s2, size_t len)
  * #desc:
  *    locate a substring.
  *
- * #1: string1 pointer
- * #2: string2 pointer
- * #r: string1 location / NULL pointer
+ * #1: s1 [in]  string1 pointer
+ * #2: s2 [in]  string2 pointer
+ * #r:    [ret] string1 location / NULL pointer
  */
 char *C_SYMBOL(strstr)(const char *s1, const char *s2)
 {
@@ -468,9 +468,9 @@ char *C_SYMBOL(strstr)(const char *s1, const char *s2)
  * #desc:
  *    locate character set in string.
  *
- * #1: string pointer
- * #2: character set
- * #r: string location / NULL pointer
+ * #1: s  [in]  string pointer
+ * #2: cs [in]  character set
+ * #r:    [ret] string location / NULL pointer
  */
 char *C_SYMBOL(strpbrk)(const char *s, const char *cs)
 {
@@ -487,9 +487,9 @@ char *C_SYMBOL(strpbrk)(const char *s, const char *cs)
  *    get the prefix length of a substring consisting of a
  *    character set.
  *
- * #1: string pointer
- * #2: character set
- * #r: string location length
+ * #1: s  [in]  string pointer
+ * #2: cs [in]  character set
+ * #r:    [ret] string location length
  */
 size_t C_SYMBOL(strspn)(const char *s, const char *cs)
 {
@@ -507,9 +507,9 @@ size_t C_SYMBOL(strspn)(const char *s, const char *cs)
  *    get the prefix length of the substring that does not belong
  *    to the character set.
  *
- * #1: string pointer
- * #2: character set
- * #r: string location length
+ * #1: s  [in]  string pointer
+ * #2: cs [in]  character set
+ * #r:    [ret] string location length
  */
 size_t C_SYMBOL(strcspn)(const char *s, const char *cs)
 {
@@ -526,10 +526,10 @@ size_t C_SYMBOL(strcspn)(const char *s, const char *cs)
  * #desc:
  *    extract tokens from strings.
  *
- * #1: string pointer
- * #2: separation character set
- * #3: separation location save pointer
- * #r: separation location / NULL pointer
+ * #1: s  [in/out] string pointer / NULL
+ * #2: sp [in]     separation character set
+ * #3: sl [in/out] separation location save pointer
+ * #r:    [ret]    separation location / NULL pointer
  */
 char *C_SYMBOL(strtok_r)(char *s, const char *sp, char **sl)
 {

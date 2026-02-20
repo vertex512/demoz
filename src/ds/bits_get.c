@@ -30,10 +30,10 @@
  * #desc:
  *    fill the get buffer.
  *
- * #1: bits-get struct context
- * #2: input buffer
- * #3: input length
- * #r: returns fill the length
+ * #1: ctx [in/out] bits-get struct context
+ * #2: s   [in]     input buffer
+ * #3: len [in]     input length
+ * #r:     [ret]    returns fill the length
  */
 uint32_t F_SYMBOL(bits_get_fill)(struct bits_get_ctx *ctx, const uint8_t *s,
 		uint32_t len)
@@ -63,11 +63,11 @@ uint32_t F_SYMBOL(bits_get_fill)(struct bits_get_ctx *ctx, const uint8_t *s,
  * #desc:
  *    get bits from the buffer.
  *
- * #1: bits-get struct context
- * #2: bits value pointer
- * #3: bits length
- * #4: peek bit
- * #r: 0: not end, -1: buffer end, >0: remaining unobtained bits
+ * #1: ctx  [in/out] bits-get struct context
+ * #2: v    [out]    bits value pointer
+ * #3: bits [in]     bits length
+ * #4: peek [in]     peeping bits only
+ * #r:      [ret]    0: not end, -1: buffer end, >0: remaining unobtained bits
  */
 int32_t F_SYMBOL(bits_get)(struct bits_get_ctx *ctx, uint32_t *v, uint32_t bits,
 		int32_t peek)
